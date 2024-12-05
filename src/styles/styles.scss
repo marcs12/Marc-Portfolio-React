@@ -1,0 +1,23 @@
+@use "./base/global.scss";
+
+// Components
+@use "./components/_navbar.scss";
+@use "./components/transition.scss";
+
+// Pages
+@use "./pages/_home.scss";
+@use "./pages/_about.scss";
+@use "./pages/_work.scss";
+@use "./pages/_contact.scss";
+
+//Reset CSS
+@use "./base/reset.scss";
+
+// Variables
+@use "./base/variables.scss";
+
+// Mixins
+@use "./utils/mixins.scss";
+
+// Typography
+@use "./base/typography.scss";
