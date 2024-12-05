@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import Scene from "./Scene";
+import { motion } from "framer-motion";
+
 import axios from "axios";
 
 const Hero = () => {
@@ -62,6 +64,27 @@ const Hero = () => {
     );
   }, []);
 
+  const colorBoxVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        duration: 0.1,
+        staggerChildren: 0.1,
+        delayChildren: 1.5,
+      },
+    },
+  };
+
+  const boxVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.1 },
+    },
+  };
+
   return (
     <>
       <section className="hero-section">
@@ -81,6 +104,33 @@ const Hero = () => {
           <p>Based in Vancouver, BC.</p>
           <p>{dateTime}</p>
         </article>
+        <motion.article
+          className="color-boxes"
+          initial="hidden"
+          animate="visible"
+          variants={colorBoxVariants}
+        >
+          <motion.div
+            className="color-box color-box-one"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-two"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-three"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-four"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-five"
+            variants={boxVariants}
+          ></motion.div>
+        </motion.article>
       </section>
     </>
   );
