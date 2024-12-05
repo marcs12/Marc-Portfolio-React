@@ -1,0 +1,15 @@
+@use "../utils/mixins" as *;
+@use "../base/variables" as *;
+
+.mission-statement {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  color: #000000;
+  padding: 1rem;
+  background-color: #ffffff;
+}

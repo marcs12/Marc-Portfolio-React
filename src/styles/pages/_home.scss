@@ -1,6 +1,14 @@
 @use "../utils/mixins" as *;
 @use "../base/variables" as *;
 
+hr {
+  margin: 0.5rem 0.5rem 0 0.5rem;
+
+  border: 0;
+  height: 1px;
+  background: #ffffff;
+}
+
 .hero-section {
   height: 100vh;
   display: flex;
