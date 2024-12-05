@@ -1,12 +1,27 @@
 @use "../utils/mixins" as *;
 @use "../base/variables" as *;
 
-hr {
-  margin: 0.5rem 0.5rem 0 0.5rem;
+.hero-line {
+  width: 100%;
+  padding: 0.25rem;
+}
 
+hr {
+  margin: 0 auto;
   border: 0;
   height: 1px;
   background: #ffffff;
+  animation: slideout 1s ease-in-out 1;
+  transform-origin: center;
+}
+
+@keyframes slideout {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
 
 .hero-section {
