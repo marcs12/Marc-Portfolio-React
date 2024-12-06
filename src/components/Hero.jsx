@@ -87,6 +87,9 @@ const Hero = () => {
 
   return (
     <>
+      <div className="hero-line">
+        <hr />
+      </div>
       <section className="hero-section">
         <article className="hero-wrap">
           <p className="sub-text">Creative Developer</p>

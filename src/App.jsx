@@ -1,13 +1,10 @@
-import { useState } from "react";
-import "./styles/styles.scss";
-import Hero from "./components/Hero";
-// import NavBar from "./components/NavBar";
+import Home from "./components/Home";
+import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
     <>
-      {/* <NavBar /> */}
-      <Hero />
+      <Home />
     </>
   );
 }
