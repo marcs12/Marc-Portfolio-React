@@ -1,5 +1,5 @@
 import React from "react";
-import { Links } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Projects = () => {
   return (
@@ -10,6 +10,7 @@ const Projects = () => {
             <p>01. </p>
             <h2>SnackLab</h2>
           </div>
+
           <hr />
         </li>
         <li>
