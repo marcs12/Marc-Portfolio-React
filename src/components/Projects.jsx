@@ -21,6 +21,29 @@ const Projects = () => {
         },
       },
     );
+
+    gsap.utils.toArray(".project-title h2").forEach((title) => {
+      const letters = title.textContent.split("");
+      title.innerHTML = letters
+        .map((letter) => `<span class="letter">${letter}</span>`)
+        .join("");
+
+      gsap.fromTo(
+        title.querySelectorAll(".letter"),
+        { opacity: 0, x: -20 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.3,
+          ease: "power1.inOut",
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: title,
+            start: "top 100%",
+          },
+        },
+      );
+    });
   }, []);
 
   return (
