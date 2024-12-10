@@ -8,7 +8,7 @@ const ColorOverlay = () => {
 
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.01,
   });
 
   useEffect(() => {
@@ -21,33 +21,35 @@ const ColorOverlay = () => {
 
   useEffect(() => {
     const unsubscribe = scrollY.onChange((latest) => {
-      controls.start({
-        y: latest * 1, // Adjust the multiplier to control the speed of the animation
-        transition: { duration: 0.1 },
-      });
+      // console.log("Scroll position:", latest);
+      controls.set({ y: latest * 1 }); // Use set() for real-time updates
+      if (latest >= 888) {
+        controls.start({ opacity: 0 });
+      } else {
+        controls.start({ opacity: 1 });
+      }
     });
 
     return () => unsubscribe();
   }, [scrollY, controls]);
 
   const colorBoxVariants = {
-    hidden: { y: 0, opacity: 1 },
+    hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        duration: 0.1,
-        staggerChildren: 0.1,
-        delayChildren: 1.5,
+        duration: 0.5,
+        staggerChildren: 0.2,
       },
     },
   };
 
   const boxVariants = {
-    hidden: { opacity: 1, scale: 0.8 },
+    hidden: { opacity: 0, scale: 0.8 },
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.1 },
+      transition: { duration: 0.5 },
     },
   };
 
