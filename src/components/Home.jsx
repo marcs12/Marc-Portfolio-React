@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import Hero from "./Hero";
 import MissionStatement from "./MissionStatement";
 import Projects from "./Projects";
-
+import ColorOverlay from "./ColorOverlay";
 function Home() {
   useEffect(() => {
     VANTA.FOG({
@@ -30,6 +30,7 @@ function Home() {
 
   return (
     <main id="main-wrapper">
+      <ColorOverlay />
       <Hero />
       <MissionStatement />
       <Projects />
