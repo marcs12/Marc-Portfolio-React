@@ -11,8 +11,7 @@ body {
   align-items: center;
   padding: 1rem;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  z-index: 100;
 
   .color-box {
     width: 1rem;

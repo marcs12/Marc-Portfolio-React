@@ -1,9 +1,10 @@
 import { useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion, useAnimation, useViewportScroll } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const ColorOverlay = () => {
   const controls = useAnimation();
+  const { scrollY } = useViewportScroll();
 
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -12,29 +13,25 @@ const ColorOverlay = () => {
 
   useEffect(() => {
     if (inView) {
-      controls.start("scrollStart");
+      controls.start("visible");
     } else {
-      controls.start("scrollStop");
+      controls.start("hidden");
     }
   }, [controls, inView]);
 
-  const scrollVariants = {
-    scrollStop: { y: -1770, opacity: 0 },
-    scrollStart: {
-      y: -1770,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        duration: 1,
-        ease: "easeInOut",
-      },
-    },
-  };
+  useEffect(() => {
+    const unsubscribe = scrollY.onChange((latest) => {
+      controls.start({
+        y: latest * 1, // Adjust the multiplier to control the speed of the animation
+        transition: { duration: 0.1 },
+      });
+    });
+
+    return () => unsubscribe();
+  }, [scrollY, controls]);
 
   const colorBoxVariants = {
-    hidden: { y: -1770, opacity: 0 },
+    hidden: { y: 0, opacity: 1 },
     visible: {
       opacity: 1,
       transition: {
@@ -46,7 +43,7 @@ const ColorOverlay = () => {
   };
 
   const boxVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 1, scale: 0.8 },
     visible: {
       opacity: 1,
       scale: 1,
@@ -61,34 +58,7 @@ const ColorOverlay = () => {
         className="color-boxes"
         initial="hidden"
         animate={controls}
-        variants={colorBoxVariants} // Apply scrollVariants here
-      >
-        <motion.div
-          className="color-box color-box-one"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-two"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-three"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-four"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-five"
-          variants={boxVariants}
-        ></motion.div>
-      </motion.article>
-      <motion.article
-        className="color-boxes"
-        initial="hidden"
-        animate="visible"
-        variants={scrollVariants} // Apply scrollVariants here
+        variants={colorBoxVariants}
       >
         <motion.div
           className="color-box color-box-one"
