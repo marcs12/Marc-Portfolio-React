@@ -23,7 +23,7 @@ const ColorOverlay = () => {
     const unsubscribe = scrollY.onChange((latest) => {
       // console.log("Scroll position:", latest);
       controls.set({ y: latest * 1 }); // Use set() for real-time updates
-      if (latest >= 888) {
+      if (latest >= 888 && latest <= 1000) {
         controls.start({ opacity: 0 });
       } else {
         controls.start({ opacity: 1 });
