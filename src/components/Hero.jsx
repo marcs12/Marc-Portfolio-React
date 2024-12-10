@@ -71,12 +71,12 @@ const Hero = () => {
       </div>
       <section className="hero-section">
         <article className="hero-wrap">
-          <p className="sub-text">Creative Developer</p>
+          <p className="sub-text">Projects</p>
           <h1 className="hero-title">
             MARC <br />
             <span aria-hidden="true">...</span>SAPA
           </h1>
-          <p className="sub-text-two">UX/UI Designer</p>
+          <p className="sub-text-two">About Me</p>
 
           <div className="topleft-border"></div>
           <div className="bottomright-border"></div>
