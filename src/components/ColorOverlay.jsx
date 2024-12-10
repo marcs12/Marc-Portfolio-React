@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { motion, useAnimation, useViewportScroll } from "framer-motion";
+import { motion, useAnimation, useScroll } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const ColorOverlay = () => {
   const controls = useAnimation();
-  const { scrollY } = useViewportScroll();
+  const { scrollY } = useScroll();
 
   const [ref, inView] = useInView({
     triggerOnce: true,
@@ -20,7 +20,7 @@ const ColorOverlay = () => {
   }, [controls, inView]);
 
   useEffect(() => {
-    const unsubscribe = scrollY.onChange((latest) => {
+    const unsubscribe = scrollY.on("change", (latest) => {
       // console.log("Scroll position:", latest);
       controls.set({ y: latest * 1 }); // Use set() for real-time updates
       if (latest >= 888 && latest <= 1000) {
