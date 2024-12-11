@@ -23,7 +23,7 @@ const ColorOverlay = () => {
     const unsubscribe = scrollY.on("change", (latest) => {
       // console.log("Scroll position:", latest);
       controls.set({ y: latest * 1 }); // Use set() for real-time updates
-      if (latest >= 888 && latest <= 1000) {
+      if (latest >= 893 && latest <= 1778) {
         controls.start({ opacity: 0 });
       } else {
         controls.start({ opacity: 1 });
@@ -55,6 +55,13 @@ const ColorOverlay = () => {
 
   return (
     <>
+      {/*
+        Coords: 
+          Hero: 0;
+          MissionStatement: 894;
+          Projects: 1779;
+          AboutMe: ***;
+    */}
       <motion.article
         ref={ref}
         className="color-boxes"

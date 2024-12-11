@@ -35,7 +35,7 @@ function Home() {
       <section id="hero">
         <Hero />
       </section>
-      <section id="mission-statement">
+      <section id="mission">
         <MissionStatement />
       </section>
       <section id="projects">
