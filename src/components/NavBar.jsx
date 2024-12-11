@@ -1,34 +1,23 @@
-// import React, { useState } from "react";
-// const NavBar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
+import React, { useState } from "react";
+import { Link, animateScroll as scroll } from "react-scroll";
 
-//   const toggleMenu = () => {
-//     setIsOpen(!isOpen);
-//   };
+const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
-//   return (
-//     <nav className="navbar">
-//       <div className="hamburger" onClick={toggleMenu}>
-//         <div className={`line ${isOpen ? "open" : ""}`}></div>
-//         <div className={`line ${isOpen ? "open" : ""}`}></div>
-//         <div className={`line ${isOpen ? "open" : ""}`}></div>
-//       </div>
-//       <ul className={`menu ${isOpen ? "open" : ""}`}>
-//         <li>
-//           <a href="#home">Home</a>
-//         </li>
-//         <li>
-//           <a href="#about">About</a>
-//         </li>
-//         <li>
-//           <a href="#services">Services</a>
-//         </li>
-//         <li>
-//           <a href="#contact">Contact</a>
-//         </li>
-//       </ul>
-//     </nav>
-//   );
-// };
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
-// export default NavBar;
+  return (
+    <nav>
+      <Link to="hero" smooth={true} duration={500}>
+        Hero
+      </Link>
+      <Link to="projects" smooth={true} duration={500}>
+        Projects
+      </Link>
+    </nav>
+  );
+};
+
+export default NavBar;
