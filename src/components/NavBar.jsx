@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const SlideTabsExample = () => {
   return (
@@ -43,15 +44,21 @@ const SlideTabs = () => {
       }}
       className="slide-tabs"
     >
-      <Tab setPosition={setPosition}>Home</Tab>
-      <Tab setPosition={setPosition}>Projects</Tab>
-      <Tab setPosition={setPosition}>About</Tab>
+      <Tab setPosition={setPosition} to="/">
+        Home
+      </Tab>
+      <Tab setPosition={setPosition} to="/projects">
+        Projects
+      </Tab>
+      <Tab setPosition={setPosition} to="/about">
+        About
+      </Tab>
       <Cursor position={position} />
     </ul>
   );
 };
 
-const Tab = ({ children, setPosition }) => {
+const Tab = ({ children, setPosition, to }) => {
   const ref = useRef(null);
 
   return (
@@ -70,7 +77,7 @@ const Tab = ({ children, setPosition }) => {
       }}
       className="tab"
     >
-      {children}
+      <Link to={to}>{children}</Link>
     </li>
   );
 };
@@ -78,6 +85,7 @@ const Tab = ({ children, setPosition }) => {
 Tab.propTypes = {
   children: PropTypes.node.isRequired,
   setPosition: PropTypes.func.isRequired,
+  to: PropTypes.string.isRequired,
 };
 
 const Cursor = ({ position }) => (
