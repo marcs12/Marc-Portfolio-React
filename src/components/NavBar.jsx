@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 
@@ -15,16 +15,24 @@ SlideTabsExample.propTypes = {
   setPosition: PropTypes.func,
 };
 
-// Move this block after the Tab component definition
-
-export default SlideTabsExample;
-
 const SlideTabs = () => {
   const [position, setPosition] = useState({
     left: 0,
     width: 0,
     opacity: 0,
   });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setPosition((pv) => ({
+        ...pv,
+        opacity: 1,
+      }));
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <ul
       onMouseLeave={() => {
@@ -38,13 +46,10 @@ const SlideTabs = () => {
       <Tab setPosition={setPosition}>Home</Tab>
       <Tab setPosition={setPosition}>Projects</Tab>
       <Tab setPosition={setPosition}>About</Tab>
-
       <Cursor position={position} />
     </ul>
   );
 };
-
-// Move this block after the Tab component definition
 
 const Tab = ({ children, setPosition }) => {
   const ref = useRef(null);
@@ -91,3 +96,5 @@ Cursor.propTypes = {
     opacity: PropTypes.number.isRequired,
   }).isRequired,
 };
+
+export default SlideTabsExample;
