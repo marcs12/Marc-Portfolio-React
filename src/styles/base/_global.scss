@@ -9,9 +9,9 @@ body {
 .color-boxes {
   display: flex;
   align-items: center;
-  padding: 1rem;
   position: absolute;
   right: 0;
+  padding: 0.5rem 0.25rem;
   z-index: 100;
 
   .color-box {

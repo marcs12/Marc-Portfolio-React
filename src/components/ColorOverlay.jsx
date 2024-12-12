@@ -22,12 +22,12 @@ const ColorOverlay = () => {
   useEffect(() => {
     const unsubscribe = scrollY.on("change", (latest) => {
       // console.log("Scroll position:", latest);
+      //Coords:
+      // Hero: 0;
+      // MissionStatement: 894;
+      // Projects: 1779;
+      // AboutMe: ***;
       controls.set({ y: latest * 1 }); // Use set() for real-time updates
-      if (latest >= 893 && latest <= 1778) {
-        controls.start({ opacity: 0 });
-      } else {
-        controls.start({ opacity: 1 });
-      }
     });
 
     return () => unsubscribe();
@@ -55,13 +55,6 @@ const ColorOverlay = () => {
 
   return (
     <>
-      {/*
-        Coords: 
-          Hero: 0;
-          MissionStatement: 894;
-          Projects: 1779;
-          AboutMe: ***;
-    */}
       <motion.article
         ref={ref}
         className="color-boxes"
