@@ -6,9 +6,6 @@ import { useEffect } from "react";
 
 // Importing components
 import Hero from "./Hero";
-import MissionStatement from "./MissionStatement";
-import Projects from "./Projects";
-import ColorOverlay from "./ColorOverlay";
 
 function Home() {
   useEffect(() => {
@@ -31,15 +28,8 @@ function Home() {
 
   return (
     <main id="main-wrapper">
-      <ColorOverlay />
       <section id="hero">
         <Hero />
-      </section>
-      <section id="mission">
-        <MissionStatement />
-      </section>
-      <section id="projects">
-        <Projects />
       </section>
     </main>
   );

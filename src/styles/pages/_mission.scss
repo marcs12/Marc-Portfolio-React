@@ -2,20 +2,19 @@
 @use "../base/variables" as *;
 
 .mission-statement {
-  height: 100vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  text-align: center;
-  position: relative;
+  text-align: left;
+  position: absolute;
+  top: 0%;
+  left: 0;
   color: #ffffff;
-  padding: 1rem;
-
   text-wrap: balance;
+  padding: 0.25rem 0.5rem;
 
   .creativity {
-    font-size: 1.2rem;
     font-family: "DM Serif Display", sans-serif;
     font-weight: 100;
     margin: 0;
@@ -23,7 +22,6 @@
   }
 
   .precision {
-    font-size: 1.2rem;
     font-family: "DM Serif Display", sans-serif;
     font-weight: 100;
     margin: 0;

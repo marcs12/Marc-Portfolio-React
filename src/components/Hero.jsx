@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { gsap } from "gsap";
 import Scene from "./Scene";
 import { motion } from "framer-motion";
+import MissionStatement from "./MissionStatement";
+import ColorOverlay from "./ColorOverlay";
 
 import axios from "axios";
 
@@ -70,6 +72,7 @@ const Hero = () => {
         <hr className="home-line" />
       </div>
       <section className="hero-section">
+        <MissionStatement />
         <article className="hero-wrap">
           <p className="sub-text">Projects</p>
           <h1 className="hero-title">
@@ -82,11 +85,13 @@ const Hero = () => {
           <div className="bottomright-border"></div>
         </article>
         <Scene />
+
         <article className="time-location">
           <p>Based in Vancouver, BC.</p>
           <p>{dateTime}</p>
         </article>
       </section>
+      <ColorOverlay />
     </>
   );
 };
