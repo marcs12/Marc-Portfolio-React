@@ -1,5 +1,9 @@
 import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { useDebugValue, useEffect } from "react";
+import EnvelopeIcon from "../assets/envelope-solid.svg";
+import GithubIcon from "../assets/icons8-github.svg";
+import LinkedInIcon from "../assets/icons8-linkedin.svg";
+import { div } from "framer-motion/client";
 
 const ColorOverlay = () => {
   const controls = useAnimation();
@@ -29,9 +33,57 @@ const ColorOverlay = () => {
     },
   };
 
+  const copyEmailToClipboard = () => {
+    navigator.clipboard.writeText("marcgsapa@gmail.com");
+    alert("Email copied to clipboard!");
+  };
+
   return (
-    <>
-      <motion.article
+    <article className="social-color">
+      <motion.div
+        className="social-svg"
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 2 }}
+      >
+        <a href="#" onClick={copyEmailToClipboard}>
+          <motion.img
+            src={EnvelopeIcon}
+            alt="Envelope Icon"
+            whileHover={{ scale: 1.2, rotate: 10 }}
+            whileTap={{ scale: 0.8, rotate: -10 }}
+            transition={{ duration: 0.3 }}
+          />
+        </a>
+        <a
+          href="https://github.com/marcs12"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <motion.img
+            src={GithubIcon}
+            alt="Github Icon"
+            whileHover={{ scale: 1.2, rotate: 10 }}
+            whileTap={{ scale: 0.8, rotate: -10 }}
+            transition={{ duration: 0.3 }}
+          />
+        </a>
+        <a
+          href="https://linkedin.com/in/marcsapa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <motion.img
+            className="linked-in"
+            src={LinkedInIcon}
+            alt="LinkedIn Icon"
+            whileHover={{ scale: 1.2, rotate: 10 }}
+            whileTap={{ scale: 0.8, rotate: -10 }}
+            transition={{ duration: 0.3 }}
+          />
+        </a>
+      </motion.div>
+      <motion.div
         className="color-boxes"
         initial="hidden"
         animate={controls}
@@ -57,8 +109,8 @@ const ColorOverlay = () => {
           className="color-box color-box-five"
           variants={boxVariants}
         ></motion.div>
-      </motion.article>
-    </>
+      </motion.div>
+    </article>
   );
 };
 

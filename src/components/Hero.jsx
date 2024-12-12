@@ -5,6 +5,10 @@ import { motion } from "framer-motion";
 import MissionStatement from "./MissionStatement";
 import ColorOverlay from "./ColorOverlay";
 
+import EnvelopeIcon from "../assets/envelope-solid.svg";
+import GithubIcon from "../assets/icons8-github.svg";
+import LinkedInIcon from "../assets/icons8-linkedin.svg";
+
 import axios from "axios";
 
 const Hero = () => {
@@ -68,30 +72,25 @@ const Hero = () => {
 
   return (
     <>
-      <div className="hero-line">
-        <hr className="home-line" />
-      </div>
       <section className="hero-section">
         <MissionStatement />
         <article className="hero-wrap">
-          <p className="sub-text">Projects</p>
+          <p className="sub-text">Creative Developer</p>
           <h1 className="hero-title">
             MARC <br />
             <span aria-hidden="true">...</span>SAPA
           </h1>
-          <p className="sub-text-two">About Me</p>
-
+          <p className="sub-text-two">UX/UI Designer</p>
           <div className="topleft-border"></div>
           <div className="bottomright-border"></div>
         </article>
         <Scene />
-
         <article className="time-location">
           <p>Based in Vancouver, BC.</p>
           <p>{dateTime}</p>
         </article>
+        <ColorOverlay />
       </section>
-      <ColorOverlay />
     </>
   );
 };
