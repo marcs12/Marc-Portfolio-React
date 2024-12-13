@@ -1,15 +1,16 @@
+// React imports
 import { useEffect, useState } from "react";
+
+// Animation library
 import { gsap } from "gsap";
+
+// Axios for HTTP requests
+import axios from "axios";
+
+// Component imports
 import Scene from "./Scene";
-import { motion } from "framer-motion";
 import MissionStatement from "./MissionStatement";
 import ColorOverlay from "./ColorOverlay";
-
-import EnvelopeIcon from "../assets/envelope-solid.svg";
-import GithubIcon from "../assets/icons8-github.svg";
-import LinkedInIcon from "../assets/icons8-linkedin.svg";
-
-import axios from "axios";
 
 const Hero = () => {
   const [dateTime, setDateTime] = useState("");

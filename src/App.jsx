@@ -1,10 +1,21 @@
+// React and hooks
+import { useEffect } from "react";
+
+// React Router
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+// GSAP for animations
+import { gsap } from "gsap";
+
+// Components
+import NavBar from "./components/NavBar";
+import Home from "./components/Home";
 import About from "./components/About";
 import Projects from "./components/Projects";
-import Home from "./components/Home";
-import NavBar from "./components/NavBar";
-import { useEffect } from "react";
-import { gsap } from "gsap";
+import SnackLab from "./components/SnackLab";
+import ThirtyFive from "./components/ThirtyFive";
+import RunYuji from "./components/RunYuji";
+import Portfolio from "./components/Portfolio";
 
 function App() {
   useEffect(() => {
@@ -38,8 +49,12 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Projects" element={<Projects />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/about" element={<About />} />
+        <Route path="/snacklab" element={<SnackLab />} />
+        <Route path="/thirtyfive" element={<ThirtyFive />} />
+        <Route path="/runyuji" element={<RunYuji />} />
+        <Route path="/portfolio" element={<Portfolio />} />
       </Routes>
     </Router>
   );

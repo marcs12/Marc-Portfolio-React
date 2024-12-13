@@ -1,8 +1,5 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
-import EnvelopeIcon from "../assets/envelope-solid.svg";
-import GithubIcon from "../assets/icons8-github.svg";
-import LinkedInIcon from "../assets/icons8-linkedin.svg";
 
 const ColorOverlay = () => {
   const controls = useAnimation();
@@ -30,11 +27,6 @@ const ColorOverlay = () => {
       scale: 1,
       transition: { duration: 0.5 },
     },
-  };
-
-  const copyEmailToClipboard = () => {
-    navigator.clipboard.writeText("marcgsapa@gmail.com");
-    alert("Email copied to clipboard!");
   };
 
   return (
