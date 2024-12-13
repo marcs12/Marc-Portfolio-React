@@ -26,7 +26,7 @@ export function LogoModel(props) {
       <mesh
         ref={meshRef}
         geometry={nodes.Curve.geometry}
-        scale={[18, 18, 18]}
+        scale={window.innerWidth >= 1024 ? [14, 14, 14] : [18, 18, 18]}
         position={[0, 0, 0.5]}
         rotation={[1.6, 0, 0]}
       >

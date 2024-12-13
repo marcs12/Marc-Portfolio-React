@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import gsap from "gsap";
 import SocialLinks from "./SocialLinks";
 
 const ColorOverlay = () => {
@@ -49,8 +48,8 @@ const ColorOverlay = () => {
 
   return (
     <>
-      <SocialLinks />
       <article className="social-color">
+        <SocialLinks />
         <motion.div
           className="color-boxes"
           initial="hidden"

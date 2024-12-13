@@ -9,7 +9,6 @@ import axios from "axios";
 
 // Component imports
 import Scene from "./Scene";
-import MissionStatement from "./MissionStatement";
 import ColorOverlay from "./ColorOverlay";
 
 const Hero = () => {
