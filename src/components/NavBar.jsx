@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -22,18 +22,6 @@ const SlideTabs = () => {
     width: 0,
     opacity: 0,
   });
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setPosition((pv) => ({
-        ...pv,
-        opacity: 1,
-      }));
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <ul
       onMouseLeave={() => {
@@ -53,6 +41,7 @@ const SlideTabs = () => {
       <Tab setPosition={setPosition} to="/about">
         About
       </Tab>
+
       <Cursor position={position} />
     </ul>
   );

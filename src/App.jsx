@@ -15,10 +15,27 @@ function App() {
     );
   }, []);
 
+  useEffect(() => {
+    VANTA.FOG({
+      el: "body",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      highlightColor: 0x141414,
+      midtoneColor: 0x111111,
+      lowlightColor: 0x111111,
+      baseColor: 0xc0c0c,
+      blurFactor: 0.9,
+      speed: 1.4,
+      zoom: 0.2,
+    });
+  }, []);
+
   return (
     <Router>
       <NavBar />
-
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Projects" element={<Projects />} />
