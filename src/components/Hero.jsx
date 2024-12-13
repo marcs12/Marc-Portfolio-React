@@ -74,7 +74,6 @@ const Hero = () => {
   return (
     <>
       <section className="hero-section">
-        <MissionStatement />
         <article className="hero-wrap">
           <p className="sub-text">Creative Developer</p>
           <h1 className="hero-title">

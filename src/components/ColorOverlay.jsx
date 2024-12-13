@@ -1,11 +1,28 @@
-import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import gsap from "gsap";
 
 const ColorOverlay = () => {
   const controls = useAnimation();
 
+  // useEffect(() => {
+  //   // Start the Framer Motion animation
+  //   controls.start("visible");
+
+  // GSAP animation using fromTo
+  //   gsap.fromTo(
+  //     ".color-box",
+  //     { height: "0vh", opacity: 1 },
+  //     {
+  //       height: "98vh",
+  //       opacity: 0.5,
+  //       duration: 100,
+  //       delay: 5,
+  //     },
+  //   );
+  // }, [controls]);
+
   useEffect(() => {
-    // Start the animation
     controls.start("visible");
   }, [controls]);
 
