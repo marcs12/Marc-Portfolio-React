@@ -50,29 +50,6 @@ body {
     }
   }
 
-  .social-svg {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
-    text-align: center;
-    gap: 0.25rem;
-    fill: #ffffff;
-    transition: all 0.5s ease-in-out;
-
-    &:hover {
-      fill: #ff0000;
-    }
-
-    img {
-      width: 1.5rem;
-    }
-
-    .linked-in {
-      padding: 0.1rem;
-    }
-  }
-
   @media (min-width: 48em) {
     .color-boxes {
       padding: 0.5rem;

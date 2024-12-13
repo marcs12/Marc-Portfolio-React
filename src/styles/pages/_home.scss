@@ -1,6 +1,38 @@
 @use "../utils/mixins" as *;
 @use "../base/variables" as *;
 
+#hero {
+  position: relative;
+}
+
+.social-svg {
+  position: absolute;
+  top: 65%;
+  right: 0;
+  left: 0;
+  z-index: 11111;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+  gap: 0.25rem;
+  fill: #ffffff;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    fill: #ff0000;
+  }
+
+  img {
+    width: 1.5rem;
+  }
+
+  .linked-in {
+    padding: 0.1rem;
+  }
+}
+
 .hero-line {
   width: 100%;
   padding: 0.25rem;
