@@ -9,7 +9,6 @@ function Home() {
   return (
     <main id="main-wrapper">
       <section id="hero">
-        <SocialLinks />
         <Hero />
       </section>
     </main>

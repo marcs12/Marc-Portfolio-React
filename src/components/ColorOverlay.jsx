@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import gsap from "gsap";
+import SocialLinks from "./SocialLinks";
 
 const ColorOverlay = () => {
   const controls = useAnimation();
@@ -47,35 +48,38 @@ const ColorOverlay = () => {
   };
 
   return (
-    <article className="social-color">
-      <motion.div
-        className="color-boxes"
-        initial="hidden"
-        animate={controls}
-        variants={colorBoxVariants}
-      >
+    <>
+      <SocialLinks />
+      <article className="social-color">
         <motion.div
-          className="color-box color-box-one"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-two"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-three"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-four"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-five"
-          variants={boxVariants}
-        ></motion.div>
-      </motion.div>
-    </article>
+          className="color-boxes"
+          initial="hidden"
+          animate={controls}
+          variants={colorBoxVariants}
+        >
+          <motion.div
+            className="color-box color-box-one"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-two"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-three"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-four"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-five"
+            variants={boxVariants}
+          ></motion.div>
+        </motion.div>
+      </article>
+    </>
   );
 };
 
