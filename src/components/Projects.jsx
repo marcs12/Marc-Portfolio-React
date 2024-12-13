@@ -59,31 +59,31 @@ const Projects = () => {
           </Link>
         </li>
         <li>
-          <div className="project-title">
-            <p>02. </p>
-            <h2>
-              <Link to="/thirtyfive">35mm</Link>
-            </h2>
-          </div>
-          <hr className="project-line" />
+          <Link to="/thirtyfive">
+            <div className="project-title">
+              <p>02. </p>
+              <h2>35mm</h2>
+            </div>
+            <hr className="project-line" />
+          </Link>
         </li>
         <li>
-          <div className="project-title">
-            <p>03. </p>
-            <h2>
-              <Link to="/runyuji">Run Yuji</Link>
-            </h2>
-          </div>
-          <hr className="project-line" />
+          <Link to="/runyuji">
+            <div className="project-title">
+              <p>03. </p>
+              <h2>Run Yuji</h2>
+            </div>
+            <hr className="project-line" />
+          </Link>
         </li>
         <li>
-          <div className="project-title">
-            <p>04. </p>
-            <h2>
-              <Link to="/portfolio">Portfolio</Link>
-            </h2>
-          </div>
-          <hr className="project-line" />
+          <Link to="/portfolio">
+            <div className="project-title">
+              <p>04. </p>
+              <h2>Portfolio</h2>
+            </div>
+            <hr className="project-line" />
+          </Link>
         </li>
       </ul>
     </section>
