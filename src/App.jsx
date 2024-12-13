@@ -1,11 +1,62 @@
+// React and hooks
+import { useEffect } from "react";
+
+// React Router
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+// GSAP for animations
+import { gsap } from "gsap";
+
+// Components
+import NavBar from "./components/NavBar";
 import Home from "./components/Home";
-import { BrowserRouter } from "react-router-dom";
+import About from "./components/About";
+import Projects from "./components/Projects";
+import SnackLab from "./components/SnackLab";
+import ThirtyFive from "./components/ThirtyFive";
+import RunYuji from "./components/RunYuji";
+import Portfolio from "./components/Portfolio";
 
 function App() {
+  useEffect(() => {
+    gsap.fromTo(
+      ".slide-tabs",
+      { opacity: 0, width: 0 },
+      { opacity: 1, width: "auto", delay: 1, duration: 1 },
+    );
+  }, []);
+
+  useEffect(() => {
+    VANTA.FOG({
+      el: "body",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.0,
+      minWidth: 200.0,
+      highlightColor: 0x141414,
+      midtoneColor: 0x111111,
+      lowlightColor: 0x111111,
+      baseColor: 0xc0c0c,
+      blurFactor: 0.9,
+      speed: 1.4,
+      zoom: 0.2,
+    });
+  }, []);
+
   return (
-    <>
-      <Home />
-    </>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/snacklab" element={<SnackLab />} />
+        <Route path="/thirtyfive" element={<ThirtyFive />} />
+        <Route path="/runyuji" element={<RunYuji />} />
+        <Route path="/portfolio" element={<Portfolio />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,37 +1,13 @@
+import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
-import { motion, useAnimation, useViewportScroll } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 
 const ColorOverlay = () => {
   const controls = useAnimation();
-  const { scrollY } = useViewportScroll();
-
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.01,
-  });
 
   useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    } else {
-      controls.start("hidden");
-    }
-  }, [controls, inView]);
-
-  useEffect(() => {
-    const unsubscribe = scrollY.onChange((latest) => {
-      // console.log("Scroll position:", latest);
-      controls.set({ y: latest * 1 }); // Use set() for real-time updates
-      if (latest >= 888 && latest <= 1000) {
-        controls.start({ opacity: 0 });
-      } else {
-        controls.start({ opacity: 1 });
-      }
-    });
-
-    return () => unsubscribe();
-  }, [scrollY, controls]);
+    // Start the animation
+    controls.start("visible");
+  }, [controls]);
 
   const colorBoxVariants = {
     hidden: { opacity: 0 },
@@ -54,9 +30,8 @@ const ColorOverlay = () => {
   };
 
   return (
-    <>
-      <motion.article
-        ref={ref}
+    <article className="social-color">
+      <motion.div
         className="color-boxes"
         initial="hidden"
         animate={controls}
@@ -82,8 +57,8 @@ const ColorOverlay = () => {
           className="color-box color-box-five"
           variants={boxVariants}
         ></motion.div>
-      </motion.article>
-    </>
+      </motion.div>
+    </article>
   );
 };
 

@@ -1,9 +1,16 @@
+// React imports
 import { useEffect, useState } from "react";
-import { gsap } from "gsap";
-import Scene from "./Scene";
-import { motion } from "framer-motion";
 
+// Animation library
+import { gsap } from "gsap";
+
+// Axios for HTTP requests
 import axios from "axios";
+
+// Component imports
+import Scene from "./Scene";
+import MissionStatement from "./MissionStatement";
+import ColorOverlay from "./ColorOverlay";
 
 const Hero = () => {
   const [dateTime, setDateTime] = useState("");
@@ -66,18 +73,15 @@ const Hero = () => {
 
   return (
     <>
-      <div className="hero-line">
-        <hr className="home-line" />
-      </div>
       <section className="hero-section">
+        <MissionStatement />
         <article className="hero-wrap">
           <p className="sub-text">Creative Developer</p>
           <h1 className="hero-title">
             MARC <br />
             <span aria-hidden="true">...</span>SAPA
           </h1>
-          <p className="sub-text-two">UX/UI Designer</p>
-
+          <p className="sub-text-two">Web Designer</p>
           <div className="topleft-border"></div>
           <div className="bottomright-border"></div>
         </article>
@@ -86,6 +90,7 @@ const Hero = () => {
           <p>Based in Vancouver, BC.</p>
           <p>{dateTime}</p>
         </article>
+        <ColorOverlay />
       </section>
     </>
   );

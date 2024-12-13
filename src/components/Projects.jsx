@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -50,32 +50,40 @@ const Projects = () => {
     <section className="projects-section">
       <ul className="projects-list">
         <li>
-          <div className="project-title">
-            <p>01. </p>
-            <h2>SnackLab</h2>
-          </div>
-          <hr className="project-line" />
+          <Link to="/snacklab">
+            <div className="project-title">
+              <p>01. </p>
+              <h2>SnackLab</h2>
+            </div>
+            <hr className="project-line" />
+          </Link>
         </li>
         <li>
-          <div className="project-title">
-            <p>02. </p>
-            <h2>35mm</h2>
-          </div>
-          <hr className="project-line" />
+          <Link to="/thirtyfive">
+            <div className="project-title">
+              <p>02. </p>
+              <h2>35mm</h2>
+            </div>
+            <hr className="project-line" />
+          </Link>
         </li>
         <li>
-          <div className="project-title">
-            <p>03. </p>
-            <h2>Run Yuji</h2>
-          </div>
-          <hr className="project-line" />
+          <Link to="/runyuji">
+            <div className="project-title">
+              <p>03. </p>
+              <h2>Run Yuji</h2>
+            </div>
+            <hr className="project-line" />
+          </Link>
         </li>
         <li>
-          <div className="project-title">
-            <p>04. </p>
-            <h2>Portfolio</h2>
-          </div>
-          <hr className="project-line" />
+          <Link to="/portfolio">
+            <div className="project-title">
+              <p>04. </p>
+              <h2>Portfolio</h2>
+            </div>
+            <hr className="project-line" />
+          </Link>
         </li>
       </ul>
     </section>
