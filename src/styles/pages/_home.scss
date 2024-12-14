@@ -6,10 +6,6 @@
 }
 
 .social-svg {
-  position: absolute;
-  top: 65%;
-  right: 0;
-  left: 0;
   z-index: 11111;
   display: flex;
   justify-content: center;
@@ -73,12 +69,19 @@
     margin: 0;
     padding: 0.5rem 0.5rem;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     text-align: left;
   }
 
   #canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+
     //  animate here
   }
 
@@ -121,6 +124,26 @@
     }
   }
 
+  @media (min-width: 48em) {
+    .hero-wrap {
+      .sub-text,
+      .sub-text-two {
+        font-size: 0.75rem;
+        padding: 1rem 1.5rem;
+      }
+    }
+  }
+
+  @media (min-width: 64em) {
+    .hero-wrap {
+      .sub-text,
+      .sub-text-two {
+        font-size: 1rem;
+        padding: 1rem 1.75rem;
+      }
+    }
+  }
+
   .hero-title {
     font-size: 3.6rem;
     line-height: 0.7;
@@ -135,6 +158,18 @@
     }
   }
 
+  @media (min-width: 48em) {
+    .hero-title {
+      font-size: 7rem;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .hero-title {
+      font-size: 12rem;
+    }
+  }
+
   .topleft-border {
     position: absolute;
     top: 0;
@@ -144,6 +179,7 @@
     border-top: 1px solid #ffffff;
     border-left: 1px solid #ffffff;
   }
+
   .bottomright-border {
     position: absolute;
     bottom: 0;
@@ -152,5 +188,21 @@
     height: 0.75rem;
     border-bottom: 1px solid #ffffff;
     border-right: 1px solid #ffffff;
+  }
+
+  @media (min-width: 48em) {
+    .topleft-border,
+    .bottomright-border {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  @media (min-width: 64em) {
+    .topleft-border,
+    .bottomright-border {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 }

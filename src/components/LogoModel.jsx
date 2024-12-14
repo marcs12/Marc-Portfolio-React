@@ -8,14 +8,24 @@ export function LogoModel(props) {
   const meshRef = useRef();
 
   useEffect(() => {
-    gsap.to(meshRef.current.rotation, {
-      z: Math.PI * 5,
-      duration: 1000,
-      delay: 1.5,
-      yoyo: true,
-      repeat: -1,
-      ease: "power-in-out",
-    });
+    const handleMouseMove = (event) => {
+      const { innerWidth, innerHeight } = window;
+      const mouseX = (event.clientX / innerWidth) * 2 - 1;
+      const mouseY = -(event.clientY / innerHeight) * 2 + 1;
+
+      gsap.to(meshRef.current.rotation, {
+        x: -mouseY * 0.2 + 1.6, // Invert the movement on the x-axis
+        y: -mouseX * 0.2, // Invert the movement on the y-axis
+        duration: 5, // Increase duration for smoother movement
+        ease: "power3.out",
+      });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, []);
 
   return (
@@ -26,7 +36,7 @@ export function LogoModel(props) {
       <mesh
         ref={meshRef}
         geometry={nodes.Curve.geometry}
-        scale={[18, 18, 18]}
+        scale={window.innerWidth >= 1024 ? [14, 14, 14] : [18, 18, 18]}
         position={[0, 0, 0.5]}
         rotation={[1.6, 0, 0]}
       >

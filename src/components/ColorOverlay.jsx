@@ -1,11 +1,28 @@
-import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import SocialLinks from "./SocialLinks";
 
 const ColorOverlay = () => {
   const controls = useAnimation();
 
+  // useEffect(() => {
+  //   // Start the Framer Motion animation
+  //   controls.start("visible");
+
+  // GSAP animation using fromTo
+  //   gsap.fromTo(
+  //     ".color-box",
+  //     { height: "0vh", opacity: 1 },
+  //     {
+  //       height: "98vh",
+  //       opacity: 0.5,
+  //       duration: 100,
+  //       delay: 5,
+  //     },
+  //   );
+  // }, [controls]);
+
   useEffect(() => {
-    // Start the animation
     controls.start("visible");
   }, [controls]);
 
@@ -30,35 +47,38 @@ const ColorOverlay = () => {
   };
 
   return (
-    <article className="social-color">
-      <motion.div
-        className="color-boxes"
-        initial="hidden"
-        animate={controls}
-        variants={colorBoxVariants}
-      >
+    <>
+      <article className="social-color">
+        <SocialLinks />
         <motion.div
-          className="color-box color-box-one"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-two"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-three"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-four"
-          variants={boxVariants}
-        ></motion.div>
-        <motion.div
-          className="color-box color-box-five"
-          variants={boxVariants}
-        ></motion.div>
-      </motion.div>
-    </article>
+          className="color-boxes"
+          initial="hidden"
+          animate={controls}
+          variants={colorBoxVariants}
+        >
+          <motion.div
+            className="color-box color-box-one"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-two"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-three"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-four"
+            variants={boxVariants}
+          ></motion.div>
+          <motion.div
+            className="color-box color-box-five"
+            variants={boxVariants}
+          ></motion.div>
+        </motion.div>
+      </article>
+    </>
   );
 };
 

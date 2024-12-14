@@ -5,11 +5,18 @@
 .slide-tabs-container {
   //   padding: 5rem 0; // py-20
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.5rem 0;
+  top: 0;
+  right: 50%;
+  transform: translateX(50%);
+  padding: 0.5rem;
   z-index: 1000;
+}
+
+@media screen and (min-width: 64em) {
+  .slide-tabs-container {
+    right: 0;
+    transform: none;
+  }
 }
 
 // Tabs Wrapper
@@ -36,6 +43,10 @@
   font-size: 0.75rem; // text-xs
   color: white;
   mix-blend-mode: difference;
+
+  a {
+    padding: 0.5rem;
+  }
 
   @media (min-width: 48em) {
     // 48em = 768px
