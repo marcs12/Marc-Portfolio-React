@@ -1,46 +1,27 @@
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
+import WebGLHoverEffect from "./WebGLHoverEffect"; // Your WebGLHoverEffect component
 
 const Projects = () => {
-  gsap.registerPlugin(ScrollTrigger);
-
   useEffect(() => {
-    gsap.fromTo(
-      ".project-line",
-      { width: "0%" },
-      {
-        width: "100%",
-        duration: 1,
-        ease: "power2.inOut",
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: ".projects-section",
-          start: "top 80%",
-        },
-      },
-    );
-
+    // Split the text of each project title into individual letters and wrap them in <span>
     gsap.utils.toArray(".project-title h2").forEach((title) => {
       const letters = title.textContent.split("");
       title.innerHTML = letters
         .map((letter) => `<span class="letter">${letter}</span>`)
         .join("");
 
+      // Animate each letter with GSAP
       gsap.fromTo(
         title.querySelectorAll(".letter"),
-        { opacity: 0, x: -20 },
+        { opacity: 0, x: -20 }, // Initial state: letters are off-screen and invisible
         {
-          opacity: 1,
-          x: 0,
+          opacity: 1, // Final state: letters become visible
+          x: 0, // Final position: letters move to their natural position
           duration: 0.3,
           ease: "power1.inOut",
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: title,
-            start: "top 100%",
-          },
+          stagger: 0.1, // Stagger animation for each letter
         },
       );
     });
@@ -86,6 +67,8 @@ const Projects = () => {
           </Link>
         </li>
       </ul>
+
+      <WebGLHoverEffect />
     </section>
   );
 };
