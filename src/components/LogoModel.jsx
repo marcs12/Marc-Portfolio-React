@@ -16,7 +16,7 @@ export function LogoModel(props) {
       gsap.to(meshRef.current.rotation, {
         x: -mouseY * 0.2 + 1.6, // Invert the movement on the x-axis
         y: -mouseX * 0.2, // Invert the movement on the y-axis
-        duration: 1.5, // Increase duration for smoother movement
+        duration: 5, // Increase duration for smoother movement
         ease: "power3.out",
       });
     };
