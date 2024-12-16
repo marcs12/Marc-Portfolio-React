@@ -47,6 +47,10 @@ const SnackLab = () => {
             </li>
           </ul>
         </div>
+        <div className="project-links">
+          <a href="https://github.com/marcs12/snacklab-theme">GitHub Repo</a>
+          <a href="https://marcsapa.com/snacklab">Visit Site</a>
+        </div>
       </article>
     </section>
   );
