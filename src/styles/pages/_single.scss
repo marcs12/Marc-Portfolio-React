@@ -1,2 +1,89 @@
 @use "../utils/mixins" as *;
 @use "../base/variables" as *;
+
+.single-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+
+  .single-hero-wrap {
+    width: 100%;
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    .heading-text-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 0.25rem;
+
+      p {
+        font-size: 1rem;
+        padding-bottom: 0.1rem;
+
+        @media (min-width: 48em) {
+          font-size: 1.125rem; // Tablet
+        }
+
+        @media (min-width: 64em) {
+          font-size: 1.25rem; // Desktop
+        }
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+
+        @media (min-width: 48em) {
+          font-size: 2.25rem; // Tablet
+        }
+
+        @media (min-width: 64em) {
+          font-size: 2.5rem; // Desktop
+        }
+      }
+    }
+
+    .project-description {
+      display: flex;
+      gap: 4rem;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 2rem;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 0.5rem;
+          text-align: left;
+
+          p {
+            font-size: 1rem;
+            margin: 0;
+
+            @media (min-width: 48em) {
+              font-size: 1.125rem; // Tablet
+            }
+
+            @media (min-width: 64em) {
+              font-size: 1.25rem; // Desktop
+            }
+          }
+        }
+      }
+
+      .categories {
+        text-align: right;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
