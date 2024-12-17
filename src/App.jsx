@@ -51,10 +51,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/works" element={<Projects />} />
         <Route path="/about" element={<About />} />
-        <Route path="/snacklab" element={<SnackLab />} />
-        <Route path="/thirtyfive" element={<ThirtyFive />} />
-        <Route path="/runyuji" element={<RunYuji />} />
-        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/works/snacklab" element={<SnackLab />} />
+        <Route path="/works/thirtyfive" element={<ThirtyFive />} />
+        <Route path="/works/runyuji" element={<RunYuji />} />
+        <Route path="/works/portfolio" element={<Portfolio />} />
       </Routes>
     </Router>
   );
