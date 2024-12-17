@@ -28,7 +28,7 @@ function App() {
 
   useEffect(() => {
     VANTA.FOG({
-      el: "body",
+      el: "#main-wrapper",
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
