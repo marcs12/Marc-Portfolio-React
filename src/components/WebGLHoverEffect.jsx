@@ -87,18 +87,19 @@ const WebGLHoverEffect = () => {
     render();
 
     // Handle window resizing to maintain aspect ratio
-    window.addEventListener("resize", () => {
+    const onResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
       renderer.setSize(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-    });
+    };
+    window.addEventListener("resize", onResize);
 
     return () => {
       container.removeChild(renderer.domElement);
       window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("resize", () => {}); // Cleanup resize event
+      window.removeEventListener("resize", onResize); // Cleanup resize event
     };
   }, []);
 

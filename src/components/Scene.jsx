@@ -1,28 +1,29 @@
 // Scene.jsx
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { Canvas } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import { LogoModel } from "./LogoModel"; // Import as a named export
+import debounce from "lodash.debounce";
 
 const Scene = () => {
-  function getScale() {
+  const getScale = useCallback(() => {
     if (window.innerWidth < 760) return 1;
-    if (window.innerWidth < 1024) return 4;
-    return 5;
-  }
+    if (window.innerWidth < 1024) return 2;
+    return 3;
+  }, []);
 
   const [scale, setScale] = useState(getScale());
 
   useEffect(() => {
-    const handleResize = () => {
+    const handleResize = debounce(() => {
       setScale(getScale());
-    };
+    }, 100);
 
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [getScale]);
 
   useEffect(() => {
     const canvas = document.getElementById("canvas");
@@ -40,11 +41,18 @@ const Scene = () => {
     );
   }, []);
 
-  function getScale() {
-    if (window.innerWidth < 760) return 1;
-    if (window.innerWidth < 1024) return 2;
-    return 3;
-  }
+  const textProps = useMemo(
+    () => ({
+      color: "#ffffff",
+      fontSize: 0.5 * scale,
+      font: "/src/assets/DMSerifDisplay-Regular.ttf",
+      rotation: [0, 0, 0],
+      textAlign: "center",
+      anchorX: "center",
+      anchorY: "middle",
+    }),
+    [scale],
+  );
 
   return (
     <Canvas
@@ -64,28 +72,10 @@ const Scene = () => {
       <mesh position={[0, 0, -5]} scale={scale}>
         <meshBasicMaterial color={"#ffffff"} />
       </mesh>
-      <Text
-        color={"#ffffff"}
-        fontSize={0.5 * scale}
-        font="/src/assets/DMSerifDisplay-Regular.ttf"
-        position={[-0.13 * scale, 0.175 * scale, 0]}
-        rotation={[0, 0, 0]}
-        textAlign={"center"}
-        anchorX="center"
-        anchorY="middle"
-      >
+      <Text {...textProps} position={[-0.13 * scale, 0.175 * scale, 0]}>
         MARC
       </Text>
-      <Text
-        color={"#ffffff"}
-        fontSize={0.5 * scale}
-        font="/src/assets/DMSerifDisplay-Regular.ttf"
-        position={[0.23 * scale, -0.175 * scale, 0]}
-        rotation={[0, 0, 0]}
-        textAlign={"center"}
-        anchorX="center"
-        anchorY="middle"
-      >
+      <Text {...textProps} position={[0.23 * scale, -0.175 * scale, 0]}>
         SAPA
       </Text>
     </Canvas>
