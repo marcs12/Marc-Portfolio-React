@@ -1,37 +1,58 @@
 @use "../utils/mixins" as *;
 
-.about-section {
-  height: 100%;
+.about-me {
+  color: #fff;
+  padding: 4rem 1rem 0 1rem;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  max-width: 400px;
+  margin: auto;
+}
+
+.profile-container {
+  margin-bottom: 30px;
+}
+
+.image-placeholder {
+  width: 150px;
+  height: 200px;
+  background-color: #333;
+  margin: auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 2rem;
+  align-items: center;
+  border-radius: 10px;
+}
 
-  .about-me,
-  .skills {
-    max-width: 50rem; // 800px to rem
-    margin-bottom: 2rem;
-    text-align: center;
+.image-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
+.description {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
 
-    p,
-    ul {
-      font-size: 1rem;
-      line-height: 1.5;
-    }
+.skills-container {
+  display: flex;
+  justify-content: center;
+}
 
-    ul {
-      list-style-type: none;
-      padding: 0;
+.skills {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  gap: 15px;
+}
 
-      li {
-        margin: 0.5rem 0;
-      }
-    }
-  }
+.skill-icon {
+  background-color: #222;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
