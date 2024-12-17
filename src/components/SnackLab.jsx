@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo } from "react";
 import { motion } from "framer-motion";
 import SnackLabVideo from "../assets/mockup-desktop/snacklab-mockups-4OBXVgqv.mp4";
 import SnackLabMobile from "../assets/phone-mockups/snacklab-mobile.mp4";
@@ -9,15 +9,19 @@ import WordPress from "../assets/icons/icons8-wordpress.svg";
 import Sass from "../assets/icons/sass-brands-solid.svg";
 import Php from "../assets/icons/icons8-php.svg";
 
-const Accordion = ({ title, content, isOpen, onClick }) => (
+const Accordion = memo(({ title, content, isOpen, onClick }) => (
   <div className="accordion-item">
-    <div className="accordion-title" onClick={onClick}>
+    <button
+      className="accordion-title"
+      onClick={onClick}
+      aria-expanded={isOpen}
+    >
       <h3>{title}</h3>
       <span>{isOpen ? "-" : "+"}</span>
-    </div>
+    </button>
     {isOpen && <div className="accordion-content">{content}</div>}
   </div>
-);
+));
 
 const projectManagementContent = (
   <ul>
@@ -101,6 +105,7 @@ const SnackLab = () => {
           muted
           loop
           className="desktop-video"
+          aria-label="SnackLab desktop mockup video"
         ></video>
         <div className="heading-text-wrap">
           <p>01.</p>
@@ -169,7 +174,7 @@ const SnackLab = () => {
               initial="hidden"
               animate="visible"
             >
-              <img src={icon} alt="Icon" />
+              <img src={icon} alt={`Icon ${index + 1}`} />
             </motion.li>
           ))}
         </ul>
@@ -230,6 +235,7 @@ const SnackLab = () => {
             muted
             loop
             className="mobile-video"
+            aria-label="SnackLab mobile mockup video"
           ></video>
         </div>
       </motion.article>

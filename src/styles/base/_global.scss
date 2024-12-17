@@ -6,6 +6,14 @@ body,
   height: 100%;
 }
 
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  outline: inherit;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   margin: 0;
