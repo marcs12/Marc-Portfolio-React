@@ -12,6 +12,7 @@
 
   .single-hero-wrap {
     width: 100%;
+
     video {
       width: 100%;
       height: auto;
@@ -103,7 +104,6 @@
         font-weight: 100;
         flex: 1;
         text-align: center;
-
         transition:
           background-color 0.3s,
           color 0.3s;
@@ -138,6 +138,11 @@
         img {
           width: 2rem;
           height: 2rem;
+
+          @media (min-width: 64em) {
+            width: 3rem; // Desktop
+            height: 3rem; // Desktop
+          }
         }
       }
     }
@@ -162,11 +167,19 @@
           margin: 0;
           font-size: 1.25rem;
           font-weight: 500;
+
+          @media (min-width: 64em) {
+            font-size: 1.5rem; // Desktop
+          }
         }
 
         span {
           font-size: 1.5rem;
           font-weight: 700;
+
+          @media (min-width: 64em) {
+            font-size: 1.75rem; // Desktop
+          }
         }
       }
 
@@ -174,6 +187,10 @@
         padding: 1rem 0;
         font-size: 1rem;
         line-height: 1.5;
+
+        @media (min-width: 64em) {
+          font-size: 1.125rem; // Desktop
+        }
 
         ul,
         ol {
@@ -203,6 +220,10 @@
         font-size: 1.25rem;
         font-weight: 600;
 
+        @media (min-width: 64em) {
+          font-size: 1.5rem; // Desktop
+        }
+
         &:hover {
           background-color: #e7e7e7;
         }
@@ -215,6 +236,65 @@
 
         &.active {
           display: block;
+        }
+
+        @media (min-width: 64em) {
+          padding: 1.5rem; // Desktop
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 64em) {
+    .single-hero-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+
+      video {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        align-self: center;
+      }
+
+      .heading-text-wrap {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+      }
+
+      .project-description {
+        grid-column: 2 / 3;
+        grid-row: 1 / 2;
+        justify-content: flex-start;
+        align-self: flex-end;
+
+        ul {
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
+      }
+    }
+
+    .bottom-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+
+      .detail-accordions {
+        grid-column: 1 / 2;
+      }
+
+      .mobile-mockup {
+        grid-column: 2 / 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        video {
+          width: 100%;
+          height: auto;
+          border-radius: 0.5rem;
         }
       }
     }

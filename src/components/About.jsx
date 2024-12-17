@@ -1,7 +1,19 @@
 import React from "react";
+import Barcode from "../assets/barcode-long.png";
 
 const About = () => {
-  return <div>About</div>;
+  return (
+    <section className="about-section">
+      <article className="top-section">
+        <img
+          className="barcode-ornament"
+          src={Barcode}
+          alt=""
+          aria-hidden="true"
+        />
+      </article>
+    </section>
+  );
 };
 
 export default About;

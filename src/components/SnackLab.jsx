@@ -1,27 +1,23 @@
-import { section } from "framer-motion/client";
-import React, { useState } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import SnackLabVideo from "../assets/mockup-desktop/snacklab-mockups-4OBXVgqv.mp4";
 import SnackLabMobile from "../assets/phone-mockups/snacklab-mobile.mp4";
 
-//Icons
+// Icons
 import FigmaIcon from "../assets/icons/figma-CCcFopil.png";
 import WordPress from "../assets/icons/icons8-wordpress.svg";
 import Sass from "../assets/icons/sass-brands-solid.svg";
 import Php from "../assets/icons/icons8-php.svg";
 
-const Accordion = ({ title, content }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <div className="accordion-item">
-      <div className="accordion-title" onClick={() => setIsOpen(!isOpen)}>
-        <h3>{title}</h3>
-        <span>{isOpen ? "-" : "+"}</span>
-      </div>
-      {isOpen && <div className="accordion-content">{content}</div>}
+const Accordion = ({ title, content, isOpen, onClick }) => (
+  <div className="accordion-item">
+    <div className="accordion-title" onClick={onClick}>
+      <h3>{title}</h3>
+      <span>{isOpen ? "-" : "+"}</span>
     </div>
-  );
-};
+    {isOpen && <div className="accordion-content">{content}</div>}
+  </div>
+);
 
 const projectManagementContent = (
   <ul>
@@ -68,92 +64,176 @@ const roleContent = (
   </p>
 );
 
+const iconVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, delay: 1.5 },
+  },
+};
+
+const motionProps = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  transition: { duration: 1 },
+};
+
 const SnackLab = () => {
+  const [openAccordion, setOpenAccordion] = useState(null);
+
+  const handleAccordionClick = (index) => {
+    setOpenAccordion(openAccordion === index ? null : index);
+  };
+
   return (
-    <section className="single-wrap">
-      <article className="single-hero-wrap">
-        <video src={SnackLabVideo} playsInline autoPlay muted loop></video>
+    <motion.section className="single-wrap" {...motionProps}>
+      <motion.article
+        className="single-hero-wrap"
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
+      >
+        <video
+          src={SnackLabVideo}
+          playsInline
+          autoPlay
+          muted
+          loop
+          className="desktop-video"
+        ></video>
         <div className="heading-text-wrap">
           <p>01.</p>
           <h1>SnackLab</h1>
         </div>
         <div className="project-description">
-          <ul className="categories">
-            <li>
-              <p>Client:</p>
-            </li>
-            <li>
-              <p>Year:</p>
-            </li>
-            <li>
-              <p>Role:</p>
-            </li>
-            <li>
-              <p>Category:</p>
-            </li>
-            <li>
-              <p>Team:</p>
-            </li>
-          </ul>
-          <ul>
-            <li>
-              <p>Project</p>
-            </li>
-            <li>
-              <p>2024</p>
-            </li>
-            <li>
-              <p>Developer</p>
-            </li>
-            <li>
-              <p>E-Commerce</p>
-            </li>
-            <li>
-              <p>Marc Sapa, Gustavo Yamamoto, Kaleb Link, Haw Haw Tan</p>
-            </li>
-          </ul>
+          <motion.ul
+            className="categories"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+          >
+            {["Client:", "Year:", "Role:", "Category:", "Team:"].map(
+              (text, index) => (
+                <li key={index}>
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 1 }}
+                  >
+                    {text}
+                  </motion.p>
+                </li>
+              ),
+            )}
+          </motion.ul>
+          <motion.ul
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+          >
+            {[
+              "Project",
+              "2024",
+              "Developer",
+              "E-Commerce",
+              "Marc Sapa, Gustavo Yamamoto, Kaleb Link, Haw Haw Tan",
+            ].map((text, index) => (
+              <li key={index}>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 2 }}
+                >
+                  {text}
+                </motion.p>
+              </li>
+            ))}
+          </motion.ul>
         </div>
         <div className="project-links">
           <a href="https://github.com/marcs12/snacklab-theme">GitHub Repo</a>
           <a href="https://marcsapa.com/snacklab">Visit Site</a>
         </div>
-      </article>
-      <article className="tech-used">
+      </motion.article>
+      <motion.article
+        className="tech-used"
+        {...motionProps}
+        transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
+      >
         <ul className="icon-list">
-          <li>
-            <img src={FigmaIcon} alt="Figma" />
-          </li>
-          <li>
-            <img src={WordPress} alt="WordPress" />
-          </li>
-          <li>
-            <img src={Sass} alt="Sass" />
-          </li>
-          <li>
-            <img src={Php} alt="PHP" />
-          </li>
+          {[FigmaIcon, WordPress, Sass, Php].map((icon, index) => (
+            <motion.li
+              key={index}
+              variants={iconVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              <img src={icon} alt="Icon" />
+            </motion.li>
+          ))}
         </ul>
-      </article>
-      <article className="project-description">
-        <p>
-          SnackLab is a fictional company that sells snacks from around the
-          world. The site is built using WordPress and WooCommerce. The theme is
-          custom-built using HTML, CSS, PHP, and JavaScript. The design was
-          created in Figma.
-        </p>
-      </article>
-      <article className="detail-accordions">
-        <Accordion
-          title="Project Management"
-          content={projectManagementContent}
-        />
-        <Accordion title="Development" content={developmentContent} />
-        <Accordion title="Role" content={roleContent} />
-      </article>
-      <div className="mobile-mockup">
-        <video src={SnackLabMobile} playsInline autoPlay muted loop></video>
-      </div>
-    </section>
+      </motion.article>
+      <motion.article
+        className="project-description"
+        initial={{ x: -50, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
+      >
+        <div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: "easeInOut" }}
+            style={{ whiteSpace: "pre-wrap" }}
+          >
+            {"SnackLab is a fictional company that sells snacks from around the world. The site is built using WordPress and WooCommerce. The theme is custom-built using HTML, CSS, PHP, and JavaScript. The design was created in Figma."
+              .split("")
+              .map((char, index) => (
+                <motion.span
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.05, delay: index * 0.05 }}
+                >
+                  {char}
+                </motion.span>
+              ))}
+          </motion.p>
+        </div>
+      </motion.article>
+      <motion.article
+        className="bottom-section"
+        {...motionProps}
+        transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
+      >
+        <div className="detail-accordions">
+          {[
+            { title: "Project Management", content: projectManagementContent },
+            { title: "Development", content: developmentContent },
+            { title: "Role", content: roleContent },
+          ].map((accordion, index) => (
+            <Accordion
+              key={index}
+              title={accordion.title}
+              content={accordion.content}
+              isOpen={openAccordion === index}
+              onClick={() => handleAccordionClick(index)}
+            />
+          ))}
+        </div>
+        <div className="mobile-mockup">
+          <video
+            src={SnackLabMobile}
+            playsInline
+            autoPlay
+            muted
+            loop
+            className="mobile-video"
+          ></video>
+        </div>
+      </motion.article>
+    </motion.section>
   );
 };
 
