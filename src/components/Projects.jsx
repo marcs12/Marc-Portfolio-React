@@ -31,7 +31,7 @@ const Projects = () => {
     <section className="projects-section">
       <ul className="projects-list">
         <li>
-          <Link to="/snacklab">
+          <Link to="/works/snacklab">
             <div className="project-title">
               <p>01. </p>
               <h2>SnackLab</h2>
@@ -40,7 +40,7 @@ const Projects = () => {
           </Link>
         </li>
         <li>
-          <Link to="/thirtyfive">
+          <Link to="/works/thirtyfive">
             <div className="project-title">
               <p>02. </p>
               <h2>35mm</h2>
@@ -49,7 +49,7 @@ const Projects = () => {
           </Link>
         </li>
         <li>
-          <Link to="/runyuji">
+          <Link to="/works/runyuji">
             <div className="project-title">
               <p>03. </p>
               <h2>Run Yuji</h2>
@@ -58,7 +58,7 @@ const Projects = () => {
           </Link>
         </li>
         <li>
-          <Link to="/portfolio">
+          <Link to="/works/portfolio">
             <div className="project-title">
               <p>04. </p>
               <h2>Portfolio</h2>

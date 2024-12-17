@@ -1,2 +1,222 @@
 @use "../utils/mixins" as *;
 @use "../base/variables" as *;
+
+.single-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  height: fit-content;
+  background-color: #0b0b0b;
+
+  .single-hero-wrap {
+    width: 100%;
+    video {
+      width: 100%;
+      height: auto;
+      border-radius: 0.5rem;
+    }
+
+    .heading-text-wrap {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      gap: 0.25rem;
+
+      p {
+        font-size: 1rem;
+        padding-bottom: 0.1rem;
+
+        @media (min-width: 48em) {
+          font-size: 1.125rem; // Tablet
+        }
+
+        @media (min-width: 64em) {
+          font-size: 1.25rem; // Desktop
+        }
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+
+        @media (min-width: 48em) {
+          font-size: 2.25rem; // Tablet
+        }
+
+        @media (min-width: 64em) {
+          font-size: 2.5rem; // Desktop
+        }
+      }
+    }
+
+    .project-description {
+      display: flex;
+      gap: 4rem;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 2rem;
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 0.5rem;
+          text-align: left;
+
+          p {
+            font-size: 1rem;
+            margin: 0;
+
+            @media (min-width: 48em) {
+              font-size: 1.125rem; // Tablet
+            }
+
+            @media (min-width: 64em) {
+              font-size: 1.25rem; // Desktop
+            }
+          }
+        }
+      }
+
+      .categories {
+        text-align: right;
+        margin-right: 1rem;
+      }
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+
+      a {
+        font-size: 1rem;
+        color: white;
+        text-decoration: none;
+        border: 1px solid white;
+        padding: 0.5rem 1rem;
+        font-family: "Roboto Condensed", sans-serif;
+        font-weight: 100;
+        flex: 1;
+        text-align: center;
+
+        transition:
+          background-color 0.3s,
+          color 0.3s;
+
+        &:hover {
+          background-color: white;
+          color: black;
+        }
+
+        @media (min-width: 48em) {
+          font-size: 1.125rem; // Tablet
+        }
+
+        @media (min-width: 64em) {
+          font-size: 1.25rem; // Desktop
+        }
+      }
+    }
+  }
+
+  .tech-used {
+    margin: 2rem;
+
+    .icon-list {
+      display: flex;
+      gap: 1rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        img {
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+  }
+
+  .detail-accordions {
+    width: 100%;
+    max-width: 800px;
+    margin: 2rem auto;
+
+    .accordion-item {
+      border-bottom: 1px solid #ddd;
+      padding: 1rem 0;
+
+      .accordion-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+
+        h3 {
+          margin: 0;
+          font-size: 1.25rem;
+          font-weight: 500;
+        }
+
+        span {
+          font-size: 1.5rem;
+          font-weight: 700;
+        }
+      }
+
+      .accordion-content {
+        padding: 1rem 0;
+        font-size: 1rem;
+        line-height: 1.5;
+
+        ul,
+        ol {
+          padding-left: 1.5rem;
+          margin: 0;
+        }
+
+        li {
+          margin-bottom: 0.5rem;
+        }
+      }
+    }
+
+    .accordion {
+      border: 1px solid #ddd;
+      border-radius: 0.5rem;
+      margin-bottom: 1rem;
+      overflow: hidden;
+
+      &__title {
+        background-color: #f7f7f7;
+        padding: 1rem;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1.25rem;
+        font-weight: 600;
+
+        &:hover {
+          background-color: #e7e7e7;
+        }
+      }
+
+      &__content {
+        padding: 1rem;
+        background-color: white;
+        display: none;
+
+        &.active {
+          display: block;
+        }
+      }
+    }
+  }
+}

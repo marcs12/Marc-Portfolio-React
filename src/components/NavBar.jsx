@@ -1,11 +1,31 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const SlideTabsExample = () => {
+  const [background, setBackground] = useState("transparent");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setBackground("white");
+      } else {
+        setBackground("transparent");
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.querySelector(".slide-tabs-container").style.transition =
+      "background 0.3s ease";
+  }, []);
+
   return (
-    <div className="slide-tabs-container">
+    <div className="slide-tabs-container" style={{ background }}>
       <SlideTabs />
     </div>
   );
@@ -35,8 +55,8 @@ const SlideTabs = () => {
       <Tab setPosition={setPosition} to="/">
         Home
       </Tab>
-      <Tab setPosition={setPosition} to="/projects">
-        Projects
+      <Tab setPosition={setPosition} to="/works">
+        Works
       </Tab>
       <Tab setPosition={setPosition} to="/about">
         About
