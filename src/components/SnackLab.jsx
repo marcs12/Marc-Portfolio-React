@@ -25,20 +25,38 @@ const Accordion = ({ title, content }) => {
 
 const projectManagementContent = (
   <ul>
-    <li>Jira for task management and tracking</li>
-    <li>Google Docs for documentation and collaboration</li>
-    <li>Slack for team communication</li>
+    <li>
+      <p>Jira for task management and tracking</p>
+    </li>
+    <li>
+      <p>Google Docs for documentation and collaboration</p>
+    </li>
+    <li>
+      <p>Slack for team communication</p>
+    </li>
   </ul>
 );
 
 const developmentContent = (
   <ol>
-    <li>Requirement Analysis</li>
-    <li>Design and Prototyping</li>
-    <li>Development</li>
-    <li>Testing</li>
-    <li>Deployment</li>
-    <li>Maintenance</li>
+    <li>
+      <p>Requirement Analysis</p>
+    </li>
+    <li>
+      <p>Design and Prototyping</p>
+    </li>
+    <li>
+      <p>Development</p>
+    </li>
+    <li>
+      <p>Testing</p>
+    </li>
+    <li>
+      <p>Deployment</p>
+    </li>
+    <li>
+      <p>Maintenance</p>
+    </li>
   </ol>
 );
 
