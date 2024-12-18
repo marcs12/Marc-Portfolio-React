@@ -1,7 +1,7 @@
 import { useState, memo } from "react";
 import { motion } from "framer-motion";
-import SnackLabVideo from "../assets/mockup-desktop/snacklab-mockups-4OBXVgqv.mp4";
-import SnackLabMobile from "../assets/phone-mockups/snacklab-mobile.mp4";
+import SnackLabVideo from "../assets/compressed/snacklab-desktop.mp4";
+import SnackLabMobile from "../assets/compressed/snacklab-mobile.mp4";
 
 // Icons
 import FigmaIcon from "../assets/icons/figma-CCcFopil.png";
