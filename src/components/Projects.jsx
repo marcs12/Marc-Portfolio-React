@@ -7,7 +7,7 @@ const Projects = () => {
   const projectRefs = useRef([]);
 
   const projects = useMemo(
-    () => ["SnackLab", "35mm", "Run Yuji", "Portfolio"],
+    () => ["SnackLab", "ThirtyFive", "Run Yuji", "Portfolio"],
     [],
   );
 
