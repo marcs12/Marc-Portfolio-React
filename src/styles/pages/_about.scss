@@ -6,11 +6,22 @@
 
   .top-section {
     height: 100%;
-  }
-  .barcode-ornament {
-    transform: rotate(90deg);
-    margin-top: 4rem;
-    margin-left: 0;
-    height: 4rem;
+    position: relative;
+
+    .barcode-ornament {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 8rem;
+    }
+
+    .vl {
+      border-left: 1px solid white;
+      height: 250px;
+      position: absolute;
+      left: 0%;
+      top: 9rem;
+      margin: 0 1.5rem;
+    }
   }
 }

@@ -11,6 +11,7 @@ const About = () => {
           alt=""
           aria-hidden="true"
         />
+        <div className="vl"></div>
       </article>
     </section>
   );
