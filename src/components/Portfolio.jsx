@@ -157,8 +157,10 @@ const Portfolio = () => {
           </motion.ul>
         </div>
         <div className="project-links">
-          <a href="https://github.com/marcs12/portfolio-project">GitHub Repo</a>
-          <a href="https://marcsapa.com/portfolio/">Visit Site</a>
+          <a href="https://github.com/marcs12/Marc-Portfolio-React">
+            GitHub Repo
+          </a>
+          <a href="https://marcsapa.com/">Back Home</a>
         </div>
       </motion.article>
 

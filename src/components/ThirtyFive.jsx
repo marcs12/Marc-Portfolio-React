@@ -135,7 +135,7 @@ const ThirtyFiveMM = () => {
             transition={{ duration: 1, ease: "easeInOut" }}
           >
             {[
-              "Project",
+              "School Project",
               "2024",
               "Developer",
               "React Database & TMDB API",

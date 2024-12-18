@@ -130,8 +130,8 @@ const RunYuji = () => {
             transition={{ duration: 1, ease: "easeInOut" }}
           >
             {[
-              "Personal Project",
-              "2023",
+              "School Project",
+              "2024",
               "Designer & Developer",
               "Game Development",
               "Marc Sapa",
@@ -150,7 +150,7 @@ const RunYuji = () => {
         </div>
         <div className="project-links">
           <a href="https://github.com/marcs12/runyuji">GitHub Repo</a>
-          <a href="https://marcsapa.com/runyuji">Play Game</a>
+          <a href="https://marcs12.github.io/runyuji/">Play Game</a>
         </div>
       </motion.article>
 
