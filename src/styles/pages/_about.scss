@@ -1,37 +1,16 @@
-@use "../utils/mixins" as *;
-
 .about-section {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
+  height: 100vh;
+  width: 100vw;
+  padding: 4rem 1rem 0;
+  position: relative;
 
-  .about-me,
-  .skills {
-    max-width: 50rem; // 800px to rem
-    margin-bottom: 2rem;
-    text-align: center;
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    p,
-    ul {
-      font-size: 1rem;
-      line-height: 1.5;
-    }
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-
-      li {
-        margin: 0.5rem 0;
-      }
-    }
+  .top-section {
+    height: 100%;
+  }
+  .barcode-ornament {
+    transform: rotate(90deg);
+    margin-top: 4rem;
+    margin-left: 0;
+    height: 4rem;
   }
 }

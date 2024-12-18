@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const SlideTabsExample = () => {
   const [background, setBackground] = useState("transparent");
@@ -69,6 +69,16 @@ const SlideTabs = () => {
 
 const Tab = ({ children, setPosition, to }) => {
   const ref = useRef(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash && location.pathname === "/") {
+      const section = document.querySelector(location.hash);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   return (
     <li

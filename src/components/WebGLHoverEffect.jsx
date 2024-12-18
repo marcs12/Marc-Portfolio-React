@@ -10,6 +10,11 @@ const WebGLHoverEffect = () => {
       return;
     }
 
+    // Check for screen width
+    if (window.innerWidth < 1024) {
+      return; // Exit early if the screen width is less than 1024px
+    }
+
     let targetX = 0;
     let targetY = 0;
 
@@ -87,18 +92,19 @@ const WebGLHoverEffect = () => {
     render();
 
     // Handle window resizing to maintain aspect ratio
-    window.addEventListener("resize", () => {
+    const onResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
       renderer.setSize(width, height);
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
-    });
+    };
+    window.addEventListener("resize", onResize);
 
     return () => {
       container.removeChild(renderer.domElement);
       window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("resize", () => {}); // Cleanup resize event
+      window.removeEventListener("resize", onResize); // Cleanup resize event
     };
   }, []);
 

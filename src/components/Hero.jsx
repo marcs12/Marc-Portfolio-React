@@ -46,9 +46,8 @@ const Hero = () => {
 
     gsap.fromTo(
       ".hero-wrap",
-      { width: 0, height: 0, opacity: 0 },
+      { height: 0, opacity: 0 },
       {
-        width: "auto",
         height: "auto",
         opacity: 1,
         duration: 0.5,
