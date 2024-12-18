@@ -4,10 +4,9 @@ import ThirtyFiveMMVideo from "../assets/compressed/thirtyfive-desktop.mp4";
 import ThirtyFiveMMMobile from "../assets/compressed/thirtyfive-mobile.mp4";
 
 // Icons
-import FigmaIcon from "../assets/icons/figma-CCcFopil.png";
-import WordPress from "../assets/icons/icons8-wordpress.svg";
+import AdobeXD from "../assets/icons/xd-Bj4jYHe2.png";
 import Sass from "../assets/icons/sass-brands-solid.svg";
-import Php from "../assets/icons/icons8-php.svg";
+import React from "../assets/icons/icons8-react.svg";
 
 const Accordion = memo(({ title, content, isOpen, onClick }) => (
   <div className="accordion-item">
@@ -63,8 +62,9 @@ const developmentContent = (
 const roleContent = (
   <p>
     I served as both a designer and developer for the ThirtyFiveMM project,
-    handling the design in Figma and the development using WordPress, HTML, CSS
-    (SASS), PHP, and JavaScript.
+    handling the design in Adobe Photoshop and making a High Fidelity mockup
+    with Adobe XD. As a developer, I used React to build the site and used the
+    TMDB API to fetch the data. I also used Sass for styling.
   </p>
 );
 
@@ -141,8 +141,8 @@ const ThirtyFiveMM = () => {
               "Project",
               "2024",
               "Developer",
-              "Photography",
-              "Marc Sapa, Gustavo Yamamoto, Kaleb Link, Haw Haw Tan",
+              "React Database & TMDB API",
+              "Marc Sapa, Mahdi Roozbahani, Yining Li, Kate Shepherd",
             ].map((text, index) => (
               <li key={index}>
                 <motion.p
@@ -157,10 +157,10 @@ const ThirtyFiveMM = () => {
           </motion.ul>
         </div>
         <div className="project-links">
-          <a href="https://github.com/marcs12/thirtyfivemm-theme">
+          <a href="https://github.com/marcs12/react-movie-project">
             GitHub Repo
           </a>
-          <a href="https://marcsapa.com/thirtyfivemm">Visit Site</a>
+          <a href="https://marcsapa.com/35mm-app/">Visit Site</a>
         </div>
       </motion.article>
 
@@ -179,7 +179,7 @@ const ThirtyFiveMM = () => {
           transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
         >
           <ul className="icon-list">
-            {[FigmaIcon, WordPress, Sass, Php].map((icon, index) => (
+            {[AdobeXD, React, Sass].map((icon, index) => (
               <motion.li
                 key={index}
                 variants={iconVariants}
