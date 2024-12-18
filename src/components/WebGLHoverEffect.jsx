@@ -10,6 +10,11 @@ const WebGLHoverEffect = () => {
       return;
     }
 
+    // Check for screen width
+    if (window.innerWidth < 1024) {
+      return; // Exit early if the screen width is less than 1024px
+    }
+
     let targetX = 0;
     let targetY = 0;
 
