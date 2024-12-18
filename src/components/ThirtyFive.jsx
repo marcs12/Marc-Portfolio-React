@@ -25,7 +25,7 @@ const Accordion = memo(({ title, content, isOpen, onClick }) => (
 const projectManagementContent = (
   <ul>
     <li>
-      <p>Jira for task management and tracking</p>
+      <p>Adobe XD for Design Planning and Reference</p>
     </li>
     <li>
       <p>Google Docs for documentation and collaboration</p>
@@ -39,22 +39,19 @@ const projectManagementContent = (
 const developmentContent = (
   <ol>
     <li>
-      <p>Requirement Analysis</p>
+      <p>Project Requirement Analysis</p>
     </li>
     <li>
       <p>Design and Prototyping</p>
     </li>
     <li>
-      <p>Development</p>
+      <p>Task Assigning + Development</p>
     </li>
     <li>
       <p>Testing</p>
     </li>
     <li>
       <p>Deployment</p>
-    </li>
-    <li>
-      <p>Maintenance</p>
     </li>
   </ol>
 );
