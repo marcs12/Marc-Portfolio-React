@@ -4,6 +4,7 @@ body,
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100vw;
   // background-color: #0b0b0b;
 }
 
@@ -17,10 +18,8 @@ button {
 
 body {
   font-family: "Roboto", sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #0b0b0b;
   color: #fff;
+  background-color: #0b0b0b;
 }
 
 .social-color {

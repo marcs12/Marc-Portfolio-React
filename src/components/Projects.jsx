@@ -35,6 +35,18 @@ const Projects = () => {
               },
             );
 
+            // Animate the hr line with GSAP
+            const hrLine = entry.target.querySelector(".project-line");
+            gsap.fromTo(
+              hrLine,
+              { scaleX: 0 }, // Initial state: line is not visible
+              {
+                scaleX: 1, // Final state: line is fully visible
+                duration: 1,
+                ease: "power1.inOut",
+              },
+            );
+
             observer.unobserve(entry.target); // Stop observing once the animation is triggered
           }
         });
