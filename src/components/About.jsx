@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useEffect, useRef, memo } from "react";
 import Barcode from "../assets/barcode-long.png";
-import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { motion } from "framer-motion";
 import MarcPhoto from "../assets/IMG_1968.JPG";
@@ -28,7 +27,7 @@ import LightroomIcon from "../assets/icons/photoshop-lightroom-BDeX5MDj.png";
 import PremiereProIcon from "../assets/icons/premiere-pro-DEinuioA.png";
 import XdIcon from "../assets/icons/xd-Bj4jYHe2.png";
 
-const About = () => {
+const About = React.memo(() => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -45,12 +44,18 @@ const About = () => {
         <img
           className="barcode-ornament"
           src={Barcode}
-          alt=""
+          alt="Barcode ornament"
           aria-hidden="true"
+          loading="lazy"
         />
         <div className="vl"></div>
         <div className="photo-intro">
-          <img className="marc-photo" src={MarcPhoto} alt="Marc Sapa" />
+          <img
+            className="marc-photo"
+            src={MarcPhoto}
+            alt="Marc Sapa"
+            loading="lazy"
+          />
           <p className="introduction">
             Marc Sapa is a multidisciplinary creative with a focus on creating
             high-level work across a variety of digital mediums such as
@@ -59,36 +64,59 @@ const About = () => {
         </div>
       </article>
 
-      <article className="my-stack">
+      <motion.article
+        className="my-stack"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
         <div className="stack-container">
           <Tabs>
             <TabList>
-              <Tab>Development Tools</Tab>
-              <Tab>Design Tools</Tab>
+              <Tab>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="typewriter"
+                >
+                  Development Tools
+                </motion.p>
+              </Tab>
+              <Tab>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="typewriter"
+                >
+                  Design Tools
+                </motion.p>
+              </Tab>
             </TabList>
 
             <TabPanel>
               <div className="stack-icons">
                 {[
-                  FramerMotionIcon,
-                  GsapGreensockIconAlt,
-                  CssIcon,
-                  HtmlIcon,
-                  JavascriptIcon,
-                  PhpIcon,
-                  ReactIcon,
-                  WordpressIcon,
-                  SassIcon,
-                  ThreeJsIcon,
+                  { src: FramerMotionIcon, alt: "Framer Motion Icon" },
+                  { src: GsapGreensockIconAlt, alt: "GSAP Greensock Icon" },
+                  { src: CssIcon, alt: "CSS Icon" },
+                  { src: HtmlIcon, alt: "HTML Icon" },
+                  { src: JavascriptIcon, alt: "JavaScript Icon" },
+                  { src: PhpIcon, alt: "PHP Icon" },
+                  { src: ReactIcon, alt: "React Icon" },
+                  { src: WordpressIcon, alt: "WordPress Icon" },
+                  { src: SassIcon, alt: "Sass Icon" },
+                  { src: ThreeJsIcon, alt: "Three.js Icon" },
                 ].map((icon, index) => (
                   <motion.div
                     key={index}
                     whileHover={{ scale: 1.2 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    <img src={icon} alt="" />
+                    <img src={icon.src} alt={icon.alt} loading="lazy" />
                   </motion.div>
                 ))}
               </div>
@@ -97,31 +125,31 @@ const About = () => {
             <TabPanel>
               <div className="stack-icons">
                 {[
-                  AfterEffectsIcon,
-                  FigmaIcon,
-                  IllustratorIcon,
-                  PhotoshopIcon,
-                  LightroomIcon,
-                  PremiereProIcon,
-                  XdIcon,
+                  { src: AfterEffectsIcon, alt: "After Effects Icon" },
+                  { src: FigmaIcon, alt: "Figma Icon" },
+                  { src: IllustratorIcon, alt: "Illustrator Icon" },
+                  { src: PhotoshopIcon, alt: "Photoshop Icon" },
+                  { src: LightroomIcon, alt: "Lightroom Icon" },
+                  { src: PremiereProIcon, alt: "Premiere Pro Icon" },
+                  { src: XdIcon, alt: "XD Icon" },
                 ].map((icon, index) => (
                   <motion.div
                     key={index}
                     whileHover={{ scale: 1.2 }}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
+                    transition={{ delay: index * 0.05 }}
                   >
-                    <img src={icon} alt="" />
+                    <img src={icon.src} alt={icon.alt} loading="lazy" />
                   </motion.div>
                 ))}
               </div>
             </TabPanel>
           </Tabs>
         </div>
-      </article>
+      </motion.article>
     </section>
   );
-};
+});
 
 export default About;
