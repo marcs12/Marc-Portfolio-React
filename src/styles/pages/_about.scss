@@ -1,16 +1,109 @@
 .about-section {
   height: 100vh;
-  width: 100vw;
   padding: 4rem 1rem 0;
   position: relative;
 
+  .stack-label {
+    text-align: right;
+    margin-bottom: 1rem;
+  }
+
+  .intro-label {
+    text-align: right;
+  }
+
   .top-section {
+    position: relative;
+    overflow: hidden;
+
+    .barcode-ornament {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 8rem;
+    }
+
+    .vl {
+      border-left: 1px solid white;
+      height: 300px;
+      position: absolute;
+      left: 0%;
+      top: 9rem;
+      margin: 0 1.5rem;
+    }
+
+    .photo-intro {
+      margin-left: 4rem;
+
+      .marc-photo {
+        width: 100%;
+        height: auto;
+        border-radius: 10%;
+        margin-bottom: 1rem;
+        max-width: 300px;
+      }
+    }
+  }
+
+  .my-stack {
+    padding: 1rem 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .stack-container {
+    text-align: center;
     height: 100%;
   }
-  .barcode-ornament {
-    transform: rotate(90deg);
-    margin-top: 4rem;
-    margin-left: 0;
-    height: 4rem;
+
+  .stack-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .stack-icons img {
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
+  }
+
+  .react-tabs {
+    font-family: "Roboto Condesed", sans-serif;
+
+    .react-tabs__tab-list {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+      padding: 0;
+      list-style: none;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .react-tabs__tab {
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      background: none;
+      font-size: 1rem;
+      color: white;
+
+      &--selected {
+        color: #ffffff;
+        border: 1px solid white;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+    }
+
+    .react-tabs__tab-panel {
+      display: none;
+      &--selected {
+        display: block;
+      }
+    }
   }
 }

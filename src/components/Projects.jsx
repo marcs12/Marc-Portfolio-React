@@ -7,7 +7,7 @@ const Projects = () => {
   const projectRefs = useRef([]);
 
   const projects = useMemo(
-    () => ["SnackLab", "35mm", "Run Yuji", "Portfolio"],
+    () => ["SnackLab", "ThirtyFive", "Run Yuji", "Portfolio"],
     [],
   );
 
@@ -39,7 +39,7 @@ const Projects = () => {
             const hrLine = entry.target.querySelector(".project-line");
             gsap.fromTo(
               hrLine,
-              { scaleX: 0 }, // Initial state: line is not visible
+              { scaleX: 0, transformOrigin: "left center" }, // Initial state: line is not visible, origin is left
               {
                 scaleX: 1, // Final state: line is fully visible
                 duration: 1,

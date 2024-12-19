@@ -161,52 +161,63 @@ const SnackLab = () => {
           <a href="https://marcsapa.com/snacklab">Visit Site</a>
         </div>
       </motion.article>
-      <motion.article
-        className="tech-used"
-        {...motionProps}
-        transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
+
+      <motion.p
+        className="number-two"
+        initial={{ opacity: 0, y: 0 }}
+        animate={{ opacity: 1, y: 20 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
       >
-        <ul className="icon-list">
-          {[FigmaIcon, WordPress, Sass, Php].map((icon, index) => (
-            <motion.li
-              key={index}
-              variants={iconVariants}
-              initial="hidden"
-              animate="visible"
+        02. Stack Used
+      </motion.p>
+      <div className="tech-desc-wrap">
+        <motion.article
+          className="tech-used"
+          {...motionProps}
+          transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
+        >
+          <ul className="icon-list">
+            {[FigmaIcon, WordPress, Sass, Php].map((icon, index) => (
+              <motion.li
+                key={index}
+                variants={iconVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <img src={icon} alt={`Icon ${index + 1}`} />
+              </motion.li>
+            ))}
+          </ul>
+        </motion.article>
+        <motion.article
+          className="project-description"
+          initial={{ x: -50, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
+        >
+          <div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, ease: "easeInOut" }}
+              style={{ whiteSpace: "pre-wrap" }}
             >
-              <img src={icon} alt={`Icon ${index + 1}`} />
-            </motion.li>
-          ))}
-        </ul>
-      </motion.article>
-      <motion.article
-        className="project-description"
-        initial={{ x: -50, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
-      >
-        <div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            style={{ whiteSpace: "pre-wrap" }}
-          >
-            {"SnackLab is a fictional company that sells snacks from around the world. The site is built using WordPress and WooCommerce. The theme is custom-built using HTML, CSS, PHP, and JavaScript. The design was created in Figma."
-              .split("")
-              .map((char, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.05, delay: index * 0.05 }}
-                >
-                  {char}
-                </motion.span>
-              ))}
-          </motion.p>
-        </div>
-      </motion.article>
+              {"SnackLab is a fictional company that sells snacks from around the world. The site is built using WordPress and WooCommerce. The theme is custom-built using HTML, CSS, PHP, and JavaScript. The design was created in Figma."
+                .split("")
+                .map((char, index) => (
+                  <motion.span
+                    key={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.05, delay: index * 0.05 }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+            </motion.p>
+          </div>
+        </motion.article>
+      </div>
       <motion.article
         className="bottom-section"
         {...motionProps}
