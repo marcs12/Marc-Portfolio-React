@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, memo } from "react";
+import { useEffect, useRef } from "react";
 import Barcode from "../assets/barcode-long.png";
 import { gsap } from "gsap";
 import { motion } from "framer-motion";
@@ -27,7 +27,7 @@ import LightroomIcon from "../assets/icons/photoshop-lightroom-BDeX5MDj.png";
 import PremiereProIcon from "../assets/icons/premiere-pro-DEinuioA.png";
 import XdIcon from "../assets/icons/xd-Bj4jYHe2.png";
 
-const About = React.memo(() => {
+const About = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
@@ -56,10 +56,14 @@ const About = React.memo(() => {
             alt="Marc Sapa"
             loading="lazy"
           />
+          <p className="intro-label">01. Introduction</p>
+          <h1>About Me</h1>
           <p className="introduction">
-            Marc Sapa is a multidisciplinary creative with a focus on creating
-            high-level work across a variety of digital mediums such as
-            automotive visualization and design.
+            Hi, I’m Marc, a Front-End Developer and Web Designer focused on
+            Crafting Clean & Consistent Experiences. I have a background in Web
+            Design and Video Editing and with these two fields combined, I can
+            create visually appealing websites that are both functional and
+            user-friendly.
           </p>
         </div>
       </article>
@@ -70,6 +74,7 @@ const About = React.memo(() => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
+        <p className="stack-label">02. Tech Stack</p>
         <div className="stack-container">
           <Tabs>
             <TabList>
@@ -98,16 +103,16 @@ const About = React.memo(() => {
             <TabPanel>
               <div className="stack-icons">
                 {[
-                  { src: FramerMotionIcon, alt: "Framer Motion Icon" },
-                  { src: GsapGreensockIconAlt, alt: "GSAP Greensock Icon" },
-                  { src: CssIcon, alt: "CSS Icon" },
                   { src: HtmlIcon, alt: "HTML Icon" },
+                  { src: CssIcon, alt: "CSS Icon" },
                   { src: JavascriptIcon, alt: "JavaScript Icon" },
                   { src: PhpIcon, alt: "PHP Icon" },
                   { src: ReactIcon, alt: "React Icon" },
-                  { src: WordpressIcon, alt: "WordPress Icon" },
                   { src: SassIcon, alt: "Sass Icon" },
+                  { src: WordpressIcon, alt: "WordPress Icon" },
                   { src: ThreeJsIcon, alt: "Three.js Icon" },
+                  { src: FramerMotionIcon, alt: "Framer Motion Icon" },
+                  { src: GsapGreensockIconAlt, alt: "GSAP Greensock Icon" },
                 ].map((icon, index) => (
                   <motion.div
                     key={index}
@@ -150,6 +155,6 @@ const About = React.memo(() => {
       </motion.article>
     </section>
   );
-});
+};
 
 export default About;

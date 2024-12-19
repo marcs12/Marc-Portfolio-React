@@ -1,8 +1,16 @@
 .about-section {
   height: 100vh;
-  width: 100vw;
   padding: 4rem 1rem 0;
   position: relative;
+
+  .stack-label {
+    text-align: right;
+    margin-bottom: 1rem;
+  }
+
+  .intro-label {
+    text-align: right;
+  }
 
   .top-section {
     position: relative;
@@ -17,7 +25,7 @@
 
     .vl {
       border-left: 1px solid white;
-      height: 200px;
+      height: 300px;
       position: absolute;
       left: 0%;
       top: 9rem;
@@ -38,13 +46,14 @@
   }
 
   .my-stack {
-    padding: 2rem;
+    padding: 1rem 0;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
   .stack-container {
     text-align: center;
+    height: 100%;
   }
 
   .stack-icons {
