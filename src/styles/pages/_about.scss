@@ -2,6 +2,18 @@
   height: 100vh;
   padding: 4rem 1rem 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  @media screen and (min-width: 64em) {
+    flex-direction: row;
+
+    > * {
+      flex: 1 1 50%;
+    }
+  }
 
   .stack-label {
     text-align: right;
@@ -48,6 +60,7 @@
   .my-stack {
     padding: 1rem 0;
     border-radius: 8px;
+    align-self: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
