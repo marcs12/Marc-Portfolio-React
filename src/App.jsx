@@ -16,6 +16,7 @@ import SnackLab from "./components/SnackLab";
 import ThirtyFive from "./components/ThirtyFive";
 import RunYuji from "./components/RunYuji";
 import Portfolio from "./components/Portfolio";
+import CursorTrail from "./components/CursorTrail";
 
 function App() {
   useEffect(() => {
@@ -48,8 +49,11 @@ function App() {
     }
   }, []);
 
+  const isLargeScreen = window.innerWidth > 1024;
+
   return (
     <Router>
+      {isLargeScreen && <CursorTrail />}
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
