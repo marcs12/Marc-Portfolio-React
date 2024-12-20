@@ -22,6 +22,7 @@ import CursorTrail from "./components/CursorTrail";
 import PageTransition from "./components/PageTransition"; // Import PageTransition
 
 import NotFound from "./components/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   useEffect(() => {
@@ -59,6 +60,7 @@ function App() {
   return (
     <Router>
       {isLargeScreen && <CursorTrail />}
+      <ScrollToTop />
       <NavBar />
       <Routes>
         <Route

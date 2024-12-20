@@ -212,11 +212,6 @@ const About = () => {
                     far: 1000,
                   }}
                 >
-                  <OrbitControls
-                    enablePan={true}
-                    enableRotate={false}
-                    enableZoom={false}
-                  />
                   <ambientLight intensity={0.5} />
                   <directionalLight position={[0, 0, 5]} intensity={1} />
                   <DevelopmentModel />
@@ -235,11 +230,6 @@ const About = () => {
                 <Canvas
                   camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
                 >
-                  <OrbitControls
-                    enablePan={true}
-                    enableRotate={false}
-                    enableZoom={false}
-                  />
                   <ambientLight intensity={0.5} />
                   <directionalLight position={[0, 5, 5]} intensity={1} />
                   <DesignModel />
@@ -258,11 +248,6 @@ const About = () => {
                 <Canvas
                   camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
                 >
-                  <OrbitControls
-                    enablePan={true}
-                    enableRotate={false}
-                    enableZoom={false}
-                  />
                   <ambientLight intensity={0.5} />
                   <directionalLight position={[0, 5, 5]} intensity={1} />
                   <PerformanceModel />
