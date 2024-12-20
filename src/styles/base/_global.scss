@@ -6,6 +6,16 @@ body,
   height: 100%;
   width: 100%;
   min-height: 100%;
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Ensuring the page doesn't overflow and content is contained */
+body {
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  background-color: #0b0b0b;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  overflow-y: auto; /* Allow vertical scrolling */
 }
 
 /* Add to your main CSS file (e.g., App.css or PageTransition.css) */
@@ -20,12 +30,6 @@ button {
   color: inherit;
   font: inherit;
   outline: inherit;
-}
-
-body {
-  font-family: "Roboto", sans-serif;
-  color: #fff;
-  background-color: #0b0b0b;
 }
 
 .social-color {
