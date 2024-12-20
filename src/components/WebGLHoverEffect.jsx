@@ -1,36 +1,20 @@
 import { useEffect } from "react";
 import * as THREE from "three";
 import images from "../images"; // Import image paths
+import vertexShader from "../shaders/vertex.glsl";
+import fragmentShader from "../shaders/fragment.glsl";
 
 const WebGLHoverEffect = () => {
   useEffect(() => {
-    // Check for WebGL context
-    if (!window.WebGLRenderingContext) {
-      console.error("Your browser does not support WebGL.");
-      return;
-    }
-
-    // Check for screen width
-    if (window.innerWidth < 1024) {
-      return; // Exit early if the screen width is less than 1024px
-    }
-
     let targetX = 0;
     let targetY = 0;
 
     const container = document.querySelector(".projects-section");
-    if (!container) {
-      console.error("Container not found");
-      return; // Exit early if container doesn't exist
-    }
+    if (!container) return;
 
     const links = [...document.querySelectorAll(".projects-list li")];
-    if (links.length === 0) {
-      console.error("No project links found");
-      return; // Exit early if no links are found
-    }
+    if (links.length === 0) return;
 
-    // Load textures once at the beginning
     const textureLoader = new THREE.TextureLoader();
     const textures = [
       textureLoader.load(images.imageOne),
@@ -52,12 +36,18 @@ const WebGLHoverEffect = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(renderer.domElement);
 
-    // Create a geometry and material for the mesh (with a basic material instead of shaders)
+    const uniforms = {
+      uTexture: { value: textures[0] },
+      uAlpha: { value: 0.0 },
+      uOffset: { value: new THREE.Vector2(0.0, 0.0) },
+    };
+
     const geometry = new THREE.PlaneGeometry(250, 350, 20, 20);
-    const material = new THREE.MeshBasicMaterial({
-      map: textures[0],
+    const material = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader,
+      fragmentShader,
       transparent: true,
-      opacity: 0.0, // Start with opacity 0
     });
 
     const mesh = new THREE.Mesh(geometry, material);
@@ -69,9 +59,12 @@ const WebGLHoverEffect = () => {
     }
 
     function render() {
-      // Smooth movement to follow the cursor
       mesh.position.x += (targetX - mesh.position.x) * 0.1;
       mesh.position.y += (targetY - mesh.position.y) * 0.1;
+      uniforms.uOffset.value.set(
+        (targetX - mesh.position.x) * 0.0005,
+        -(targetY - mesh.position.y) * 0.0005,
+      );
 
       renderer.render(scene, camera);
       requestAnimationFrame(render);
@@ -79,19 +72,18 @@ const WebGLHoverEffect = () => {
 
     links.forEach((link, idx) => {
       link.addEventListener("mouseenter", () => {
-        material.map = textures[idx]; // Update texture on hover
-        material.opacity = 1.0; // Make it fully visible
+        uniforms.uTexture.value = textures[idx];
+        uniforms.uAlpha.value = 1.0;
       });
 
       link.addEventListener("mouseleave", () => {
-        material.opacity = 0.0; // Hide texture when mouse leaves
+        uniforms.uAlpha.value = 0.0;
       });
     });
 
     window.addEventListener("mousemove", onMouseMove);
     render();
 
-    // Handle window resizing to maintain aspect ratio
     const onResize = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
@@ -99,12 +91,13 @@ const WebGLHoverEffect = () => {
       camera.aspect = width / height;
       camera.updateProjectionMatrix();
     };
+
     window.addEventListener("resize", onResize);
 
     return () => {
       container.removeChild(renderer.domElement);
       window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("resize", onResize); // Cleanup resize event
+      window.removeEventListener("resize", onResize);
     };
   }, []);
 
