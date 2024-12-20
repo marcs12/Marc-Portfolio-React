@@ -201,7 +201,7 @@ const About = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
-              <p>Front-End Development</p>
+              <p>Modern Web Development</p>
               <div className="canvas-container">
                 <Canvas
                   camera={{
@@ -224,7 +224,7 @@ const About = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
-              <p>Creative Design</p>
+              <p>UX/UI Design & Prototyping</p>
               <div className="canvas-container">
                 <Canvas
                   camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
@@ -242,7 +242,7 @@ const About = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
-              <p>Prototyping</p>
+              <p>Dynamic Web Animations & Interactivity</p>
               <div className="canvas-container">
                 <Canvas
                   camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
