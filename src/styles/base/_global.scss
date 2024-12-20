@@ -116,3 +116,53 @@ body {
   pointer-events: none;
   z-index: 99999999; /* so that it stays on top of all other elements */
 }
+
+.notfound-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0b0b0b;
+  color: #fff;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+.notfound-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notfound-message h1 {
+  font-size: 120px;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.notfound-message p {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.typewriter-text {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.5;
+  display: inline-block;
+}
+
+.back-home-link {
+  font-size: 18px;
+  color: #c0c0c0;
+  text-decoration: none;
+  padding: 10px 20px;
+  background-color: #141414;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.back-home-link:hover {
+  background-color: #333;
+}
