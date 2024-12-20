@@ -4,9 +4,9 @@ import { gsap } from "gsap";
 import { motion } from "framer-motion";
 import MarcPhoto from "../assets/IMG_1968.JPG";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { OrbitControls } from "@react-three/drei";
 
-//icons
-// Development Tools
+// Icons
 import FramerMotionIcon from "../assets/icons/framer-motion.svg";
 import GsapGreensockIconAlt from "../assets/icons/gsap-greensock.svg";
 import CssIcon from "../assets/icons/icons8-css.svg";
@@ -27,6 +27,14 @@ import LightroomIcon from "../assets/icons/photoshop-lightroom-BDeX5MDj.png";
 import PremiereProIcon from "../assets/icons/premiere-pro-DEinuioA.png";
 import XdIcon from "../assets/icons/xd-Bj4jYHe2.png";
 
+// 3D Models
+import { Canvas } from "@react-three/fiber";
+import { DevelopmentModel } from "./DevelopmentModel";
+import { DesignModel } from "./DesignModel";
+import { PerformanceModel } from "./PerformanceModel";
+
+import { Leva, useControls } from "leva";
+
 const About = () => {
   const sectionRef = useRef(null);
 
@@ -38,8 +46,15 @@ const About = () => {
     );
   }, []);
 
+  const { cameraX, cameraY, cameraZ } = useControls({
+    cameraX: { value: 0, min: -10, max: 10, step: 0.1 },
+    cameraY: { value: 2, min: -10, max: 10, step: 0.1 },
+    cameraZ: { value: 5, min: -10, max: 10, step: 0.1 },
+  });
+
   return (
     <section className="about-section">
+      <Leva collapsed />
       <div className="first-wrap">
         <article className="top-section" ref={sectionRef}>
           <img
@@ -62,8 +77,8 @@ const About = () => {
             <p className="introduction">
               Hi, I’m Marc, a Front-End Developer and Web Designer focused on
               Crafting Clean & Consistent Experiences. I have a background in
-              Web Design and Video Editing and with these two fields combined, I
-              can create visually appealing websites that are both functional
+              Web Design and Video Editing, and with these two fields combined,
+              I can create visually appealing websites that are both functional
               and user-friendly.
             </p>
           </div>
@@ -155,6 +170,71 @@ const About = () => {
           </div>
         </motion.article>
       </div>
+      {/* 3D Models Section */}
+      <motion.article
+        className="three-models"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
+        <p className="stack-label">03. 3D Models</p>
+        <div className="models-container">
+          <div className="model-item">
+            <h3>Development</h3>
+            <div className="canvas-container">
+              <Canvas
+                camera={{
+                  position: [
+                    -0.00001206672155511208, 22.64321294604775,
+                    0.00001916009716655424,
+                  ],
+                }}
+              >
+                <OrbitControls
+                  enablePan={true}
+                  enableRotate={false}
+                  enableZoom={false}
+                />
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[0, 0, 5]} intensity={1} />
+                <DevelopmentModel />
+              </Canvas>
+            </div>
+          </div>
+
+          <div className="model-item">
+            <h3>Design</h3>
+            <div className="canvas-container">
+              <Canvas camera={{ position: [0, 0, 400] }}>
+                <OrbitControls
+                  enablePan={true}
+                  enableRotate={false}
+                  enableZoom={false}
+                />
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[0, 5, 5]} intensity={1} />
+                <DesignModel />
+              </Canvas>
+            </div>
+          </div>
+
+          <div className="model-item">
+            <h3>Performance</h3>
+            <div className="canvas-container">
+              <Canvas camera={{ position: [0, 0, 400] }}>
+                <OrbitControls
+                  enablePan={true}
+                  enableRotate={false}
+                  enableZoom={false}
+                />
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[0, 5, 5]} intensity={1} />
+                <PerformanceModel />
+              </Canvas>
+            </div>
+          </div>
+        </div>
+      </motion.article>
     </section>
   );
 };
