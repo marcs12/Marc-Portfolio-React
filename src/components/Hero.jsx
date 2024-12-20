@@ -17,7 +17,7 @@ const Hero = () => {
   const fetchDateTime = async () => {
     try {
       const response = await axios.get(
-        "http://worldtimeapi.org/api/timezone/America/Vancouver",
+        "https://worldtimeapi.org/api/timezone/America/Vancouver",
       );
       const dateTimeString = response.data.datetime;
       const date = new Date(dateTimeString);
