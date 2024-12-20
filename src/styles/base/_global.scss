@@ -8,6 +8,12 @@ body,
   min-height: 100%;
 }
 
+/* Add to your main CSS file (e.g., App.css or PageTransition.css) */
+.page-transition {
+  position: relative;
+  overflow: hidden;
+}
+
 button {
   background: none;
   border: none;
