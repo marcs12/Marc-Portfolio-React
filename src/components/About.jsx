@@ -67,9 +67,23 @@ const About = () => {
 
   return (
     <section className="about-section">
-      <div className="first-wrap" ref={firstWrapRef}>
+      <motion.div
+        className="first-wrap"
+        ref={firstWrapRef}
+        initial={{ opacity: 0 }}
+        animate={firstWrapInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 1 }}
+      >
         <div className="container-pic-text">
-          <article className="top-section" ref={sectionRef}>
+          <motion.article
+            className="top-section"
+            ref={sectionRef}
+            initial={{ opacity: 0, y: 20 }}
+            animate={
+              firstWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+            }
+            transition={{ duration: 1 }}
+          >
             <img
               className="barcode-ornament"
               src={Barcode}
@@ -95,7 +109,7 @@ const About = () => {
                 functional and user-friendly.
               </p>
             </div>
-          </article>
+          </motion.article>
         </div>
 
         <motion.article
@@ -201,8 +215,14 @@ const About = () => {
             </Tabs>
           </div>
         </motion.article>
-      </div>
-      <div className="second-wrap" ref={secondWrapRef}>
+      </motion.div>
+      <motion.div
+        className="second-wrap"
+        ref={secondWrapRef}
+        initial={{ opacity: 0 }}
+        animate={secondWrapInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 1 }}
+      >
         <TextEffect />
 
         {/* 3D Models Section */}
@@ -297,7 +317,7 @@ const About = () => {
             </motion.div>
           </div>
         </motion.article>
-      </div>
+      </motion.div>
     </section>
   );
 };
