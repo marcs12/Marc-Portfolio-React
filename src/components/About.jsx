@@ -5,6 +5,7 @@ import MarcPhoto from "../assets/IMG_1968.JPG";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { OrbitControls } from "@react-three/drei";
 import TextEffect from "./TextEffect";
+import ColorOverlay from "./ColorOverlay";
 
 // Icons
 import FramerMotionIcon from "../assets/icons/framer-motion.svg";
@@ -255,6 +256,7 @@ const About = () => {
           </div>
         </motion.article>
       </motion.div>
+      <ColorOverlay />
     </section>
   );
 };
