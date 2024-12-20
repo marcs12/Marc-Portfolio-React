@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useMemo } from "react";
 import Barcode from "../assets/barcode-long.png";
 import { motion, useAnimation } from "framer-motion";
 import MarcPhoto from "../assets/IMG_1968.JPG";
@@ -64,6 +64,35 @@ const About = () => {
   const text = "Let's Work Together";
 
   const isMobile = window.innerWidth <= 768;
+
+  const techStackIcons = useMemo(
+    () => [
+      { src: HtmlIcon, alt: "HTML Icon" },
+      { src: CssIcon, alt: "CSS Icon" },
+      { src: JavascriptIcon, alt: "JavaScript Icon" },
+      { src: PhpIcon, alt: "PHP Icon" },
+      { src: ReactIcon, alt: "React Icon" },
+      { src: SassIcon, alt: "Sass Icon" },
+      { src: WordpressIcon, alt: "WordPress Icon" },
+      { src: ThreeJsIcon, alt: "Three.js Icon" },
+      { src: FramerMotionIcon, alt: "Framer Motion Icon" },
+      { src: GsapGreensockIconAlt, alt: "GSAP Greensock Icon" },
+    ],
+    [],
+  );
+
+  const designToolsIcons = useMemo(
+    () => [
+      { src: AfterEffectsIcon, alt: "After Effects Icon" },
+      { src: FigmaIcon, alt: "Figma Icon" },
+      { src: IllustratorIcon, alt: "Illustrator Icon" },
+      { src: PhotoshopIcon, alt: "Photoshop Icon" },
+      { src: LightroomIcon, alt: "Lightroom Icon" },
+      { src: PremiereProIcon, alt: "Premiere Pro Icon" },
+      { src: XdIcon, alt: "XD Icon" },
+    ],
+    [],
+  );
 
   return (
     <section className="about-section">
@@ -156,18 +185,7 @@ const About = () => {
 
               <TabPanel>
                 <div className="stack-icons">
-                  {[
-                    { src: HtmlIcon, alt: "HTML Icon" },
-                    { src: CssIcon, alt: "CSS Icon" },
-                    { src: JavascriptIcon, alt: "JavaScript Icon" },
-                    { src: PhpIcon, alt: "PHP Icon" },
-                    { src: ReactIcon, alt: "React Icon" },
-                    { src: SassIcon, alt: "Sass Icon" },
-                    { src: WordpressIcon, alt: "WordPress Icon" },
-                    { src: ThreeJsIcon, alt: "Three.js Icon" },
-                    { src: FramerMotionIcon, alt: "Framer Motion Icon" },
-                    { src: GsapGreensockIconAlt, alt: "GSAP Greensock Icon" },
-                  ].map((icon, index) => (
+                  {techStackIcons.map((icon, index) => (
                     <motion.div
                       key={index}
                       whileHover={{ scale: 1.2 }}
@@ -187,15 +205,7 @@ const About = () => {
 
               <TabPanel>
                 <div className="stack-icons">
-                  {[
-                    { src: AfterEffectsIcon, alt: "After Effects Icon" },
-                    { src: FigmaIcon, alt: "Figma Icon" },
-                    { src: IllustratorIcon, alt: "Illustrator Icon" },
-                    { src: PhotoshopIcon, alt: "Photoshop Icon" },
-                    { src: LightroomIcon, alt: "Lightroom Icon" },
-                    { src: PremiereProIcon, alt: "Premiere Pro Icon" },
-                    { src: XdIcon, alt: "XD Icon" },
-                  ].map((icon, index) => (
+                  {designToolsIcons.map((icon, index) => (
                     <motion.div
                       key={index}
                       whileHover={{ scale: 1.2 }}
@@ -224,7 +234,6 @@ const About = () => {
         transition={{ duration: 1 }}
       >
         <TextEffect />
-
         {/* 3D Models Section */}
         <motion.article
           className="three-models"

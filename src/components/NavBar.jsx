@@ -8,7 +8,6 @@ const SlideTabsExample = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // console.log(window.scrollY);
       if (window.scrollY > 50) {
         setBackground("white");
       } else {
@@ -53,13 +52,13 @@ const SlideTabs = () => {
       }}
       className="slide-tabs"
     >
-      <Tab setPosition={setPosition} to="/">
+      <Tab setPosition={setPosition} to="#hero">
         Home
       </Tab>
-      <Tab setPosition={setPosition} to="/works">
-        Works
+      <Tab setPosition={setPosition} to="#projects">
+        Projects
       </Tab>
-      <Tab setPosition={setPosition} to="/about">
+      <Tab setPosition={setPosition} to="#about">
         About
       </Tab>
 
@@ -73,13 +72,21 @@ const Tab = ({ children, setPosition, to }) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash && location.pathname === "/") {
+    if (location.hash) {
       const section = document.querySelector(location.hash);
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [location]);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    const section = document.querySelector(to);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <li
@@ -97,7 +104,9 @@ const Tab = ({ children, setPosition, to }) => {
       }}
       className="tab"
     >
-      <Link to={to}>{children}</Link>
+      <Link to={to} onClick={handleClick}>
+        {children}
+      </Link>
     </li>
   );
 };

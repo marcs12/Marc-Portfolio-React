@@ -77,6 +77,7 @@
     .first-wrap {
       padding-right: 2rem;
       width: 50%;
+      justify-content: space-around;
     }
   }
 
@@ -101,6 +102,7 @@
     position: relative;
     overflow: hidden;
     max-width: 100%;
+    overflow-y: hidden; /* Hide vertical scrollbar */
 
     .barcode-ornament {
       position: absolute;
@@ -123,6 +125,7 @@
       margin-left: 4rem;
       height: 100%;
       max-width: 100%;
+      overflow-y: hidden; /* Hide vertical scrollbar */
 
       .marc-photo {
         width: 100%;
