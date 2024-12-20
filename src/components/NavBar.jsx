@@ -8,6 +8,7 @@ const SlideTabsExample = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      console.log(window.scrollY);
       if (window.scrollY > 50) {
         setBackground("white");
       } else {

@@ -36,14 +36,6 @@ import { PerformanceModel } from "./PerformanceModel";
 const About = () => {
   const sectionRef = useRef(null);
 
-  useEffect(() => {
-    gsap.fromTo(
-      sectionRef.current,
-      { height: "0", opacity: 0 },
-      { height: "458px", opacity: 1, duration: 2 },
-    );
-  }, []);
-
   const isMobile = window.innerWidth <= 768;
 
   return (

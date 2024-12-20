@@ -5,6 +5,7 @@ body,
   padding: 0;
   height: 100%;
   width: 100%;
+  overflow-y: auto; /* Ensure vertical scrolling is allowed */
 }
 
 button {
@@ -96,4 +97,16 @@ body {
       }
     }
   }
+}
+
+.circle {
+  height: 16px;
+  width: 16px;
+  border-radius: 16px;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999999; /* so that it stays on top of all other elements */
 }
