@@ -30,9 +30,12 @@ export function DevelopmentModel(props) {
         return (
           <mesh key={meshName} geometry={nodes[meshName].geometry}>
             <meshStandardMaterial
-              color="#C0C0C0" // Silver color
-              metalness={0.4} // Reflective metallic appearance
-              roughness={0.6} // Slight surface roughness
+              color="#FFFFFF" // White color
+              metalness={0.4} // Low metallic appearance
+              roughness={0.7} // Smooth surface
+              opacity={0.6} // Semi-transparent
+              transparent={true} // Enable transparency
+              envMapIntensity={1} // Reflective environment map
             />
           </mesh>
         );

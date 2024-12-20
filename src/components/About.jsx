@@ -1,10 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Barcode from "../assets/barcode-long.png";
-import { gsap } from "gsap";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import MarcPhoto from "../assets/IMG_1968.JPG";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { OrbitControls } from "@react-three/drei";
+import TextEffect from "./TextEffect";
 
 // Icons
 import FramerMotionIcon from "../assets/icons/framer-motion.svg";
@@ -33,14 +33,41 @@ import { DevelopmentModel } from "./DevelopmentModel";
 import { DesignModel } from "./DesignModel";
 import { PerformanceModel } from "./PerformanceModel";
 
+const useInView = (options) => {
+  const [isIntersecting, setIntersecting] = useState(false);
+  const ref = useRef();
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setIntersecting(entry.isIntersecting);
+    }, options);
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [ref, options]);
+
+  return [ref, isIntersecting];
+};
+
 const About = () => {
   const sectionRef = useRef(null);
+  const [firstWrapRef, firstWrapInView] = useInView({ threshold: 0.1 });
+  const [secondWrapRef, secondWrapInView] = useInView({ threshold: 0.1 });
+
+  const text = "Let's Work Together";
 
   const isMobile = window.innerWidth <= 768;
 
   return (
     <section className="about-section">
-      <div className="first-wrap">
+      <div className="first-wrap" ref={firstWrapRef}>
         <div className="container-pic-text">
           <article className="top-section" ref={sectionRef}>
             <img
@@ -74,7 +101,9 @@ const About = () => {
         <motion.article
           className="my-stack"
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={
+            firstWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+          }
           transition={{ duration: 1 }}
         >
           <p className="stack-label">02. Tech Stack</p>
@@ -84,7 +113,11 @@ const About = () => {
                 <Tab>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={
+                      firstWrapInView
+                        ? { opacity: 1, y: 0 }
+                        : { opacity: 0, y: 20 }
+                    }
                     transition={{ duration: 0.5 }}
                     className="typewriter"
                   >
@@ -94,7 +127,11 @@ const About = () => {
                 <Tab>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
+                    animate={
+                      firstWrapInView
+                        ? { opacity: 1, y: 0 }
+                        : { opacity: 0, y: 20 }
+                    }
                     transition={{ duration: 0.5 }}
                     className="typewriter"
                   >
@@ -121,7 +158,11 @@ const About = () => {
                       key={index}
                       whileHover={{ scale: 1.2 }}
                       initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      animate={
+                        firstWrapInView
+                          ? { opacity: 1, y: 0 }
+                          : { opacity: 0, y: 20 }
+                      }
                       transition={{ delay: index * 0.05 }}
                     >
                       <img src={icon.src} alt={icon.alt} loading="lazy" />
@@ -145,7 +186,11 @@ const About = () => {
                       key={index}
                       whileHover={{ scale: 1.2 }}
                       initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      animate={
+                        firstWrapInView
+                          ? { opacity: 1, y: 0 }
+                          : { opacity: 0, y: 20 }
+                      }
                       transition={{ delay: index * 0.05 }}
                     >
                       <img src={icon.src} alt={icon.alt} loading="lazy" />
@@ -157,90 +202,102 @@ const About = () => {
           </div>
         </motion.article>
       </div>
-      {/* 3D Models Section */}
-      <motion.article
-        className="three-models"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-      >
-        <p className="stack-label">03. Services Offered</p>
-        <div className="models-container">
-          <motion.div
-            className="model-item"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <p>Front-End Development</p>
-            <div className="canvas-container">
-              <Canvas
-                camera={{
-                  position: isMobile ? [0, 0, 35] : [0, 0, 5],
-                  fov: 43,
-                  near: 0.1,
-                  far: 1000,
-                }}
-              >
-                <OrbitControls
-                  enablePan={true}
-                  enableRotate={false}
-                  enableZoom={false}
-                />
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[0, 0, 5]} intensity={1} />
-                <DevelopmentModel />
-              </Canvas>
-            </div>
-          </motion.div>
+      <div className="second-wrap" ref={secondWrapRef}>
+        <TextEffect />
 
-          <motion.div
-            className="model-item"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <p>Web Design</p>
-            <div className="canvas-container">
-              <Canvas
-                camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
-              >
-                <OrbitControls
-                  enablePan={true}
-                  enableRotate={false}
-                  enableZoom={false}
-                />
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[0, 5, 5]} intensity={1} />
-                <DesignModel />
-              </Canvas>
-            </div>
-          </motion.div>
+        {/* 3D Models Section */}
+        <motion.article
+          className="three-models"
+          initial={{ opacity: 0, y: 20 }}
+          animate={
+            secondWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+          }
+          transition={{ duration: 1 }}
+        >
+          <p className="stack-label">03. Services Offered</p>
+          <div className="models-container">
+            <motion.div
+              className="model-item"
+              initial={{ opacity: 0, y: 20 }}
+              animate={
+                secondWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              }
+              transition={{ duration: 1 }}
+            >
+              <p>Front-End Development</p>
+              <div className="canvas-container">
+                <Canvas
+                  camera={{
+                    position: isMobile ? [0, 0, 35] : [0, 0, 5],
+                    fov: 43,
+                    near: 0.1,
+                    far: 1000,
+                  }}
+                >
+                  <OrbitControls
+                    enablePan={true}
+                    enableRotate={false}
+                    enableZoom={false}
+                  />
+                  <ambientLight intensity={0.5} />
+                  <directionalLight position={[0, 0, 5]} intensity={1} />
+                  <DevelopmentModel />
+                </Canvas>
+              </div>
+            </motion.div>
 
-          <motion.div
-            className="model-item"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <p>Dynamic Styling</p>
-            <div className="canvas-container">
-              <Canvas
-                camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
-              >
-                <OrbitControls
-                  enablePan={true}
-                  enableRotate={false}
-                  enableZoom={false}
-                />
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[0, 5, 5]} intensity={1} />
-                <PerformanceModel />
-              </Canvas>
-            </div>
-          </motion.div>
-        </div>
-      </motion.article>
+            <motion.div
+              className="model-item"
+              initial={{ opacity: 0, y: 20 }}
+              animate={
+                secondWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              }
+              transition={{ duration: 1 }}
+            >
+              <p>Creative Design</p>
+              <div className="canvas-container">
+                <Canvas
+                  camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
+                >
+                  <OrbitControls
+                    enablePan={true}
+                    enableRotate={false}
+                    enableZoom={false}
+                  />
+                  <ambientLight intensity={0.5} />
+                  <directionalLight position={[0, 5, 5]} intensity={1} />
+                  <DesignModel />
+                </Canvas>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="model-item"
+              initial={{ opacity: 0, y: 20 }}
+              animate={
+                secondWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+              }
+              transition={{ duration: 1 }}
+            >
+              <p>Prototyping</p>
+              <div className="canvas-container">
+                <Canvas
+                  camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
+                >
+                  <OrbitControls
+                    enablePan={true}
+                    enableRotate={false}
+                    enableZoom={false}
+                  />
+                  <ambientLight intensity={0.5} />
+                  <directionalLight position={[0, 5, 5]} intensity={1} />
+                  <PerformanceModel />
+                </Canvas>
+              </div>
+            </motion.div>
+          </div>
+        </motion.article>
+      </div>
     </section>
   );
 };

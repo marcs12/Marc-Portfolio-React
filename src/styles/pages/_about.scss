@@ -1,14 +1,61 @@
 .about-section {
   height: 100%;
-  padding: 4rem 1rem 0;
+  padding: 4rem 1rem;
   position: relative;
   max-width: 100%;
+  // min-height: 100%;
   overflow-x: hidden;
 
   .container-pic-text {
     height: 458px;
     max-width: 100%;
     overflow: hidden;
+  }
+
+  .reveal-links-section {
+    display: grid;
+    place-content: left;
+    gap: 2rem;
+    padding: 6rem 2rem; /* Equivalent to px-8 py-24 */
+    color: white; /* Text color */
+  }
+
+  .flip-link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    font-family: "Roboto Condensed", sans-serif;
+    font-size: 3rem;
+
+    font-weight: 900; /* Equivalent to font-black */
+    text-transform: uppercase;
+    line-height: 0.9;
+    transition: transform 0.25s ease-in-out;
+  }
+
+  @media (min-width: 768px) {
+    .flip-link {
+      font-size: 8rem; /* md:text-8xl */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .flip-link {
+      font-size: 10rem; /* lg:text-9xl */
+    }
+  }
+
+  .flip-letter {
+    display: inline-block;
+  }
+
+  .flip-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   @media screen and (min-width: 90em) {
@@ -22,7 +69,6 @@
     justify-content: flex-start;
     align-items: flex-start;
     position: relative;
-    gap: 4rem;
     max-width: 100%;
     overflow-x: hidden;
   }
@@ -32,6 +78,11 @@
       padding-right: 2rem;
       width: 50%;
     }
+  }
+
+  .second-wrap {
+    display: flex;
+    flex-direction: column;
   }
 
   .stack-label {
