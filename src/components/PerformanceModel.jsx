@@ -13,7 +13,9 @@ export function PerformanceModel(props) {
   // Rotate the model slowly
   useFrame(() => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += 0.01;
+      groupRef.current.rotation.y += 0.01; // Adjust the speed of rotation here
+      // groupRef.current.rotation.x += 0.01; // Adjust the speed of rotation here
+      groupRef.current.rotation.z += 0.01; // Adjust the speed of rotation here
     }
   });
 

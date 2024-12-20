@@ -180,14 +180,14 @@ const About = () => {
         <p className="stack-label">03. 3D Models</p>
         <div className="models-container">
           <div className="model-item">
-            <h3>Development</h3>
+            <p>Development</p>
             <div className="canvas-container">
               <Canvas
                 camera={{
-                  position: [
-                    -0.00001206672155511208, 22.64321294604775,
-                    0.00001916009716655424,
-                  ],
+                  position: [0, 0, 5],
+                  fov: 43,
+                  near: 0.1,
+                  far: 1000,
                 }}
               >
                 <OrbitControls
@@ -203,7 +203,7 @@ const About = () => {
           </div>
 
           <div className="model-item">
-            <h3>Design</h3>
+            <p>Design</p>
             <div className="canvas-container">
               <Canvas camera={{ position: [0, 0, 400] }}>
                 <OrbitControls
@@ -219,7 +219,7 @@ const About = () => {
           </div>
 
           <div className="model-item">
-            <h3>Performance</h3>
+            <p>Dynamic</p>
             <div className="canvas-container">
               <Canvas camera={{ position: [0, 0, 400] }}>
                 <OrbitControls

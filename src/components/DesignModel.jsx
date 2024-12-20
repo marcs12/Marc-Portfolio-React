@@ -13,28 +13,34 @@ export function DesignModel(props) {
   useFrame(() => {
     if (group.current) {
       group.current.rotation.y += 0.01; // Adjust the speed of the rotation here
+      group.current.rotation.x += 0.01; // Adjust the speed of the rotation here
     }
   });
 
   return (
     <group ref={group} {...props} dispose={null}>
+      <ambientLight intensity={100} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.part1.geometry}
         material={nodes.part1.material}
+        material-color="white"
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.part2.geometry}
         material={nodes.part2.material}
+        material-color="white"
       />
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.part3.geometry}
         material={nodes.part3.material}
+        material-color="white"
       />
     </group>
   );
