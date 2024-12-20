@@ -1,6 +1,6 @@
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useState, useMemo } from "react";
 import Barcode from "../assets/barcode-long.png";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import MarcPhoto from "../assets/IMG_1968.JPG";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { OrbitControls } from "@react-three/drei";
@@ -33,33 +33,8 @@ import { DevelopmentModel } from "./DevelopmentModel";
 import { DesignModel } from "./DesignModel";
 import { PerformanceModel } from "./PerformanceModel";
 
-const useInView = (options) => {
-  const [isIntersecting, setIntersecting] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      setIntersecting(entry.isIntersecting);
-    }, options);
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
-      }
-    };
-  }, [ref, options]);
-
-  return [ref, isIntersecting];
-};
-
 const About = () => {
   const sectionRef = useRef(null);
-  const [firstWrapRef, firstWrapInView] = useInView({ threshold: 0.1 });
-  const [secondWrapRef, secondWrapInView] = useInView({ threshold: 0.1 });
 
   const text = "Let's Work Together";
 
@@ -98,9 +73,8 @@ const About = () => {
     <section className="about-section">
       <motion.div
         className="first-wrap"
-        ref={firstWrapRef}
         initial={{ opacity: 0 }}
-        animate={firstWrapInView ? { opacity: 1 } : { opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
         <div className="container-pic-text">
@@ -108,9 +82,7 @@ const About = () => {
             className="top-section"
             ref={sectionRef}
             initial={{ opacity: 0, y: 20 }}
-            animate={
-              firstWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-            }
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
             <img
@@ -144,9 +116,7 @@ const About = () => {
         <motion.article
           className="my-stack"
           initial={{ opacity: 0, y: 20 }}
-          animate={
-            firstWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-          }
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
           <p className="stack-label">02. My Tech Stack</p>
@@ -156,11 +126,7 @@ const About = () => {
                 <Tab>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
-                    animate={
-                      firstWrapInView
-                        ? { opacity: 1, y: 0 }
-                        : { opacity: 0, y: 20 }
-                    }
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                     className="typewriter"
                   >
@@ -170,11 +136,7 @@ const About = () => {
                 <Tab>
                   <motion.p
                     initial={{ opacity: 0, y: 20 }}
-                    animate={
-                      firstWrapInView
-                        ? { opacity: 1, y: 0 }
-                        : { opacity: 0, y: 20 }
-                    }
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5 }}
                     className="typewriter"
                   >
@@ -190,11 +152,7 @@ const About = () => {
                       key={index}
                       whileHover={{ scale: 1.2 }}
                       initial={{ opacity: 0, y: 20 }}
-                      animate={
-                        firstWrapInView
-                          ? { opacity: 1, y: 0 }
-                          : { opacity: 0, y: 20 }
-                      }
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.05 }}
                     >
                       <img src={icon.src} alt={icon.alt} loading="lazy" />
@@ -210,11 +168,7 @@ const About = () => {
                       key={index}
                       whileHover={{ scale: 1.2 }}
                       initial={{ opacity: 0, y: 20 }}
-                      animate={
-                        firstWrapInView
-                          ? { opacity: 1, y: 0 }
-                          : { opacity: 0, y: 20 }
-                      }
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.05 }}
                     >
                       <img src={icon.src} alt={icon.alt} loading="lazy" />
@@ -228,9 +182,8 @@ const About = () => {
       </motion.div>
       <motion.div
         className="second-wrap"
-        ref={secondWrapRef}
         initial={{ opacity: 0 }}
-        animate={secondWrapInView ? { opacity: 1 } : { opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
         <TextEffect />
@@ -238,19 +191,15 @@ const About = () => {
         <motion.article
           className="three-models"
           initial={{ opacity: 0, y: 20 }}
-          animate={
-            secondWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-          }
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <p className="stack-label">03. Services Offered</p>
+          <p className="stack-label">03. What I Can Do For You</p>
           <div className="models-container">
             <motion.div
               className="model-item"
               initial={{ opacity: 0, y: 20 }}
-              animate={
-                secondWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
               <p>Front-End Development</p>
@@ -278,9 +227,7 @@ const About = () => {
             <motion.div
               className="model-item"
               initial={{ opacity: 0, y: 20 }}
-              animate={
-                secondWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
               <p>Creative Design</p>
@@ -303,9 +250,7 @@ const About = () => {
             <motion.div
               className="model-item"
               initial={{ opacity: 0, y: 20 }}
-              animate={
-                secondWrapInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
-              }
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
               <p>Prototyping</p>

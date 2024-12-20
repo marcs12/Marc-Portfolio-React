@@ -11,17 +11,26 @@ import GSAP from "../assets/icons/gsap-greensock-CPWT-giO.svg";
 import FramerMotion from "../assets/icons/framer-motion.svg";
 import Sass from "../assets/icons/sass-brands-solid.svg";
 
+// Accordion Component
 const Accordion = memo(({ title, content, isOpen, onClick }) => (
   <div className="accordion-item">
     <button
       className="accordion-title"
       onClick={onClick}
       aria-expanded={isOpen}
+      aria-controls={`accordion-content-${title}`} // Improve accessibility
     >
       <h3>{title}</h3>
       <span>{isOpen ? "-" : "+"}</span>
     </button>
-    {isOpen && <div className="accordion-content">{content}</div>}
+    {isOpen && (
+      <div
+        className="accordion-content"
+        id={`accordion-content-${title}`} // Improve accessibility
+      >
+        {content}
+      </div>
+    )}
   </div>
 ));
 
@@ -31,10 +40,10 @@ const projectManagementContent = (
       <p>Figma for Design Planning and Prototyping</p>
     </li>
     <li>
-      <p>Google Docs for documentation and collaboration</p>
+      <p>Google Docs for Documentation and Collaboration</p>
     </li>
     <li>
-      <p>Slack for team communication</p>
+      <p>Slack for Team Communication</p>
     </li>
   </ul>
 );
@@ -62,12 +71,14 @@ const developmentContent = (
 const roleContent = (
   <p>
     I served as both a designer and developer for the Portfolio project,
-    handling the design in Figma and making a High Fidelity mockup. As a
+    handling the design in Figma and creating a high-fidelity mockup. As a
     developer, I used React to build the site and integrated multiple APIs and
-    dependencies like ThreeJS, GSAP, and Framer Motion to provide a great UX.
+    dependencies like ThreeJS, GSAP, and Framer Motion to enhance user
+    experience.
   </p>
 );
 
+// Icon animation settings
 const iconVariants = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: {
@@ -172,6 +183,7 @@ const Portfolio = () => {
       >
         02. Stack Used
       </motion.p>
+
       <div className="tech-desc-wrap">
         <motion.article
           className="tech-used"
@@ -222,6 +234,7 @@ const Portfolio = () => {
           </div>
         </motion.article>
       </div>
+
       <motion.article
         className="bottom-section"
         {...motionProps}

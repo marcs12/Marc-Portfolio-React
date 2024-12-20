@@ -103,6 +103,7 @@ const ThirtyFiveMM = () => {
           loop
           className="desktop-video"
           aria-label="ThirtyFiveMM desktop mockup video"
+          loading="lazy" // Lazy loading
         ></video>
         <div className="heading-text-wrap">
           <p>01.</p>
@@ -201,7 +202,7 @@ const ThirtyFiveMM = () => {
               transition={{ duration: 1, ease: "easeInOut" }}
               style={{ whiteSpace: "pre-wrap" }}
             >
-              {"ThirtyFiveMM is a website that uses the TMDB API to showcase New and Upcoming Films. The site is built using using REACT with functionalities such as being able to favourite your films, search and choosing categories. For styling, Sass was used. This project was a great learning experience in using APIs, useState, useEffect and more."
+              {"ThirtyFiveMM is a website that uses the TMDB API to showcase New and Upcoming Films. The site is built using REACT with functionalities such as being able to favourite your films, search and choosing categories. For styling, Sass was used. This project was a great learning experience in using APIs, useState, useEffect and more."
                 .split("")
                 .map((char, index) => (
                   <motion.span
@@ -246,6 +247,7 @@ const ThirtyFiveMM = () => {
             loop
             className="mobile-video"
             aria-label="ThirtyFiveMM mobile mockup video"
+            loading="lazy" // Lazy loading
           ></video>
         </div>
       </motion.article>

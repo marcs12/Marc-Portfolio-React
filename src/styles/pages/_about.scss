@@ -3,7 +3,7 @@
   padding: 4rem 1rem;
   position: relative;
   max-width: 100%;
-  // min-height: 100%;
+  min-height: 100%;
   overflow-x: hidden;
 
   .container-pic-text {
@@ -14,9 +14,6 @@
 
   .reveal-links-section {
     display: grid;
-    place-content: left;
-    gap: 2rem;
-    padding: 6rem 2rem; /* Equivalent to px-8 py-24 */
     color: white; /* Text color */
   }
 
@@ -213,7 +210,7 @@
     align-items: center;
     justify-content: center;
     max-width: 100%;
-    overflow-x: hidden;
+    margin: 1rem;
   }
 
   .models-container {

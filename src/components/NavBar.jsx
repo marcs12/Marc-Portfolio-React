@@ -5,10 +5,14 @@ import { Link, useLocation } from "react-router-dom";
 
 const SlideTabsExample = () => {
   const [background, setBackground] = useState("transparent");
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (
+        window.scrollY > 50 ||
+        (window.innerWidth < 1440 && location.pathname === "/about")
+      ) {
         setBackground("white");
       } else {
         setBackground("transparent");
@@ -16,8 +20,14 @@ const SlideTabsExample = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("resize", handleScroll);
+    handleScroll(); // Call it initially to set the correct background
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [location]);
 
   useEffect(() => {
     document.querySelector(".slide-tabs-container").style.transition =
@@ -52,13 +62,13 @@ const SlideTabs = () => {
       }}
       className="slide-tabs"
     >
-      <Tab setPosition={setPosition} to="#hero">
+      <Tab setPosition={setPosition} to="/">
         Home
       </Tab>
-      <Tab setPosition={setPosition} to="#projects">
-        Projects
+      <Tab setPosition={setPosition} to="/works">
+        Works
       </Tab>
-      <Tab setPosition={setPosition} to="#about">
+      <Tab setPosition={setPosition} to="/about">
         About
       </Tab>
 
@@ -72,21 +82,13 @@ const Tab = ({ children, setPosition, to }) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.hash) {
+    if (location.hash && location.pathname === "/") {
       const section = document.querySelector(location.hash);
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
       }
     }
   }, [location]);
-
-  const handleClick = (e) => {
-    e.preventDefault();
-    const section = document.querySelector(to);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <li
@@ -104,9 +106,7 @@ const Tab = ({ children, setPosition, to }) => {
       }}
       className="tab"
     >
-      <Link to={to} onClick={handleClick}>
-        {children}
-      </Link>
+      <Link to={to}>{children}</Link>
     </li>
   );
 };
