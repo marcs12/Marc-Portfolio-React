@@ -4,38 +4,8 @@ import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
 
 const SlideTabsExample = () => {
-  const [background, setBackground] = useState("transparent");
-  const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.scrollY > 50 ||
-        (window.innerWidth < 1440 && location.pathname === "/about")
-      ) {
-        setBackground("white");
-      } else {
-        setBackground("transparent");
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("resize", handleScroll);
-    handleScroll(); // Call it initially to set the correct background
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, [location]);
-
-  useEffect(() => {
-    document.querySelector(".slide-tabs-container").style.transition =
-      "background 0.3s ease";
-  }, []);
-
   return (
-    <div className="slide-tabs-container" style={{ background }}>
+    <div className="slide-tabs-container">
       <SlideTabs />
     </div>
   );
@@ -79,16 +49,6 @@ const SlideTabs = () => {
 
 const Tab = ({ children, setPosition, to }) => {
   const ref = useRef(null);
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.hash && location.pathname === "/") {
-      const section = document.querySelector(location.hash);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  }, [location]);
 
   return (
     <li
