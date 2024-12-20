@@ -1,6 +1,7 @@
 // React and hooks
 import { useEffect } from "react";
-
+import VANTA from "vanta";
+import { Fog } from "vanta/dist/vanta.fog.min.js";
 // React Router
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
