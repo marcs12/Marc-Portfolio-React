@@ -19,6 +19,8 @@ import Portfolio from "./components/Portfolio";
 import CursorTrail from "./components/CursorTrail";
 import PageTransition from "./components/PageTransition"; // Import PageTransition
 
+import NotFound from "./components/NotFound";
+
 function App() {
   useEffect(() => {
     gsap.fromTo(
@@ -110,6 +112,14 @@ function App() {
           element={
             <PageTransition>
               <Portfolio />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <PageTransition>
+              <NotFound />
             </PageTransition>
           }
         />
