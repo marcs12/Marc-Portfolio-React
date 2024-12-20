@@ -1,4 +1,4 @@
-import { useState, memo } from "react";
+import { useState, memo, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import SnackLabVideo from "../assets/compressed/snacklab-desktop.mp4";
 import SnackLabMobile from "../assets/compressed/snacklab-mobile.mp4";
@@ -9,6 +9,7 @@ import WordPress from "../assets/icons/icons8-wordpress.svg";
 import Sass from "../assets/icons/sass-brands-solid.svg";
 import Php from "../assets/icons/icons8-php.svg";
 
+// Memoizing Accordion for performance
 const Accordion = memo(({ title, content, isOpen, onClick }) => (
   <div className="accordion-item">
     <button
@@ -23,75 +24,78 @@ const Accordion = memo(({ title, content, isOpen, onClick }) => (
   </div>
 ));
 
-const projectManagementContent = (
-  <ul>
-    <li>
-      <p>Jira for task management and tracking</p>
-    </li>
-    <li>
-      <p>Google Docs for documentation and collaboration</p>
-    </li>
-    <li>
-      <p>Slack for team communication</p>
-    </li>
-  </ul>
-);
-
-const developmentContent = (
-  <ol>
-    <li>
-      <p>Requirement Analysis</p>
-    </li>
-    <li>
-      <p>Design and Prototyping</p>
-    </li>
-    <li>
-      <p>Development</p>
-    </li>
-    <li>
-      <p>Testing</p>
-    </li>
-    <li>
-      <p>Deployment</p>
-    </li>
-    <li>
-      <p>Maintenance</p>
-    </li>
-  </ol>
-);
-
-const roleContent = (
-  <p>
-    I served as both a designer and developer for the SnackLab project, handling
-    the design in Figma and the development using WordPress, HTML, CSS (SASS),
-    PHP, and JavaScript.
-  </p>
-);
-
-const iconVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, delay: 1.5 },
-  },
-};
-
-const motionProps = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  transition: { duration: 1 },
-};
-
 const SnackLab = () => {
   const [openAccordion, setOpenAccordion] = useState(null);
 
-  const handleAccordionClick = (index) => {
-    setOpenAccordion(openAccordion === index ? null : index);
-  };
+  // Memoize content to avoid re-calculation on every render
+  const projectManagementContent = useMemo(
+    () => (
+      <ul>
+        <li>
+          <p>Jira for task management and tracking</p>
+        </li>
+        <li>
+          <p>Google Docs for documentation and collaboration</p>
+        </li>
+        <li>
+          <p>Slack for team communication</p>
+        </li>
+      </ul>
+    ),
+    [],
+  );
+
+  const developmentContent = useMemo(
+    () => (
+      <ol>
+        <li>
+          <p>Requirement Analysis</p>
+        </li>
+        <li>
+          <p>Design and Prototyping</p>
+        </li>
+        <li>
+          <p>Development</p>
+        </li>
+        <li>
+          <p>Testing</p>
+        </li>
+        <li>
+          <p>Deployment</p>
+        </li>
+        <li>
+          <p>Maintenance</p>
+        </li>
+      </ol>
+    ),
+    [],
+  );
+
+  const roleContent = useMemo(
+    () => (
+      <p>
+        I served as both a designer and developer for the SnackLab project,
+        handling the design in Figma and the development using WordPress, HTML,
+        CSS (SASS), PHP, and JavaScript.
+      </p>
+    ),
+    [],
+  );
+
+  const handleAccordionClick = useCallback(
+    (index) => {
+      setOpenAccordion((prev) => (prev === index ? null : index));
+    },
+    [openAccordion],
+  );
 
   return (
-    <motion.section className="single-wrap" {...motionProps}>
+    <motion.section
+      className="single-wrap"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
       <motion.article
         className="single-hero-wrap"
         initial={{ y: -50, opacity: 0 }}
@@ -106,37 +110,23 @@ const SnackLab = () => {
           loop
           className="desktop-video"
           aria-label="SnackLab desktop mockup video"
+          loading="lazy" // Lazy loading video
         ></video>
         <div className="heading-text-wrap">
           <p>01.</p>
           <h1>SnackLab</h1>
         </div>
         <div className="project-description">
-          <motion.ul
-            className="categories"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-          >
+          <motion.ul className="categories">
             {["Client:", "Year:", "Role:", "Category:", "Team:"].map(
               (text, index) => (
                 <li key={index}>
-                  <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 1 }}
-                  >
-                    {text}
-                  </motion.p>
+                  <motion.p>{text}</motion.p>
                 </li>
               ),
             )}
           </motion.ul>
-          <motion.ul
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-          >
+          <motion.ul>
             {[
               "Project",
               "2024",
@@ -145,13 +135,7 @@ const SnackLab = () => {
               "Marc Sapa, Gustavo Yamamoto, Kaleb Link, Haw Haw Tan",
             ].map((text, index) => (
               <li key={index}>
-                <motion.p
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: 2 }}
-                >
-                  {text}
-                </motion.p>
+                <motion.p>{text}</motion.p>
               </li>
             ))}
           </motion.ul>
@@ -161,57 +145,40 @@ const SnackLab = () => {
           <a href="https://marcsapa.com/snacklab">Visit Site</a>
         </div>
       </motion.article>
-      <motion.article
-        className="tech-used"
-        {...motionProps}
-        transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
+
+      <motion.p
+        className="number-two"
+        initial={{ opacity: 0, y: 0 }}
+        animate={{ opacity: 1, y: 20 }}
+        transition={{ duration: 1, ease: "easeInOut" }}
       >
-        <ul className="icon-list">
-          {[FigmaIcon, WordPress, Sass, Php].map((icon, index) => (
-            <motion.li
-              key={index}
-              variants={iconVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              <img src={icon} alt={`Icon ${index + 1}`} />
-            </motion.li>
-          ))}
-        </ul>
-      </motion.article>
-      <motion.article
-        className="project-description"
-        initial={{ x: -50, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
-      >
-        <div>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            style={{ whiteSpace: "pre-wrap" }}
-          >
-            {"SnackLab is a fictional company that sells snacks from around the world. The site is built using WordPress and WooCommerce. The theme is custom-built using HTML, CSS, PHP, and JavaScript. The design was created in Figma."
-              .split("")
-              .map((char, index) => (
-                <motion.span
-                  key={index}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.05, delay: index * 0.05 }}
-                >
-                  {char}
-                </motion.span>
-              ))}
+        02. Stack Used
+      </motion.p>
+      <div className="tech-desc-wrap">
+        <motion.article
+          className="tech-used"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1 }}
+        >
+          <ul className="icon-list">
+            {[FigmaIcon, WordPress, Sass, Php].map((icon, index) => (
+              <motion.li key={index} initial="hidden" animate="visible">
+                <img src={icon} alt={`Icon ${index + 1}`} />
+              </motion.li>
+            ))}
+          </ul>
+        </motion.article>
+        <motion.article className="project-description">
+          <motion.p style={{ whiteSpace: "pre-wrap" }}>
+            {
+              "SnackLab is a fictional company that sells snacks from around the world. The site is built using WordPress and WooCommerce. The theme is custom-built using HTML, CSS, PHP, and JavaScript. The design was created in Figma."
+            }
           </motion.p>
-        </div>
-      </motion.article>
-      <motion.article
-        className="bottom-section"
-        {...motionProps}
-        transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
-      >
+        </motion.article>
+      </div>
+
+      <motion.article className="bottom-section">
         <div className="detail-accordions">
           {[
             { title: "Project Management", content: projectManagementContent },
@@ -236,6 +203,7 @@ const SnackLab = () => {
             loop
             className="mobile-video"
             aria-label="SnackLab mobile mockup video"
+            loading="lazy" // Lazy loading video
           ></video>
         </div>
       </motion.article>

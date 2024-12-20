@@ -5,10 +5,14 @@ import { Link, useLocation } from "react-router-dom";
 
 const SlideTabsExample = () => {
   const [background, setBackground] = useState("transparent");
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
+      if (
+        window.scrollY > 50 ||
+        (window.innerWidth < 1440 && location.pathname === "/about")
+      ) {
         setBackground("white");
       } else {
         setBackground("transparent");
@@ -16,8 +20,14 @@ const SlideTabsExample = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("resize", handleScroll);
+    handleScroll(); // Call it initially to set the correct background
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
+  }, [location]);
 
   useEffect(() => {
     document.querySelector(".slide-tabs-container").style.transition =

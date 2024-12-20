@@ -16,6 +16,8 @@ import SnackLab from "./components/SnackLab";
 import ThirtyFive from "./components/ThirtyFive";
 import RunYuji from "./components/RunYuji";
 import Portfolio from "./components/Portfolio";
+import CursorTrail from "./components/CursorTrail";
+import PageTransition from "./components/PageTransition"; // Import PageTransition
 
 function App() {
   useEffect(() => {
@@ -48,17 +50,69 @@ function App() {
     }
   }, []);
 
+  const isLargeScreen = window.innerWidth > 1024;
+
   return (
     <Router>
+      {isLargeScreen && <CursorTrail />}
       <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/works" element={<Projects />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/works/snacklab" element={<SnackLab />} />
-        <Route path="/works/thirtyfive" element={<ThirtyFive />} />
-        <Route path="/works/runyuji" element={<RunYuji />} />
-        <Route path="/works/portfolio" element={<Portfolio />} />
+        <Route
+          path="/"
+          element={
+            <PageTransition>
+              <Home />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/works"
+          element={
+            <PageTransition>
+              <Projects />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <PageTransition>
+              <About />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/works/snacklab"
+          element={
+            <PageTransition>
+              <SnackLab />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/works/thirtyfive"
+          element={
+            <PageTransition>
+              <ThirtyFive />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/works/runyuji"
+          element={
+            <PageTransition>
+              <RunYuji />
+            </PageTransition>
+          }
+        />
+        <Route
+          path="/works/portfolio"
+          element={
+            <PageTransition>
+              <Portfolio />
+            </PageTransition>
+          }
+        />
       </Routes>
     </Router>
   );
