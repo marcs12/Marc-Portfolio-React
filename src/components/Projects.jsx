@@ -1,6 +1,7 @@
 import { useEffect, useRef, useMemo } from "react";
 import { gsap } from "gsap";
 import { Link } from "react-router-dom";
+
 import WebGLHoverEffect from "./WebGLHoverEffect"; // Your WebGLHoverEffect component
 
 const Projects = () => {
