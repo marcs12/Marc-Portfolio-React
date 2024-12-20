@@ -149,7 +149,7 @@ const About = () => {
           }
           transition={{ duration: 1 }}
         >
-          <p className="stack-label">02. Tech Stack</p>
+          <p className="stack-label">02. My Tech Stack</p>
           <div className="stack-container">
             <Tabs>
               <TabList>
