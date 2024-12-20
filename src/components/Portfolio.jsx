@@ -51,30 +51,29 @@ const projectManagementContent = (
 const developmentContent = (
   <ol>
     <li>
-      <p>Project Requirement Analysis</p>
+      <p>Outlining project requirements</p>
     </li>
     <li>
       <p>Design and Prototyping</p>
     </li>
     <li>
-      <p>Task Assigning + Development</p>
+      <p>Development</p>
     </li>
     <li>
-      <p>Testing</p>
+      <p>Testing and Debugging</p>
     </li>
     <li>
-      <p>Deployment</p>
+      <p>Adding nice-to-haves and Deployment</p>
     </li>
   </ol>
 );
 
 const roleContent = (
   <p>
-    I served as both a designer and developer for the Portfolio project,
-    handling the design in Figma and creating a high-fidelity mockup. As a
-    developer, I used React to build the site and integrated multiple APIs and
-    dependencies like ThreeJS, GSAP, and Framer Motion to enhance user
-    experience.
+    I served as both a designer and developer for the my portfolio, handling the
+    design in Figma and creating a high-fidelity mockup. As a developer, I used
+    React to build the site and integrated multiple APIs and dependencies like
+    ThreeJS, GSAP, and Framer Motion to enhance user experience.
   </p>
 );
 
@@ -218,7 +217,7 @@ const Portfolio = () => {
               transition={{ duration: 1, ease: "easeInOut" }}
               style={{ whiteSpace: "pre-wrap" }}
             >
-              {"Portfolio is a personal project designed to showcase my skills and projects. The site is built using React, ThreeJS, GSAP, and Framer Motion to create an engaging and interactive user experience. The design was created in Figma, and the project integrates multiple APIs and dependencies to enhance functionality and UX."
+              {"My Portfolio is a personal project designed to showcase my skills and projects. The site is built using React, ThreeJS, GSAP, and Framer Motion to create an engaging and interactive user experience. The design was created in Figma, and the project integrates multiple APIs and dependencies to enhance functionality and UX."
                 .split("")
                 .map((char, index) => (
                   <motion.span
