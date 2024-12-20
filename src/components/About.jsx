@@ -33,8 +33,6 @@ import { DevelopmentModel } from "./DevelopmentModel";
 import { DesignModel } from "./DesignModel";
 import { PerformanceModel } from "./PerformanceModel";
 
-import { Leva, useControls } from "leva";
-
 const About = () => {
   const sectionRef = useRef(null);
 
@@ -42,47 +40,44 @@ const About = () => {
     gsap.fromTo(
       sectionRef.current,
       { height: "0", opacity: 0 },
-      { height: "auto", opacity: 1, duration: 2 },
+      { height: "458px", opacity: 1, duration: 2 },
     );
   }, []);
 
-  const { cameraX, cameraY, cameraZ } = useControls({
-    cameraX: { value: 0, min: -10, max: 10, step: 0.1 },
-    cameraY: { value: 2, min: -10, max: 10, step: 0.1 },
-    cameraZ: { value: 5, min: -10, max: 10, step: 0.1 },
-  });
+  const isMobile = window.innerWidth <= 768;
 
   return (
     <section className="about-section">
-      <Leva collapsed />
       <div className="first-wrap">
-        <article className="top-section" ref={sectionRef}>
-          <img
-            className="barcode-ornament"
-            src={Barcode}
-            alt="Barcode ornament"
-            aria-hidden="true"
-            loading="lazy"
-          />
-          <div className="vl"></div>
-          <div className="photo-intro">
+        <div className="container-pic-text">
+          <article className="top-section" ref={sectionRef}>
             <img
-              className="marc-photo"
-              src={MarcPhoto}
-              alt="Marc Sapa"
+              className="barcode-ornament"
+              src={Barcode}
+              alt="Barcode ornament"
+              aria-hidden="true"
               loading="lazy"
             />
-            <p className="intro-label">01. Introduction</p>
-            <h1>About Me</h1>
-            <p className="introduction">
-              Hi, I’m Marc, a Front-End Developer and Web Designer focused on
-              Crafting Clean & Consistent Experiences. I have a background in
-              Web Design and Video Editing, and with these two fields combined,
-              I can create visually appealing websites that are both functional
-              and user-friendly.
-            </p>
-          </div>
-        </article>
+            <div className="vl"></div>
+            <div className="photo-intro">
+              <img
+                className="marc-photo"
+                src={MarcPhoto}
+                alt="Marc Sapa"
+                loading="lazy"
+              />
+              <p className="intro-label">01. Introduction</p>
+              <h1>About Me</h1>
+              <p className="introduction">
+                Hi, I’m Marc, a Front-End Developer and Web Designer focused on
+                Crafting Clean & Consistent Experiences. I have a background in
+                Web Design and Video Editing, and with these two fields
+                combined, I can create visually appealing websites that are both
+                functional and user-friendly.
+              </p>
+            </div>
+          </article>
+        </div>
 
         <motion.article
           className="my-stack"
@@ -177,14 +172,19 @@ const About = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
-        <p className="stack-label">03. 3D Models</p>
+        <p className="stack-label">03. Services Offered</p>
         <div className="models-container">
-          <div className="model-item">
-            <p>Development</p>
+          <motion.div
+            className="model-item"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <p>Front-End Development</p>
             <div className="canvas-container">
               <Canvas
                 camera={{
-                  position: [0, 0, 5],
+                  position: isMobile ? [0, 0, 35] : [0, 0, 5],
                   fov: 43,
                   near: 0.1,
                   far: 1000,
@@ -200,12 +200,19 @@ const About = () => {
                 <DevelopmentModel />
               </Canvas>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="model-item">
-            <p>Design</p>
+          <motion.div
+            className="model-item"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <p>Web Design</p>
             <div className="canvas-container">
-              <Canvas camera={{ position: [0, 0, 400] }}>
+              <Canvas
+                camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
+              >
                 <OrbitControls
                   enablePan={true}
                   enableRotate={false}
@@ -216,12 +223,19 @@ const About = () => {
                 <DesignModel />
               </Canvas>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="model-item">
-            <p>Dynamic</p>
+          <motion.div
+            className="model-item"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <p>Dynamic Styling</p>
             <div className="canvas-container">
-              <Canvas camera={{ position: [0, 0, 400] }}>
+              <Canvas
+                camera={{ position: isMobile ? [0, 0, 800] : [0, 0, 400] }}
+              >
                 <OrbitControls
                   enablePan={true}
                   enableRotate={false}
@@ -232,7 +246,7 @@ const About = () => {
                 <PerformanceModel />
               </Canvas>
             </div>
-          </div>
+          </motion.div>
         </div>
       </motion.article>
     </section>
