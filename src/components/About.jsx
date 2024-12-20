@@ -36,8 +36,6 @@ import { PerformanceModel } from "./PerformanceModel";
 const About = () => {
   const sectionRef = useRef(null);
 
-  const text = "Let's Work Together";
-
   const isMobile = window.innerWidth <= 768;
 
   const techStackIcons = useMemo(
