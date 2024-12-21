@@ -34,23 +34,23 @@
   padding: 0.25rem;
 }
 
-.home-line {
-  margin: 0 auto;
-  border: 0;
-  height: 1px;
-  background: #ffffff;
-  animation: slideout 1s ease-in-out 1;
-  transform-origin: center;
-}
+// .home-line {
+//   margin: 0 auto;
+//   border: 0;
+//   height: 1px;
+//   background: #ffffff;
+//   animation: slideout 1s ease-in-out 1;
+//   transform-origin: center;
+// }
 
-@keyframes slideout {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
-}
+// @keyframes slideout {
+//   0% {
+//     width: 0;
+//   }
+//   100% {
+//     width: 100%;
+//   }
+// }
 
 .hero-section {
   height: 100vh;

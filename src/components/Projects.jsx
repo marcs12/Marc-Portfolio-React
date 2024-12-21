@@ -13,6 +13,14 @@ const Projects = () => {
   );
 
   useEffect(() => {
+    gsap.fromTo(
+      ".project-title",
+      { x: -100, opacity: 0 },
+      { x: 0, opacity: 1, duration: 1, ease: "power2.out" },
+    );
+  }, []);
+
+  useEffect(() => {
     projectRefs.current.forEach((ref) => {
       if (ref) {
         const title = ref.querySelector("h2");
@@ -34,7 +42,11 @@ const Projects = () => {
         );
 
         const hrLine = ref.querySelector(".project-line");
-        gsap.fromTo(hrLine, { scaleX: 0 }, { scaleX: 1, duration: 1 });
+        gsap.fromTo(
+          hrLine,
+          { scaleX: 0, transformOrigin: "left" },
+          { scaleX: 1, duration: 1 },
+        );
       }
     });
   }, []);
@@ -54,7 +66,6 @@ const Projects = () => {
           </li>
         ))}
       </ul>
-
       <WebGLHoverEffect />
     </section>
   );

@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
+import { gsap } from "gsap";
 
 const SlideTabsExample = () => {
   return (
@@ -17,6 +18,13 @@ SlideTabsExample.propTypes = {
 };
 
 const SlideTabs = () => {
+  useEffect(() => {
+    gsap.fromTo(
+      ".slide-tabs",
+      { opacity: 0, width: 0 },
+      { opacity: 1, width: "auto", delay: 1, duration: 1 },
+    );
+  }, []);
   const [position, setPosition] = useState({
     left: 0,
     width: 0,

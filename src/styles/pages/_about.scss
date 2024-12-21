@@ -8,7 +8,7 @@
   box-sizing: border-box;
 
   .second-wrap {
-    margin: 4rem 1rem;
+    margin: 2rem 1rem;
   }
 
   .container-pic-text {
@@ -289,5 +289,26 @@
     height: 100%;
     display: block;
     object-fit: contain;
+  }
+}
+
+.loading-container {
+  position: relative;
+}
+
+.loading-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  img {
+    width: 75px;
+    height: auto;
   }
 }

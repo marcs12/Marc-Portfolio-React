@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 export const RevealLinks = () => {
   return (
     <section className="reveal-links-section">
-      <FlipLink>Let's</FlipLink>
-      <FlipLink>Work</FlipLink>
-      <FlipLink>Together.</FlipLink>
+      <FlipLink href="https://github.com/marcs12">Let's</FlipLink>
+      <FlipLink href="https://www.linkedin.com/in/marcsapa/">Work</FlipLink>
+      <FlipLink href="mailto:marcgsapa@gmail.com">Together</FlipLink>
     </section>
   );
 };
