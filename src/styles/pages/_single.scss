@@ -6,8 +6,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1rem;
-  height: fit-content;
+  padding: 3rem 1rem;
+  height: 100%;
   background-color: #080808;
 
   .number-two {
@@ -288,6 +288,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
+      margin: 1rem;
 
       video {
         grid-column: 1 / 2;
