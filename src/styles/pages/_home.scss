@@ -3,6 +3,7 @@
 
 #hero {
   position: relative;
+  max-width: 2560px;
 }
 
 .social-svg {
@@ -34,24 +35,6 @@
   padding: 0.25rem;
 }
 
-// .home-line {
-//   margin: 0 auto;
-//   border: 0;
-//   height: 1px;
-//   background: #ffffff;
-//   animation: slideout 1s ease-in-out 1;
-//   transform-origin: center;
-// }
-
-// @keyframes slideout {
-//   0% {
-//     width: 0;
-//   }
-//   100% {
-//     width: 100%;
-//   }
-// }
-
 .hero-section {
   height: 100vh;
   width: 100vw;
@@ -81,8 +64,6 @@
     width: 100vw;
     height: 100vh;
     z-index: 0;
-
-    //  animate here
   }
 
   .hero-wrap {
@@ -134,13 +115,23 @@
     }
   }
 
-  @media (min-width: 64em) {
+  @media (min-width: 160rem) {
     .hero-wrap {
       .sub-text,
       .sub-text-two {
-        font-size: 1rem;
-        padding: 1rem 1.75rem;
+        font-size: 1.25rem;
+        padding: 2rem 2.5rem;
       }
+    }
+
+    .hero-title {
+      font-size: 16rem;
+    }
+
+    .topleft-border,
+    .bottomright-border {
+      width: 2rem;
+      height: 2rem;
     }
   }
 
@@ -166,7 +157,7 @@
 
   @media (min-width: 64em) {
     .hero-title {
-      font-size: 12rem;
+      font-size: 26em;
     }
   }
 
@@ -203,6 +194,26 @@
     .bottomright-border {
       width: 1.5rem;
       height: 1.5rem;
+    }
+  }
+
+  @media (min-width: 3840px) {
+    .hero-wrap {
+      .sub-text,
+      .sub-text-two {
+        font-size: 2rem;
+        padding: 3rem 3.5rem;
+      }
+    }
+
+    .hero-title {
+      font-size: 26rem;
+    }
+
+    .topleft-border,
+    .bottomright-border {
+      width: 3rem;
+      height: 3rem;
     }
   }
 }
