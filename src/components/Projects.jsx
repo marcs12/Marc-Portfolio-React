@@ -9,14 +9,14 @@ const Projects = () => {
 
   const projects = useMemo(
     () => ["SnackLab", "ThirtyFive", "Run Yuji", "Portfolio"],
-    [],
+    []
   );
 
   useEffect(() => {
     gsap.fromTo(
       ".project-title",
       { x: -100, opacity: 0 },
-      { x: 0, opacity: 1, duration: 1, ease: "power2.out" },
+      { x: 0, opacity: 1, duration: 1, ease: "power2.out" }
     );
   }, []);
 
@@ -38,14 +38,14 @@ const Projects = () => {
             duration: 0.3,
             ease: "power1.inOut",
             stagger: 0.1,
-          },
+          }
         );
 
         const hrLine = ref.querySelector(".project-line");
         gsap.fromTo(
           hrLine,
           { scaleX: 0, transformOrigin: "left" },
-          { scaleX: 1, duration: 1 },
+          { scaleX: 1, duration: 1 }
         );
       }
     });
