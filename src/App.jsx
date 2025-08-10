@@ -9,6 +9,7 @@ import SnackLab from "./components/SnackLab";
 import ThirtyFive from "./components/ThirtyFive";
 import RunYuji from "./components/RunYuji";
 import Portfolio from "./components/Portfolio";
+import Apple from "./components/Apple";
 import CursorTrail from "./components/CursorTrail";
 import PageTransition from "./components/PageTransition";
 import NotFound from "./components/NotFound";
@@ -109,6 +110,14 @@ function App() {
               element={
                 <PageTransition>
                   <Portfolio />
+                </PageTransition>
+              }
+            />
+            <Route
+              path="/works/apple"
+              element={
+                <PageTransition>
+                  <Apple />
                 </PageTransition>
               }
             />
