@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import { gsap } from "gsap";
 import { Canvas } from "@react-three/fiber";
-import { Text } from "@react-three/drei";
+import { Text, Environment, Lightformer } from "@react-three/drei";
 import { LogoModel } from "./LogoModel"; // Import as a named export
 import debounce from "lodash.debounce";
 
@@ -57,6 +57,8 @@ const Scene = () => {
   return (
     <Canvas
       id="canvas"
+      dpr={[1, 2]}
+      gl={{ antialias: true }}
       style={{
         width: "100%",
         height: "100%",
@@ -65,18 +67,50 @@ const Scene = () => {
         left: 0,
       }}
     >
-      <ambientLight intensity={1} />
-      <directionalLight position={[0, 10, 5]} intensity={1} />
-      <LogoModel position={[0, 0, 0]} scale={scale} />
-      <mesh position={[0, 0, -5]} scale={scale}>
-        <meshBasicMaterial color={"#ffffff"} />
-      </mesh>
-      <Text {...textProps} position={[-0.13 * scale, 0.175 * scale, 0]}>
+      <ambientLight intensity={0.35} />
+
+      {/* The text sits behind the glass so the transmission material refracts it.
+          Pushed back on z and rendered first so it lands in the refraction buffer. */}
+      <Text {...textProps} position={[-0.13 * scale, 0.175 * scale, -0.6]}>
         MARC
       </Text>
-      <Text {...textProps} position={[0.23 * scale, -0.175 * scale, 0]}>
+      <Text {...textProps} position={[0.23 * scale, -0.175 * scale, -0.6]}>
         SAPA
       </Text>
+
+      <LogoModel position={[0, 0, 0]} scale={scale} />
+
+      {/* Procedural studio environment (no external HDRI). Gives the glass crisp
+          neutral reflections + edge highlights — the difference between "cheap
+          plastic" and real glass. Soft rects, kept white to stay on-palette. */}
+      <Environment resolution={256}>
+        <Lightformer
+          intensity={3}
+          color="#ffffff"
+          position={[0, 3, 4]}
+          scale={[12, 4, 1]}
+        />
+        <Lightformer
+          intensity={1.6}
+          color="#ffffff"
+          position={[-6, 1, 2]}
+          rotation={[0, Math.PI / 2, 0]}
+          scale={[8, 8, 1]}
+        />
+        <Lightformer
+          intensity={1.6}
+          color="#ffffff"
+          position={[6, -1, 2]}
+          rotation={[0, -Math.PI / 2, 0]}
+          scale={[8, 8, 1]}
+        />
+        <Lightformer
+          intensity={2}
+          color="#dfe6ff"
+          position={[0, -4, 3]}
+          scale={[12, 3, 1]}
+        />
+      </Environment>
     </Canvas>
   );
 };

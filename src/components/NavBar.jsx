@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
+import logoMark from "../assets/adjust-logo.svg";
 
 const LINKS = [
   { to: "/", label: "Index" },
@@ -24,7 +25,9 @@ const NavBar = () => {
       transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
     >
       <Link to="/" className="nav-wordmark" aria-label="Marc Sapa, home">
-        <span className="nav-mark">MS</span>
+        <span className="nav-mark">
+          <img src={logoMark} alt="" aria-hidden="true" />
+        </span>
         <span className="nav-name">Marc&nbsp;Sapa</span>
       </Link>
 
