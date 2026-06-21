@@ -1,23 +1,161 @@
-// nav {
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
-//   padding: 1rem;
-//   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-//   position: fixed;
+@use "../base/variables" as v;
+@use "../utils/mixins" as m;
 
-//   bottom: 0;
-//   width: 100%;
-//   z-index: 100;
+.site-nav {
+  position: fixed;
+  top: clamp(0.75rem, 2vw, 1.5rem);
+  // Center without CSS transform — framer-motion owns `transform` for the
+  // entry animation, so transform-based centering would be clobbered.
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  z-index: var(--z-nav);
 
-//   a {
-//     color: #fff;
-//     text-decoration: none;
-//     font-size: 1.2rem;
-//     transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 2.5rem);
+  width: max-content;
+  max-width: calc(100vw - 1.5rem);
+  padding: 0.5rem 0.5rem 0.5rem 1.25rem;
 
-//     &:hover {
-//       color: #ff6347;
-//     }
-//   }
-// }
+  border-radius: var(--r-pill);
+  @include m.glass(rgba(12, 12, 15, 0.6), 20px);
+}
+
+.nav-wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+
+  .nav-mark {
+    display: grid;
+    place-items: center;
+    width: 1.85rem;
+    height: 1.85rem;
+    border-radius: var(--r-pill);
+    background: var(--amber);
+    color: var(--ink-950);
+    font-family: v.$font-mono;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  .nav-name {
+    @include m.until(v.$bp-sm) {
+      display: none;
+    }
+  }
+}
+
+.nav-tabs {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-tab {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+
+  a {
+    display: block;
+    padding: 0.5rem 0.95rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    transition: color 0.3s var(--ease-out);
+    white-space: nowrap;
+  }
+
+  &.is-active a {
+    color: var(--text);
+  }
+
+  &.is-active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 0.15rem;
+    width: 4px;
+    height: 4px;
+    border-radius: var(--r-pill);
+    background: var(--amber);
+    transform: translateX(-50%);
+  }
+
+  @include m.hover {
+    a {
+      color: var(--text);
+    }
+  }
+}
+
+.nav-cursor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+  border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, 0.06);
+  list-style: none;
+}
+
+.nav-contact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: var(--r-pill);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text);
+  border: 1px solid var(--line-strong);
+  transition:
+    border-color 0.35s var(--ease-out),
+    background 0.35s var(--ease-out);
+
+  .nav-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: var(--r-pill);
+    background: var(--amber);
+    box-shadow: 0 0 0 0 var(--amber-glow);
+    animation: nav-pulse 2.4s ease-out infinite;
+  }
+
+  @include m.hover {
+    border-color: rgba(232, 176, 106, 0.5);
+    background: rgba(232, 176, 106, 0.06);
+  }
+
+  @include m.until(v.$bp-md) {
+    display: none;
+  }
+}
+
+@keyframes nav-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 176, 106, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(232, 176, 106, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 176, 106, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-status-dot {
+    animation: none;
+  }
+}
