@@ -3,6 +3,7 @@ import "../styles/styles.scss";
 import { Link } from "react-router-dom";
 import Hero from "./Hero";
 import Reveal from "./Reveal";
+import SplitText from "./SplitText";
 import projects from "../data/projects";
 
 const MARQUEE = [
@@ -102,7 +103,7 @@ const Home = () => {
                   </div>
                   <div className="featured-meta">
                     <span className="featured-index mono">{p.index}</span>
-                    <h3>{p.title}</h3>
+                    <SplitText as="h3" text={p.title} />
                     <p>{p.summary}</p>
                     <span className="featured-year mono">{p.year}</span>
                   </div>
@@ -119,9 +120,12 @@ const Home = () => {
           <Reveal as="p" className="eyebrow">
             What I do
           </Reveal>
-          <Reveal as="h2" className="capabilities-title" delay={0.05}>
-            One person, the whole pipeline.
-          </Reveal>
+          <SplitText
+            as="h2"
+            className="capabilities-title"
+            text="One person, the whole pipeline."
+            delay={0.05}
+          />
 
           <ul className="capability-list">
             {CAPABILITIES.map((c, i) => (

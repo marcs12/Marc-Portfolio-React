@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,6 +8,28 @@ const YEAR = new Date().getFullYear();
 
 const Footer = () => {
   const [copied, setCopied] = useState(false);
+  const footerRef = useRef(null);
+
+  // The footer is fixed behind the page panel; the panel reserves scroll space
+  // equal to the footer's height (--footer-h) so scrolling reveals it underneath.
+  useEffect(() => {
+    const el = footerRef.current;
+    if (!el) return;
+    const set = () =>
+      document.documentElement.style.setProperty(
+        "--footer-h",
+        `${el.offsetHeight}px`,
+      );
+    set();
+    const ro = new ResizeObserver(set);
+    ro.observe(el);
+    window.addEventListener("resize", set);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", set);
+      document.documentElement.style.removeProperty("--footer-h");
+    };
+  }, []);
 
   const copyEmail = () => {
     navigator.clipboard.writeText(EMAIL).then(() => {
@@ -18,8 +40,13 @@ const Footer = () => {
   };
 
   return (
-    <footer className="site-footer" id="contact">
+    <footer className="site-footer" id="contact" ref={footerRef}>
       <div className="footer-inner">
+        <div className="footer-cue" aria-hidden="true">
+          <span className="footer-cue-label">Marc Sapa</span>
+          <span className="footer-cue-line" />
+        </div>
+
         <p className="footer-eyebrow">Available for select projects in 2026</p>
 
         <a className="footer-cta" href={`mailto:${EMAIL}`}>

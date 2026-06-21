@@ -1,6 +1,7 @@
 import { useState, memo, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import SplitText from "./SplitText";
 import SnackLabVideo from "../assets/compressed/snacklab-desktop.mp4";
 import SnackLabMobile from "../assets/compressed/snacklab-mobile.mp4";
 
@@ -121,7 +122,7 @@ const SnackLab = () => {
         ></video>
         <div className="heading-text-wrap">
           <p>01.</p>
-          <h1>SnackLab</h1>
+          <SplitText as="h1" text="SnackLab" />
         </div>
         <div className="project-description">
           <motion.ul className="categories">

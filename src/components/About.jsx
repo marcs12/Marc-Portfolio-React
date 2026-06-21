@@ -5,6 +5,7 @@ import { Canvas } from "@react-three/fiber";
 
 import MarcPhoto from "../assets/IMG_1968.JPG";
 import Reveal from "./Reveal";
+import SplitText from "./SplitText";
 import TextEffect from "./TextEffect";
 import { DevelopmentModel } from "./DevelopmentModel";
 import { DesignModel } from "./DesignModel";
@@ -97,10 +98,11 @@ const About = () => {
       <div className="about-intro section-shell">
         <Reveal className="about-intro-text">
           <p className="eyebrow">About</p>
-          <h1 className="about-heading">
-            A front-end developer and designer who builds the whole thing,
-            design through code.
-          </h1>
+          <SplitText
+            as="h1"
+            className="about-heading"
+            text="A front-end developer and designer who builds the whole thing, design through code."
+          />
           <p className="about-lead">
             I&rsquo;m Marc, based in Vancouver. I came up through web design and
             video editing, so I pay as much attention to how a site moves as how
@@ -163,9 +165,12 @@ const About = () => {
         <Reveal as="p" className="eyebrow">
           What I can do for you
         </Reveal>
-        <Reveal as="h2" className="about-services-title" delay={0.05}>
-          Three things, done properly.
-        </Reveal>
+        <SplitText
+          as="h2"
+          className="about-services-title"
+          text="Three things, done properly."
+          delay={0.05}
+        />
 
         <div className="models-container">
           {SERVICES.map(({ label, copy, Model, camera, cameraMobile, light }, i) => (

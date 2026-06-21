@@ -13,7 +13,11 @@ body,
   padding: 0;
   min-height: 100%;
   width: 100%;
-  overflow-x: hidden;
+  // `clip` (not `hidden`) stops horizontal scroll WITHOUT turning these into
+  // vertical scroll containers — keeps a single, normal document scroller so
+  // window.scrollY works, fixed elements behave, and the footer reveal scrolls
+  // both ways. (overflow-x:hidden was forcing overflow-y:auto → nested scrollers.)
+  overflow-x: clip;
 }
 
 body {
@@ -31,7 +35,6 @@ body {
       transparent 55%
     );
   background-attachment: fixed;
-  overflow-y: auto;
 }
 
 // Slow-drifting ambient amber field behind everything.
@@ -78,6 +81,21 @@ body {
 #page-root {
   position: relative;
   z-index: var(--z-base);
+  min-height: 100dvh;
+  // Opaque panel that scrolls up to reveal the cinematic footer pinned
+  // underneath (sticky, z:0). Rounded bottom + shadow read as a lifting card.
+  background:
+    radial-gradient(
+      120% 80% at 50% -10%,
+      rgba(255, 255, 255, 0.06),
+      transparent 60%
+    ),
+    var(--ink-850);
+  border-bottom-left-radius: clamp(1.5rem, 4vw, 2.5rem);
+  border-bottom-right-radius: clamp(1.5rem, 4vw, 2.5rem);
+  box-shadow: 0 60px 120px -24px rgba(0, 0, 0, 0.7);
+  // Scroll space that exposes the fixed footer pinned behind (set in Footer.jsx).
+  margin-bottom: var(--footer-h, 80vh);
 }
 
 // ---- Links ----

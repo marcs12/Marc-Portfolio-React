@@ -1,6 +1,7 @@
 import { useState, memo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import SplitText from "./SplitText";
 import ThirtyFiveMMVideo from "../assets/compressed/thirtyfive-desktop.mp4";
 import ThirtyFiveMMMobile from "../assets/compressed/thirtyfive-mobile.mp4";
 
@@ -114,7 +115,7 @@ const ThirtyFiveMM = () => {
         ></video>
         <div className="heading-text-wrap">
           <p>01.</p>
-          <h1>ThirtyFiveMM</h1>
+          <SplitText as="h1" text="ThirtyFiveMM" />
         </div>
         <div className="project-description">
           <motion.ul

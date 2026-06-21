@@ -1,6 +1,7 @@
 import { useState, memo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import SplitText from "./SplitText";
 import RunYujiVideo from "../assets/compressed/runyuji-desktop.mp4";
 import RunYujiMobile from "../assets/compressed/runyuji-two-desktop.mp4";
 
@@ -108,7 +109,7 @@ const RunYuji = () => {
         ></video>
         <div className="heading-text-wrap">
           <p>01.</p>
-          <h1>RunYuji</h1>
+          <SplitText as="h1" text="RunYuji" />
         </div>
         <div className="project-description">
           <motion.ul

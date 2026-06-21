@@ -9,6 +9,7 @@ import { AnimatePresence, MotionConfig } from "framer-motion";
 
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
+import ParticleField from "./components/ParticleField";
 import About from "./components/About";
 import Projects from "./components/Projects";
 import SnackLab from "./components/SnackLab";
@@ -118,6 +119,11 @@ function App() {
         <ScrollToTop />
         <NavBar />
         <main id="page-root">
+          {/* Persistent across routes (outside the per-route PageTransition,
+              whose transform would re-anchor the fixed canvas and glitch it).
+              It self-fades when #main-wrapper is absent, i.e. off the home page,
+              so navigation never pops the logo. */}
+          <ParticleField />
           <AnimatedRoutes />
         </main>
         <Footer />

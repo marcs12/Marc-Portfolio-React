@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import Scene from "./Scene";
 import { CanvasRevealEffect } from "./ui/canvas-reveal-effect";
 
 // Local Vancouver clock via Intl. No network call, reliable on static hosting.
@@ -16,6 +15,26 @@ const formatVancouver = () => {
 };
 
 const ease = [0.23, 1, 0.32, 1];
+
+// Wordmark entrance: each letter swings up + flips in, staggered.
+const wordmarkContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.5 } },
+};
+const wordmarkLetter = {
+  hidden: { opacity: 0, y: 70, rotateX: -70 },
+  show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 1, ease } },
+};
+
+const GhostWord = ({ text }) => (
+  <span className="hero-word" aria-hidden="true">
+    {text.split("").map((ch, i) => (
+      <motion.span className="hero-letter" variants={wordmarkLetter} key={i}>
+        {ch}
+      </motion.span>
+    ))}
+  </span>
+);
 
 const Hero = () => {
   const [clock, setClock] = useState(formatVancouver());
@@ -38,9 +57,19 @@ const Hero = () => {
           showGradient
         />
       </div>
-      <div className="hero-canvas">
-        <Scene />
-      </div>
+
+      {/* Oversized ghost wordmark — sits BEHIND the particle logo (z:-1).
+          Outlined editorial type, staggered, so the 3D mark reads in front. */}
+      <motion.h1
+        className="hero-wordmark"
+        aria-label="Marc Sapa"
+        variants={wordmarkContainer}
+        initial="hidden"
+        animate="show"
+      >
+        <GhostWord text="Marc" />
+        <GhostWord text="Sapa" />
+      </motion.h1>
 
       <div className="hero-grid">
         <motion.p

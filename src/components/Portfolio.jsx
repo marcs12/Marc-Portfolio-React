@@ -1,6 +1,7 @@
 import { useState, memo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import SplitText from "./SplitText";
 import PortfolioVideo from "../assets/compressed/portfolio-desktop.mp4";
 import PortfolioMobile from "../assets/compressed/portfolio-mobile.mp4";
 
@@ -126,7 +127,7 @@ const Portfolio = () => {
         ></video>
         <div className="heading-text-wrap">
           <p>01.</p>
-          <h1>Portfolio</h1>
+          <SplitText as="h1" text="Portfolio" />
         </div>
         <div className="project-description">
           <motion.ul

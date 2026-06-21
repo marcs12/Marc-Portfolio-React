@@ -2,18 +2,46 @@
 @use "../utils/mixins" as m;
 
 // ============================ FOOTER ============================
+// Cinematic footer: FIXED behind the page panel (#page-root, z:1) at the
+// viewport bottom. The panel reserves `--footer-h` of scroll space (set in
+// Footer.jsx from this element's height), so scrolling lifts the panel away
+// and reveals the footer underneath.
 .site-footer {
-  position: relative;
-  z-index: var(--z-base);
-  border-top: 1px solid var(--line);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
   background:
     radial-gradient(
-      80% 120% at 50% 0%,
-      rgba(255, 255, 255, 0.06),
+      90% 120% at 50% 100%,
+      rgba(255, 255, 255, 0.07),
       transparent 60%
     ),
     var(--ink-900);
-  padding-block: clamp(4rem, 10vw, 8rem);
+  padding-block: clamp(5rem, 12vw, 9rem) clamp(3rem, 6vw, 5rem);
+}
+
+// Seam motif echoing the source design: a thin vertical gradient line + a
+// tracking-wide micro label centered at the top of the reveal.
+.footer-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: clamp(3rem, 7vw, 5.5rem);
+
+  .footer-cue-label {
+    @include m.eyebrow;
+    letter-spacing: 0.4em;
+    color: var(--text-faint);
+  }
+
+  .footer-cue-line {
+    width: 1px;
+    height: clamp(3rem, 8vw, 5.5rem);
+    background: linear-gradient(var(--text-dim), transparent);
+  }
 }
 
 .footer-inner {
