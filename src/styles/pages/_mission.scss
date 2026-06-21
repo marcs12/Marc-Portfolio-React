@@ -1,29 +1,37 @@
-@use "../utils/mixins" as *;
-@use "../base/variables" as *;
+@use "../base/variables" as v;
+@use "../utils/mixins" as m;
 
-.mission-statement {
+// Kinetic flip-link CTA (TextEffect / RevealLinks), used on the About page.
+.reveal-links-section {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: absolute;
-  top: 60%;
-  left: 0;
-  color: #ffffff;
-  padding: 0.25rem 0.5rem;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding-block: clamp(3rem, 8vw, 6rem);
+}
 
-  .creativity {
-    font-family: "DM Serif Display", sans-serif;
-    font-weight: 100;
-    margin: 0;
-    padding: 0.2rem;
+.flip-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  line-height: 0.92;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  font-size: clamp(3rem, 12vw, 9rem);
+  color: var(--text);
+  white-space: nowrap;
+
+  > div {
+    display: flex;
   }
 
-  .precision {
-    font-family: "DM Serif Display", sans-serif;
-    font-weight: 100;
-    margin: 0;
-    padding: 0.2rem;
+  .flip-overlay {
+    position: absolute;
+    inset: 0;
+    color: var(--amber);
+  }
+
+  .flip-letter {
+    display: inline-block;
   }
 }

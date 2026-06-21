@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 
 export function LogoModel(props) {
-  const { nodes } = useGLTF("/src/assets/updated-glass.glb");
+  const { nodes } = useGLTF("/models/updated-glass.glb");
 
   const meshRef = useRef();
 
@@ -56,4 +56,4 @@ export function LogoModel(props) {
 }
 
 // Preload the model to improve performance
-useGLTF.preload("/src/assets/updated-glass.glb");
+useGLTF.preload("/models/updated-glass.glb");

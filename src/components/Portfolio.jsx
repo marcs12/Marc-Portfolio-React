@@ -1,5 +1,6 @@
 import { useState, memo } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import PortfolioVideo from "../assets/compressed/portfolio-desktop.mp4";
 import PortfolioMobile from "../assets/compressed/portfolio-mobile.mp4";
 
@@ -102,6 +103,12 @@ const Portfolio = () => {
 
   return (
     <motion.section className="single-wrap" {...motionProps}>
+      <Link to="/works" className="single-back">
+        <span className="single-back-arrow" aria-hidden="true">
+          &larr;
+        </span>
+        All works
+      </Link>
       <motion.article
         className="single-hero-wrap"
         initial={{ y: -50, opacity: 0 }}

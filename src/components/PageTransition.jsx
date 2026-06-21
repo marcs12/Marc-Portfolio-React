@@ -2,21 +2,20 @@
 import React from "react";
 import { motion } from "framer-motion"; // Ensure you have installed framer-motion
 
-// Define transition variants for sliding and fading animations
+// GPU-only fade-up. Replaces the old full-viewport x-slide (which risked
+// horizontal scroll and felt heavy). Enter is responsive (ease-out), exit snaps.
+const ease = [0.23, 1, 0.32, 1];
 const pageVariants = {
-  initial: {
-    opacity: 0,
-    x: "-100vw", // Slide from left
-  },
+  initial: { opacity: 0, y: 18 },
   animate: {
     opacity: 1,
-    x: 0, // Slide to normal position
-    transition: { type: "spring", stiffness: 120, damping: 25 },
+    y: 0,
+    transition: { duration: 0.5, ease },
   },
   exit: {
     opacity: 0,
-    x: "100vw", // Slide to the right on exit
-    transition: { type: "spring", stiffness: 120, damping: 25 },
+    y: -12,
+    transition: { duration: 0.3, ease },
   },
 };
 

@@ -45,7 +45,7 @@ const Scene = () => {
     () => ({
       color: "#ffffff",
       fontSize: 0.5 * scale,
-      font: "/src/assets/DMSerifDisplay-Regular.ttf",
+      font: "/fonts/DMSerifDisplay-Regular.ttf",
       rotation: [0, 0, 0],
       textAlign: "center",
       anchorX: "center",
@@ -58,12 +58,11 @@ const Scene = () => {
     <Canvas
       id="canvas"
       style={{
-        width: "100vw",
-        height: "100vh",
+        width: "100%",
+        height: "100%",
         position: "absolute",
         top: 0,
         left: 0,
-        zIndex: -1, // Add z-index to ensure canvas is on top
       }}
     >
       <ambientLight intensity={1} />

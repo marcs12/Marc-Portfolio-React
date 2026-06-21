@@ -1,5 +1,6 @@
 import { useState, memo } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import RunYujiVideo from "../assets/compressed/runyuji-desktop.mp4";
 import RunYujiMobile from "../assets/compressed/runyuji-two-desktop.mp4";
 
@@ -84,6 +85,12 @@ const RunYuji = () => {
 
   return (
     <motion.section className="single-wrap" {...motionProps}>
+      <Link to="/works" className="single-back">
+        <span className="single-back-arrow" aria-hidden="true">
+          &larr;
+        </span>
+        All works
+      </Link>
       <motion.article
         className="single-hero-wrap"
         initial={{ y: -50, opacity: 0 }}
