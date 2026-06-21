@@ -21,10 +21,53 @@
   overflow: hidden;
 }
 
-.hero-canvas {
+// Animated dot-matrix background (CanvasRevealEffect) — deepest hero layer.
+.hero-reveal {
   position: absolute;
   inset: 0;
   z-index: 0;
+  pointer-events: none;
+  // Radial mask: dots fade out toward the centre so the glass logo + copy
+  // read cleanly, denser toward the edges.
+  -webkit-mask-image: radial-gradient(
+    120% 100% at 50% 42%,
+    transparent 14%,
+    rgba(0, 0, 0, 0.55) 42%,
+    #000 78%
+  );
+  mask-image: radial-gradient(
+    120% 100% at 50% 42%,
+    transparent 14%,
+    rgba(0, 0, 0, 0.55) 42%,
+    #000 78%
+  );
+  opacity: 0.6;
+}
+
+.canvas-reveal,
+.canvas-reveal-inner {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.canvas-reveal-canvas {
+  position: absolute;
+  inset: 0;
+  height: 100% !important;
+  width: 100% !important;
+}
+
+.canvas-reveal-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--ink-850), transparent 55%);
+}
+
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 
   canvas {
     pointer-events: none;

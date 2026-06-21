@@ -9,7 +9,7 @@
   background:
     radial-gradient(
       80% 120% at 50% 0%,
-      rgba(232, 176, 106, 0.06),
+      rgba(255, 255, 255, 0.06),
       transparent 60%
     ),
     var(--ink-900);
@@ -79,7 +79,7 @@
     }
     .footer-cta-icon {
       transform: translate(4px, -4px);
-      background: rgba(232, 176, 106, 0.1);
+      background: rgba(255, 255, 255, 0.1);
     }
   }
 }

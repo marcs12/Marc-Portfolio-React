@@ -37,11 +37,11 @@ $color-secondary: #f4f2ee;
   --text-dim: #a9a6a0;
   --text-faint: #706d67;
 
-  // Accent — desaturated warm amber (locked, single accent)
-  --amber: #e8b06a;
-  --amber-bright: #f6cb8c;
-  --amber-deep: #b9863f;
-  --amber-glow: rgba(232, 176, 106, 0.16);
+  // Accent — monochrome (token names kept; palette is black & white now)
+  --amber: #ffffff;
+  --amber-bright: #ffffff;
+  --amber-deep: #d4d4d4;
+  --amber-glow: rgba(255, 255, 255, 0.16);
 
   // Glass
   --glass-bg: rgba(20, 20, 25, 0.55);
@@ -52,7 +52,7 @@ $color-secondary: #f4f2ee;
   --shadow-sm: 0 2px 12px rgba(0, 0, 0, 0.45);
   --shadow-md: 0 16px 40px -16px rgba(0, 0, 0, 0.6);
   --shadow-lg: 0 32px 90px -24px rgba(0, 0, 0, 0.72);
-  --shadow-amber: 0 24px 70px -28px rgba(232, 176, 106, 0.3);
+  --shadow-amber: 0 24px 70px -28px rgba(255, 255, 255, 0.3);
 
   // Radius scale (concentric — softer outer, tighter inner)
   --r-xs: 8px;

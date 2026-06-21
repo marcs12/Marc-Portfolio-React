@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Scene from "./Scene";
+import { CanvasRevealEffect } from "./ui/canvas-reveal-effect";
 
 // Local Vancouver clock via Intl — no network call, reliable on static hosting.
 const formatVancouver = () => {
@@ -26,6 +27,17 @@ const Hero = () => {
 
   return (
     <section className="hero" aria-label="Introduction">
+      <div className="hero-reveal" aria-hidden="true">
+        <CanvasRevealEffect
+          animationSpeed={3}
+          colors={[
+            [255, 255, 255],
+            [255, 255, 255],
+          ]}
+          dotSize={4}
+          showGradient
+        />
+      </div>
       <div className="hero-canvas">
         <Scene />
       </div>
