@@ -1,0 +1,226 @@
+@use "../base/variables" as v;
+@use "../utils/mixins" as m;
+
+// ============================ FOOTER ============================
+// Cinematic footer: FIXED behind the page panel (#page-root, z:1) at the
+// viewport bottom. The panel reserves `--footer-h` of scroll space (set in
+// Footer.jsx from this element's height), so scrolling lifts the panel away
+// and reveals the footer underneath.
+.site-footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  background:
+    radial-gradient(
+      90% 120% at 50% 100%,
+      rgba(255, 255, 255, 0.07),
+      transparent 60%
+    ),
+    var(--ink-900);
+  padding-block: clamp(5rem, 12vw, 9rem) clamp(3rem, 6vw, 5rem);
+}
+
+// Seam motif echoing the source design: a thin vertical gradient line + a
+// tracking-wide micro label centered at the top of the reveal.
+.footer-cue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: clamp(3rem, 7vw, 5.5rem);
+
+  .footer-cue-label {
+    @include m.eyebrow;
+    letter-spacing: 0.4em;
+    color: var(--text-faint);
+  }
+
+  .footer-cue-line {
+    width: 1px;
+    height: clamp(3rem, 8vw, 5.5rem);
+    background: linear-gradient(var(--text-dim), transparent);
+  }
+}
+
+.footer-inner {
+  @include m.container;
+}
+
+.footer-eyebrow {
+  @include m.eyebrow;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  &::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: var(--r-pill);
+    background: var(--amber);
+  }
+}
+
+.footer-cta {
+  display: block;
+  margin-top: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  color: var(--text);
+
+  .footer-cta-line {
+    display: block;
+  }
+
+  .footer-cta-line--accent {
+    color: var(--text-faint);
+    transition: color 0.5s var(--ease-out);
+  }
+
+  .footer-cta-icon {
+    display: inline-grid;
+    place-items: center;
+    width: clamp(2.5rem, 6vw, 4.5rem);
+    height: clamp(2.5rem, 6vw, 4.5rem);
+    margin-left: 0.5rem;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--line-strong);
+    color: var(--amber);
+    vertical-align: middle;
+    transition:
+      transform 0.5s var(--ease-out),
+      background 0.5s var(--ease-out);
+
+    svg {
+      width: 45%;
+      height: 45%;
+    }
+  }
+
+  @include m.hover {
+    .footer-cta-line--accent {
+      color: var(--amber);
+    }
+    .footer-cta-icon {
+      transform: translate(4px, -4px);
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem 1.5rem;
+  margin-top: clamp(3rem, 8vw, 5.5rem);
+  padding-top: clamp(2rem, 4vw, 3rem);
+  border-top: 1px solid var(--line);
+
+  @include m.from(v.$bp-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.footer-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.footer-label {
+  @include m.eyebrow;
+  margin-bottom: 0.35rem;
+}
+
+.footer-link {
+  font-size: 1.05rem;
+  color: var(--text-dim);
+  transition: color 0.3s var(--ease-out);
+
+  @include m.hover {
+    color: var(--amber);
+  }
+}
+
+.footer-email {
+  font-family: inherit;
+  padding: 0;
+  text-align: left;
+}
+
+.footer-meta {
+  font-family: v.$font-mono;
+  font-size: 0.75rem;
+  color: var(--text-faint);
+}
+
+.footer-base {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(3rem, 7vw, 5rem);
+
+  .footer-wordmark {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+}
+
+// ============================ 404 ============================
+.notfound-container {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 8rem var(--gutter) 4rem;
+}
+
+.notfound-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  h1 {
+    font-size: clamp(6rem, 22vw, 16rem);
+    line-height: 0.85;
+    color: var(--amber);
+    letter-spacing: -0.05em;
+  }
+
+  p {
+    max-width: 38ch;
+    color: var(--text-dim);
+    font-size: var(--fs-lead);
+  }
+}
+
+.back-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--r-pill);
+  background: var(--amber);
+  color: var(--ink-950);
+  font-weight: 500;
+  transition:
+    background 0.35s var(--ease-out),
+    transform 0.35s var(--ease-out);
+
+  @include m.hover {
+    background: var(--amber-bright);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

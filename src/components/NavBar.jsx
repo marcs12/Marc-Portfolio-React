@@ -1,105 +1,89 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
 import { Link, useLocation } from "react-router-dom";
-import { gsap } from "gsap";
+import logoMark from "../assets/adjust-logo.svg";
 
-const SlideTabsExample = () => {
+const LINKS = [
+  { to: "/", label: "Index" },
+  { to: "/works", label: "Works" },
+  { to: "/about", label: "About" },
+];
+
+const NavBar = () => {
+  const { pathname } = useLocation();
+  const [hover, setHover] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const isActive = (to) =>
+    to === "/" ? pathname === "/" : pathname.startsWith(to);
+
   return (
-    <div className="slide-tabs-container">
-      <SlideTabs />
-    </div>
-  );
-};
-
-SlideTabsExample.propTypes = {
-  children: PropTypes.node,
-  setPosition: PropTypes.func,
-};
-
-const SlideTabs = () => {
-  useEffect(() => {
-    gsap.fromTo(
-      ".slide-tabs",
-      { opacity: 0, width: 0 },
-      { opacity: 1, width: "auto", delay: 1, duration: 1 },
-    );
-  }, []);
-  const [position, setPosition] = useState({
-    left: 0,
-    width: 0,
-    opacity: 0,
-  });
-  return (
-    <ul
-      onMouseLeave={() => {
-        setPosition((pv) => ({
-          ...pv,
-          opacity: 0,
-        }));
-      }}
-      className="slide-tabs"
+    <motion.header
+      className="site-nav"
+      initial={{ y: -24, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
     >
-      <Tab setPosition={setPosition} to="/">
-        Home
-      </Tab>
-      <Tab setPosition={setPosition} to="/works">
-        Works
-      </Tab>
-      <Tab setPosition={setPosition} to="/about">
-        About
-      </Tab>
+      <Link to="/" className="nav-wordmark" aria-label="Marc Sapa, home">
+        <span className="nav-mark">
+          <img src={logoMark} alt="" aria-hidden="true" />
+        </span>
+        <span className="nav-name">Marc&nbsp;Sapa</span>
+      </Link>
 
-      <Cursor position={position} />
-    </ul>
+      <nav aria-label="Primary">
+        <ul
+          className="nav-tabs"
+          onMouseLeave={() => setHover((p) => ({ ...p, opacity: 0 }))}
+        >
+          {LINKS.map((link) => (
+            <NavTab
+              key={link.to}
+              to={link.to}
+              active={isActive(link.to)}
+              setHover={setHover}
+            >
+              {link.label}
+            </NavTab>
+          ))}
+          <motion.li
+            className="nav-cursor"
+            animate={hover}
+            transition={{ type: "spring", stiffness: 320, damping: 30 }}
+          />
+        </ul>
+      </nav>
+
+      <a href="mailto:marcgsapa@gmail.com" className="nav-contact">
+        <span className="nav-status-dot" aria-hidden="true" />
+        Get in touch
+      </a>
+    </motion.header>
   );
 };
 
-const Tab = ({ children, setPosition, to }) => {
+const NavTab = ({ to, children, active, setHover }) => {
   const ref = useRef(null);
-
   return (
     <li
       ref={ref}
+      className={`nav-tab${active ? " is-active" : ""}`}
       onMouseEnter={() => {
-        if (!ref?.current) return;
-
+        if (!ref.current) return;
         const { width } = ref.current.getBoundingClientRect();
-
-        setPosition({
-          left: ref.current.offsetLeft,
-          width,
-          opacity: 1,
-        });
+        setHover({ left: ref.current.offsetLeft, width, opacity: 1 });
       }}
-      className="tab"
     >
       <Link to={to}>{children}</Link>
     </li>
   );
 };
 
-Tab.propTypes = {
-  children: PropTypes.node.isRequired,
-  setPosition: PropTypes.func.isRequired,
+NavTab.propTypes = {
   to: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  active: PropTypes.bool.isRequired,
+  setHover: PropTypes.func.isRequired,
 };
 
-const Cursor = ({ position }) => (
-  <motion.li
-    animate={{
-      ...position,
-    }}
-    className="cursor"
-  />
-);
-
-Cursor.propTypes = {
-  position: PropTypes.shape({
-    left: PropTypes.number.isRequired,
-    width: PropTypes.number.isRequired,
-    opacity: PropTypes.number.isRequired,
-  }).isRequired,
-};
-
-export default SlideTabsExample;
+export default NavBar;

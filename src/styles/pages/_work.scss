@@ -1,0 +1,128 @@
+@use "../base/variables" as v;
+@use "../utils/mixins" as m;
+
+.works {
+  position: relative;
+  min-height: 100dvh;
+  padding-top: clamp(8rem, 18vh, 12rem);
+  padding-bottom: var(--section-y);
+  overflow: hidden;
+}
+
+.works-head {
+  margin-bottom: clamp(3rem, 8vw, 6rem);
+
+  .works-title {
+    margin-top: 1.25rem;
+    font-size: var(--fs-display);
+    line-height: 0.92;
+
+    em {
+      font-style: normal;
+      color: var(--amber);
+    }
+  }
+
+  .works-intro {
+    margin-top: 1.5rem;
+    max-width: 52ch;
+    color: var(--text-dim);
+    font-size: var(--fs-lead);
+  }
+}
+
+.works-list {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0;
+  padding-inline: var(--gutter);
+}
+
+.works-row {
+  border-top: 1px solid var(--line);
+
+  &:last-child {
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+.works-link {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "index name go"
+    "index meta go";
+  align-items: center;
+  column-gap: clamp(1rem, 3vw, 2.5rem);
+  padding-block: clamp(1.5rem, 3.5vw, 2.75rem);
+  transition: padding-left 0.5s var(--ease-out);
+
+  .works-index {
+    grid-area: index;
+    color: var(--text-faint);
+    font-size: 0.8rem;
+    align-self: start;
+    padding-top: 0.5rem;
+    transition: color 0.4s var(--ease-out);
+  }
+
+  .works-name {
+    grid-area: name;
+    h2 {
+      font-size: clamp(2rem, 7vw, 4.5rem);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+      line-height: 1;
+      color: var(--text);
+      transition: color 0.4s var(--ease-out);
+    }
+  }
+
+  .works-discipline {
+    grid-area: meta;
+    color: var(--text-dim);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding-top: 0.6rem;
+  }
+
+  .works-year {
+    display: none;
+  }
+
+  .works-go {
+    grid-area: go;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    color: var(--text-faint);
+    transition:
+      transform 0.5s var(--ease-out),
+      color 0.4s var(--ease-out);
+  }
+
+  @include m.hover {
+    padding-left: clamp(0.5rem, 2vw, 1.5rem);
+    .works-index {
+      color: var(--amber);
+    }
+    .works-name h2 {
+      color: var(--amber);
+    }
+    .works-go {
+      transform: translateX(8px);
+      color: var(--amber);
+    }
+  }
+}
+
+// The WebGL hover-preview plane is injected into .projects-section by
+// WebGLHoverEffect. Keep it pinned behind the list and non-interactive.
+.projects-section > canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+  mix-blend-mode: screen;
+}

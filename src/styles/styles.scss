@@ -1,27 +1,19 @@
+// ---- Foundation ----
+@use "./base/variables.scss";
+@use "./base/reset.scss";
+@use "./base/typography.scss";
 @use "./base/global.scss";
 
-// Components
-@use "./components/_navbar.scss";
+// ---- Components ----
+@use "./components/navbar.scss";
+@use "./components/slidetabs.scss";
 @use "./components/transition.scss";
-@use "./components/_slidetabs.scss";
 
-// Pages
-@use "./pages/_home.scss";
-@use "./pages/_about.scss";
-@use "./pages/_work.scss";
-@use "./pages/_contact.scss";
-@use "./pages/_mission.scss";
+// ---- Pages ----
+@use "./pages/home.scss";
+@use "./pages/work.scss";
 @use "./pages/projects.scss";
-@use "./pages/_single.scss";
-
-//Reset CSS
-@use "./base/reset.scss";
-
-// Variables
-@use "./base/variables.scss";
-
-// Mixins
-@use "./utils/mixins.scss";
-
-// Typography
-@use "./base/typography.scss";
+@use "./pages/single.scss";
+@use "./pages/about.scss";
+@use "./pages/mission.scss";
+@use "./pages/contact.scss";

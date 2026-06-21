@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 
 export function LogoModel(props) {
-  const { nodes } = useGLTF("/src/assets/updated-glass.glb");
+  const { nodes } = useGLTF("/models/updated-glass.glb");
 
   const meshRef = useRef();
 
@@ -30,9 +30,7 @@ export function LogoModel(props) {
 
   return (
     <group {...props}>
-      <ambientLight intensity={1.5} />
-      <directionalLight position={[10, 10, 5]} intensity={1.5} />
-      <pointLight position={[-10, -10, -10]} intensity={1} />
+      <directionalLight position={[5, 8, 6]} intensity={0.8} />
       <mesh
         ref={meshRef}
         geometry={nodes.Curve.geometry}
@@ -40,15 +38,25 @@ export function LogoModel(props) {
         position={[0, 0, 0.5]}
         rotation={[1.6, 0, 0]}
       >
+        {/* Tuned values (dialed in via leva). samples/resolution = quality. */}
         <MeshTransmissionMaterial
-          transmission={0.95}
-          reflectivity={0.5}
-          metalness={0.1}
-          envMapIntensity={1}
-          roughness={0.05}
-          thickness={0.2}
+          samples={6}
+          resolution={1024}
+          transmission={0.97}
+          roughness={0}
+          thickness={0.06}
           ior={1}
-          chromaticAberration={0.05}
+          chromaticAberration={0.28}
+          anisotropicBlur={0.05}
+          distortion={0.04}
+          distortionScale={0.15}
+          temporalDistortion={0.04}
+          clearcoat={1}
+          clearcoatRoughness={0.12}
+          attenuationDistance={2}
+          attenuationColor="#ffffff"
+          color="#ffffff"
+          envMapIntensity={1.5}
         />
       </mesh>
     </group>
@@ -56,4 +64,4 @@ export function LogoModel(props) {
 }
 
 // Preload the model to improve performance
-useGLTF.preload("/src/assets/updated-glass.glb");
+useGLTF.preload("/models/updated-glass.glb");

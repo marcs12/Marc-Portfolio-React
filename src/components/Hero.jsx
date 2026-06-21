@@ -1,96 +1,117 @@
-// React imports
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { CanvasRevealEffect } from "./ui/canvas-reveal-effect";
 
-// Animation library
-import { gsap } from "gsap";
+// Local Vancouver clock via Intl. No network call, reliable on static hosting.
+const formatVancouver = () => {
+  const now = new Date();
+  const time = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Vancouver",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }).format(now);
+  return `${time} PT`;
+};
 
-// Axios for HTTP requests
-import axios from "axios";
+const ease = [0.23, 1, 0.32, 1];
 
-// Component imports
-import Scene from "./Scene";
-import ColorOverlay from "./ColorOverlay";
+// Wordmark entrance: each letter swings up + flips in, staggered.
+const wordmarkContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.07, delayChildren: 0.5 } },
+};
+const wordmarkLetter = {
+  hidden: { opacity: 0, y: 70, rotateX: -70 },
+  show: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 1, ease } },
+};
+
+const GhostWord = ({ text }) => (
+  <span className="hero-word" aria-hidden="true">
+    {text.split("").map((ch, i) => (
+      <motion.span className="hero-letter" variants={wordmarkLetter} key={i}>
+        {ch}
+      </motion.span>
+    ))}
+  </span>
+);
 
 const Hero = () => {
-  const [dateTime, setDateTime] = useState("");
-
-  const fetchDateTime = async () => {
-    try {
-      const response = await axios.get(
-        "https://worldtimeapi.org/api/timezone/America/Vancouver",
-      );
-      const dateTimeString = response.data.datetime;
-      const date = new Date(dateTimeString);
-
-      const formattedDate = date.toLocaleDateString("en-US", {
-        month: "2-digit",
-        day: "2-digit",
-        year: "numeric",
-      });
-
-      const formattedTime = date.toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: true,
-        timeZoneName: "short",
-      });
-
-      setDateTime(`${formattedDate} ${formattedTime}`);
-    } catch (error) {
-      console.error("Error fetching date and time:", error);
-    }
-  };
+  const [clock, setClock] = useState(formatVancouver());
 
   useEffect(() => {
-    fetchDateTime();
-
-    gsap.fromTo(
-      ".hero-wrap",
-      { height: 0, opacity: 0 },
-      {
-        height: "auto",
-        opacity: 1,
-        duration: 0.5,
-        delay: 1,
-        ease: "power4.out",
-      },
-    );
-
-    gsap.fromTo(
-      ".time-location",
-      { opacity: 0 },
-      {
-        opacity: 1,
-        duration: 0.1,
-        repeat: 3,
-        ease: "power1.inOut",
-        delay: 2,
-      },
-    );
+    const id = setInterval(() => setClock(formatVancouver()), 1000 * 30);
+    return () => clearInterval(id);
   }, []);
 
   return (
-    <>
-      <section className="hero-section">
-        <article className="hero-wrap">
-          <p className="sub-text">Creative Developer</p>
-          <h1 className="hero-title">
-            MARC <br />
-            <span aria-hidden="true">...</span>SAPA
-          </h1>
-          <p className="sub-text-two">Web Designer</p>
-          <div className="topleft-border"></div>
-          <div className="bottomright-border"></div>
-        </article>
-        <Scene />
-        <article className="time-location">
-          <p>Based in Vancouver, BC.</p>
-          <p>{dateTime}</p>
-        </article>
-        <ColorOverlay />
-      </section>
-    </>
+    <section className="hero" aria-label="Introduction">
+      <div className="hero-reveal" aria-hidden="true">
+        <CanvasRevealEffect
+          animationSpeed={3}
+          colors={[
+            [255, 255, 255],
+            [255, 255, 255],
+          ]}
+          dotSize={4}
+          showGradient
+        />
+      </div>
+
+      {/* Oversized ghost wordmark — sits BEHIND the particle logo (z:-1).
+          Outlined editorial type, staggered, so the 3D mark reads in front. */}
+      <motion.h1
+        className="hero-wordmark"
+        aria-label="Marc Sapa"
+        variants={wordmarkContainer}
+        initial="hidden"
+        animate="show"
+      >
+        <GhostWord text="Marc" />
+        <GhostWord text="Sapa" />
+      </motion.h1>
+
+      <div className="hero-grid">
+        <motion.p
+          className="eyebrow hero-eyebrow"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease, delay: 0.9 }}
+        >
+          Creative developer &amp; web designer
+        </motion.p>
+
+        <motion.p
+          className="hero-sub"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease, delay: 1.15 }}
+        >
+          I design and build fast websites, doing both the design and the
+          front-end myself so the work stays consistent from layout to code.
+        </motion.p>
+      </div>
+
+      <motion.div
+        className="hero-hud"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 1.4 }}
+      >
+        <div className="hud-item">
+          <span className="hud-label">Based in</span>
+          <span className="hud-value">Vancouver, BC</span>
+        </div>
+        <div className="hud-item">
+          <span className="hud-label">Local time</span>
+          <span className="hud-value mono">{clock}</span>
+        </div>
+        <div className="hud-item hud-scroll">
+          <span className="hud-label">Scroll</span>
+          <span className="hud-arrow" aria-hidden="true" />
+        </div>
+      </motion.div>
+    </section>
   );
 };
 
