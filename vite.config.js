@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import glsl from "vite-plugin-glsl";
 
-// Custom domain (marcsapa.com) on GitHub Pages -> served from root.
+// Custom domain (marcgsapa.com) on GitHub Pages -> served from root.
 export default defineConfig({
   base: "/",
   plugins: [react(), glsl()],
