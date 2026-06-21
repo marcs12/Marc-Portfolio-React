@@ -13,7 +13,7 @@ const NotFound = () => {
         <p className="eyebrow">Error 404</p>
         <h1>404</h1>
         <p>
-          This page doesn&rsquo;t exist — or it moved. Let&rsquo;s get you back
+          This page doesn&rsquo;t exist, or it moved. Let&rsquo;s get you back
           to the work.
         </p>
         <Link to="/" className="back-home-link">

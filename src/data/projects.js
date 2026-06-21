@@ -10,7 +10,7 @@ const projects = [
     index: "01",
     title: "SnackLab",
     summary:
-      "A custom WooCommerce storefront for a fictional global-snack brand — bespoke theme, no page builder.",
+      "A custom WooCommerce storefront for a fictional global-snack brand. Hand-coded theme, no page builder.",
     year: "2024",
     role: "Design & Development",
     discipline: "E-commerce",
@@ -22,7 +22,7 @@ const projects = [
     index: "02",
     title: "ThirtyFiveMM",
     summary:
-      "A React film-discovery app on the TMDB API — search, favourites, and category browsing with a cinematic UI.",
+      "A React film-discovery app on the TMDB API, with search, favourites, and category browsing.",
     year: "2024",
     role: "Development",
     discipline: "Web App",
@@ -34,7 +34,7 @@ const projects = [
     index: "03",
     title: "Run Yuji",
     summary:
-      "An endless-runner built from scratch in vanilla JavaScript — physics, collision, and score, no engine.",
+      "An endless-runner built from scratch in vanilla JavaScript, with physics, collision, and scoring. No engine.",
     year: "2024",
     role: "Design & Development",
     discipline: "Game",
@@ -46,7 +46,7 @@ const projects = [
     index: "04",
     title: "Portfolio",
     summary:
-      "This site — a 3D glass logo with custom shaders, scroll-driven motion, and a hand-built design system.",
+      "This site. A 3D glass logo with custom shaders, scroll-driven motion, and a hand-built design system.",
     year: "2024",
     role: "Design & Development",
     discipline: "Brand & Site",

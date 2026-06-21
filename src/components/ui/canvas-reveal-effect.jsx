@@ -2,7 +2,7 @@
 
 // Ported from the shadcn/21st.dev "sign-in-flow-1" component to this project's
 // actual stack: Vite + React (JSX) + SCSS. The original is TSX and assumes
-// Tailwind, Next.js (next/link) and the `@/lib/utils` `cn` helper — none of
+// Tailwind, Next.js (next/link) and the `@/lib/utils` `cn` helper, none of
 // which exist here. Only the animated dot-matrix background (CanvasRevealEffect)
 // is kept; the sign-in form / navbar were dropped. Colors default to white for
 // the black & white palette. Requires three + @react-three/fiber (already deps).

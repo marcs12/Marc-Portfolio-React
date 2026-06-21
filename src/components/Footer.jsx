@@ -20,12 +20,12 @@ const Footer = () => {
   return (
     <footer className="site-footer" id="contact">
       <div className="footer-inner">
-        <p className="footer-eyebrow">Available for select projects — 2026</p>
+        <p className="footer-eyebrow">Available for select projects in 2026</p>
 
         <a className="footer-cta" href={`mailto:${EMAIL}`}>
           <span className="footer-cta-line">Let&rsquo;s build</span>
           <span className="footer-cta-line footer-cta-line--accent">
-            something worth shipping
+            your next website
             <span className="footer-cta-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none">
                 <path
@@ -50,7 +50,7 @@ const Footer = () => {
             >
               {copied ? "Copied" : EMAIL}
             </button>
-            <span className="footer-meta">Vancouver, BC — PT</span>
+            <span className="footer-meta">Vancouver, BC (PT)</span>
           </div>
 
           <div className="footer-col">
@@ -87,7 +87,7 @@ const Footer = () => {
         <div className="footer-base">
           <span className="footer-wordmark">Marc Sapa</span>
           <span className="footer-meta">
-            &copy; {YEAR} — Designed &amp; built in Vancouver
+            &copy; {YEAR}. Designed &amp; built in Vancouver.
           </span>
         </div>
       </div>

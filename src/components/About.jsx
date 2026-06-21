@@ -34,7 +34,7 @@ import XdIcon from "../assets/icons/xd-Bj4jYHe2.png";
 const SERVICES = [
   {
     label: "Web development",
-    copy: "Hand-built React front-ends — fast, accessible, and easy to maintain.",
+    copy: "Hand-built React front-ends that stay fast, accessible, and easy to maintain.",
     Model: DevelopmentModel,
     camera: { position: [0, 0, 5], fov: 43, near: 0.1, far: 1000 },
     cameraMobile: { position: [0, 0, 35], fov: 43, near: 0.1, far: 1000 },
@@ -98,20 +98,20 @@ const About = () => {
         <Reveal className="about-intro-text">
           <p className="eyebrow">About</p>
           <h1 className="about-heading">
-            A front-end developer and designer who treats craft as the brief,
-            not the bonus.
+            A front-end developer and designer who builds the whole thing,
+            design through code.
           </h1>
           <p className="about-lead">
-            I&rsquo;m Marc — based in Vancouver. I come from web design and video
-            editing, and I&rsquo;ve learned to build sites that are as careful
-            about how they move as how they look. One person handling design and
-            development means nothing gets lost in handoff.
+            I&rsquo;m Marc, based in Vancouver. I came up through web design and
+            video editing, so I pay as much attention to how a site moves as how
+            it looks. I handle the design and the development myself, which keeps
+            everything consistent.
           </p>
         </Reveal>
 
         <Reveal className="about-portrait" delay={0.1}>
           <img src={MarcPhoto} alt="Marc Sapa" loading="lazy" />
-          <span className="about-portrait-tag mono">Marc Sapa — 2026</span>
+          <span className="about-portrait-tag mono">Marc Sapa, 2026</span>
         </Reveal>
       </div>
 

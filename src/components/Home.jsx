@@ -18,19 +18,19 @@ const CAPABILITIES = [
   {
     no: "01",
     title: "Design",
-    body: "Interface and brand design in Figma — type, layout, and a system that holds together across every screen.",
+    body: "Interface and brand design in Figma: type, layout, and a system that holds together across every screen.",
     tags: ["UX/UI", "Prototyping", "Design Systems"],
   },
   {
     no: "02",
     title: "Build",
-    body: "Hand-written React front-ends. No page builders, no bloated templates — fast, accessible, maintainable code.",
+    body: "Hand-written React front-ends. No page builders, no bloated templates. Fast, accessible, maintainable code.",
     tags: ["React", "Sass", "Performance"],
   },
   {
     no: "03",
     title: "Motion",
-    body: "Scroll-driven reveals, 3D, and micro-interactions with GSAP and Three.js — physics that feel intentional, never noisy.",
+    body: "Scroll-driven reveals, 3D, and micro-interactions with GSAP and Three.js. Motion that feels intentional, never noisy.",
     tags: ["GSAP", "Three.js", "WebGL"],
   },
 ];
@@ -65,9 +65,9 @@ const Home = () => {
             The approach
           </Reveal>
           <Reveal as="h2" className="statement-text" delay={0.05}>
-            Most sites look fine and feel forgettable. I build the other kind —
-            where the typography, the motion, and the load time all say the same
-            thing: <em>someone cared.</em>
+            Most sites look fine and feel forgettable. I build the other kind,
+            where the typography, the motion, and the load time all pull in the{" "}
+            <em>same direction.</em>
           </Reveal>
         </div>
       </section>

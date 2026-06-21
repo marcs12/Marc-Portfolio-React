@@ -23,7 +23,7 @@ const NavBar = () => {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
     >
-      <Link to="/" className="nav-wordmark" aria-label="Marc Sapa — home">
+      <Link to="/" className="nav-wordmark" aria-label="Marc Sapa, home">
         <span className="nav-mark">MS</span>
         <span className="nav-name">Marc&nbsp;Sapa</span>
       </Link>

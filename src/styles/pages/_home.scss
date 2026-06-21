@@ -84,22 +84,9 @@
   margin-bottom: 1.25rem;
 }
 
-.hero-headline {
-  font-size: var(--fs-h1);
-  font-weight: 500;
-  line-height: 0.98;
-  letter-spacing: -0.035em;
-  margin: 0;
-
-  em {
-    font-style: normal;
-    color: var(--amber);
-  }
-}
-
 .hero-sub {
   margin-top: 1.5rem;
-  max-width: 38ch;
+  max-width: 42ch;
   color: var(--text-dim);
   font-size: var(--fs-lead);
   line-height: 1.5;

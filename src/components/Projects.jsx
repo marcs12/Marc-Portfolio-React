@@ -29,13 +29,13 @@ const Projects = () => {
   return (
     <section className="works projects-section">
       <header className="works-head section-shell" ref={headRef}>
-        <p className="eyebrow">Selected work — 2024 / 2025</p>
+        <p className="eyebrow">Selected work, 2024 / 2025</p>
         <h1 className="works-title">
           Projects, in <em>full.</em>
         </h1>
         <p className="works-intro">
-          A short, honest index. Each one was designed and built end to end —
-          hover a title to preview, click through for the detail.
+          A short index. Each one was designed and built end to end. Hover a
+          title to preview, click through for the detail.
         </p>
       </header>
 

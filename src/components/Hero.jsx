@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Scene from "./Scene";
 import { CanvasRevealEffect } from "./ui/canvas-reveal-effect";
 
-// Local Vancouver clock via Intl — no network call, reliable on static hosting.
+// Local Vancouver clock via Intl. No network call, reliable on static hosting.
 const formatVancouver = () => {
   const now = new Date();
   const time = new Intl.DateTimeFormat("en-US", {
@@ -52,25 +52,14 @@ const Hero = () => {
           Creative developer &amp; web designer
         </motion.p>
 
-        <motion.h1
-          className="hero-headline"
-          initial={{ opacity: 0, filter: "blur(8px)", y: 18 }}
-          animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-          transition={{ duration: 0.9, ease, delay: 1 }}
-        >
-          Websites with weight,
-          <br />
-          <em>built to be felt.</em>
-        </motion.h1>
-
         <motion.p
           className="hero-sub"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 1.15 }}
         >
-          I design and build cinematic, fast websites — the kind that make a
-          studio of one look like an agency of ten.
+          I design and build fast websites, doing both the design and the
+          front-end myself so the work stays consistent from layout to code.
         </motion.p>
       </div>
 
