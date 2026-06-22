@@ -185,10 +185,15 @@ function Particles({ isHome }) {
 
     // Legibility: dim the field across the dense content band (project text +
     // capabilities) so bright chips don't wash out descriptions; full strength
-    // at the hero and the bottom reassembly.
+    // at the hero and the bottom reassembly. On mobile the cloud can't drift
+    // clear of the single narrow column, so dim earlier and harder — it reads
+    // as a faint backdrop everywhere between the hero and the bottom reform.
+    const dimStart = isMobile ? 0.08 : 0.42;
+    const dimEnd = isMobile ? 0.18 : 0.52;
     const dim =
-      THREE.MathUtils.smoothstep(p, 0.42, 0.52) *
+      THREE.MathUtils.smoothstep(p, dimStart, dimEnd) *
       (1 - THREE.MathUtils.smoothstep(p, 0.9, 1));
+    const dimAmount = isMobile ? 0.66 : 0.32;
 
     // Assemble / disperse. `appear` eases toward present; particles fly in from
     // their scatter vectors as it rises, and back out as it falls.
@@ -208,7 +213,7 @@ function Particles({ isHome }) {
       revealPx = Math.max(0, window.innerHeight - rb);
     }
 
-    const targetOp = (1 - 0.32 * dim) * appear;
+    const targetOp = (1 - dimAmount * dim) * appear;
     opacityRef.current += (targetOp - opacityRef.current) * Math.min(1, dt * 4);
     mesh.material.opacity = opacityRef.current;
 
@@ -252,8 +257,12 @@ function Particles({ isHome }) {
     const offX = (oa[0] + (ob[0] - oa[0]) * eG) * fxm * state.viewport.width;
     // Ride up with the footer-reveal panel (px → world units at the cloud's z).
     const revealLift = revealPx * (state.viewport.height / window.innerHeight);
+    // On mobile the hero logo would sit dead-centre on the wordmark + eyebrow.
+    // Lift ONLY the hero stop (k===0 start) into the upper third so the copy
+    // below stays legible; the bottom reassembly (k===3 end → logo) stays put.
+    const oaY = isMobile && k === 0 ? oa[1] + 0.16 : oa[1];
     const offY =
-      (oa[1] + (ob[1] - oa[1]) * eG) * state.viewport.height + revealLift;
+      (oaY + (ob[1] - oaY) * eG) * state.viewport.height + revealLift;
 
     const wob = prefersReduced ? 0 : 1;
     const scatterAmp = 1.15;
@@ -346,6 +355,9 @@ Particles.propTypes = {
 const ParticleField = () => {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
+  // Narrow viewports show more of the fixed-size cloud, so it reads as huge and
+  // buries the hero copy. Dolly the camera back on mobile to shrink it.
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 760;
   return (
     <div
       className="particle-field"
@@ -355,7 +367,7 @@ const ParticleField = () => {
       <Canvas
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-        camera={{ position: [0, 0, 6], fov: 45 }}
+        camera={{ position: [0, 0, isMobile ? 8.4 : 6], fov: 45 }}
         // Decorative only — never intercept pointer/scroll. Inline so it beats
         // R3F's own canvas styles.
         style={{ width: "100%", height: "100%", pointerEvents: "none" }}
