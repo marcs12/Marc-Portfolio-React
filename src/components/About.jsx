@@ -33,6 +33,12 @@ import LightroomIcon from "../assets/icons/photoshop-lightroom-BDeX5MDj.png";
 import PremiereProIcon from "../assets/icons/premiere-pro-DEinuioA.png";
 import XdIcon from "../assets/icons/xd-Bj4jYHe2.png";
 
+const FACTS = [
+  { k: "Based", v: "Vancouver, BC" },
+  { k: "Focus", v: "Front-end & Design" },
+  { k: "Status", v: "Available 2026" },
+];
+
 const SERVICES = [
   {
     label: "Web development",
@@ -95,7 +101,7 @@ const About = () => {
 
   return (
     <section className="about-section">
-      {/* Intro */}
+      {/* Intro — editorial masthead */}
       <div className="about-intro section-shell">
         <Reveal className="about-intro-text">
           <p className="eyebrow">About</p>
@@ -110,6 +116,14 @@ const About = () => {
             it looks. I handle the design and the development myself, which keeps
             everything consistent.
           </TextRevealByWord>
+          <ul className="about-facts mono">
+            {FACTS.map(({ k, v }) => (
+              <li key={k}>
+                <span className="about-fact-key">{k}</span>
+                <span className="about-fact-val">{v}</span>
+              </li>
+            ))}
+          </ul>
         </Reveal>
 
         <Reveal className="about-portrait" delay={0.1}>
@@ -120,8 +134,10 @@ const About = () => {
 
       {/* Toolkit */}
       <div className="about-stack section-shell">
-        <Reveal as="p" className="eyebrow">
-          The toolkit
+        <Reveal className="section-index">
+          <span className="section-index-no mono">01</span>
+          <span className="eyebrow">The toolkit</span>
+          <span className="section-index-rule" aria-hidden="true" />
         </Reveal>
         <Reveal className="stack-container" delay={0.05}>
           <Tabs>
@@ -135,10 +151,13 @@ const About = () => {
                 {techStackIcons.map((icon) => (
                   <motion.div
                     key={icon.alt}
+                    className="stack-tile"
                     whileHover={{ y: -4 }}
-                    title={icon.alt}
                   >
-                    <img src={icon.src} alt={icon.alt} loading="lazy" />
+                    <span className="stack-tile-icon">
+                      <img src={icon.src} alt={icon.alt} loading="lazy" />
+                    </span>
+                    <span className="stack-tile-label mono">{icon.alt}</span>
                   </motion.div>
                 ))}
               </div>
@@ -149,10 +168,13 @@ const About = () => {
                 {designToolsIcons.map((icon) => (
                   <motion.div
                     key={icon.alt}
+                    className="stack-tile"
                     whileHover={{ y: -4 }}
-                    title={icon.alt}
                   >
-                    <img src={icon.src} alt={icon.alt} loading="lazy" />
+                    <span className="stack-tile-icon">
+                      <img src={icon.src} alt={icon.alt} loading="lazy" />
+                    </span>
+                    <span className="stack-tile-label mono">{icon.alt}</span>
                   </motion.div>
                 ))}
               </div>
@@ -163,8 +185,10 @@ const About = () => {
 
       {/* Services */}
       <div className="about-services section-shell">
-        <Reveal as="p" className="eyebrow">
-          What I can do for you
+        <Reveal className="section-index">
+          <span className="section-index-no mono">02</span>
+          <span className="eyebrow">What I can do for you</span>
+          <span className="section-index-rule" aria-hidden="true" />
         </Reveal>
         <SplitText
           as="h2"
@@ -176,6 +200,7 @@ const About = () => {
         <div className="models-container">
           {SERVICES.map(({ label, copy, Model, camera, cameraMobile, light }, i) => (
             <Reveal as="div" className="model-item" key={label} delay={i * 0.06}>
+              <span className="model-no mono">{`0${i + 1}`}</span>
               <div className="canvas-container">
                 <Canvas camera={isMobile ? cameraMobile : camera}>
                   <ambientLight intensity={0.5} />
@@ -192,6 +217,11 @@ const About = () => {
 
       {/* CTA */}
       <div className="about-cta section-shell">
+        <Reveal className="section-index">
+          <span className="section-index-no mono">03</span>
+          <span className="eyebrow">Let&rsquo;s work together</span>
+          <span className="section-index-rule" aria-hidden="true" />
+        </Reveal>
         <TextEffect />
       </div>
     </section>
