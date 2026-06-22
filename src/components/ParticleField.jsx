@@ -96,7 +96,7 @@ function Particles({ isHome }) {
   homeRef.current = isHome;
 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 760;
-  const COUNT = isMobile ? 1000 : 2400;
+  const COUNT = isMobile ? 2000 : 5000;
   const DELAY_SPAN = 0.35; // per-particle morph stagger → shapes ripple into form
 
   const { nodes } = useGLTF(MODEL);
@@ -137,7 +137,9 @@ function Particles({ isHome }) {
         phase: Math.random() * Math.PI * 2,
         wobbleSpeed: 0.5 + Math.random() * 0.9,
         spinSpeed: (Math.random() - 0.5) * 1.6,
-        size: 0.014 + Math.random() * 0.016,
+        // Fine, fairly even chips — the logo reads through dot DENSITY (high
+        // COUNT) rather than big chips, so the mark stays crisp, not chunky.
+        size: 0.008 + Math.pow(Math.random(), 1.5) * 0.011,
         delay: Math.random() * DELAY_SPAN, // stagger when this chip morphs
         swirl: (Math.random() - 0.5) * 3.0, // vortex twist during transitions
       });
