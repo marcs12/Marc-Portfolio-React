@@ -7,6 +7,7 @@ import MarcPhoto from "../assets/IMG_1968.JPG";
 import Reveal from "./Reveal";
 import SplitText from "./SplitText";
 import TextEffect from "./TextEffect";
+import TextRevealByWord from "./TextRevealByWord";
 import { DevelopmentModel } from "./DevelopmentModel";
 import { DesignModel } from "./DesignModel";
 import { PerformanceModel } from "./PerformanceModel";
@@ -103,12 +104,12 @@ const About = () => {
             className="about-heading"
             text="A front-end developer and designer who builds the whole thing, design through code."
           />
-          <p className="about-lead">
+          <TextRevealByWord as="p" className="about-lead">
             I&rsquo;m Marc, based in Vancouver. I came up through web design and
             video editing, so I pay as much attention to how a site moves as how
             it looks. I handle the design and the development myself, which keeps
             everything consistent.
-          </p>
+          </TextRevealByWord>
         </Reveal>
 
         <Reveal className="about-portrait" delay={0.1}>

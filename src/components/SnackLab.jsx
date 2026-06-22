@@ -2,6 +2,7 @@ import { useState, memo, useCallback, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import SplitText from "./SplitText";
+import TextRevealByWord from "./TextRevealByWord";
 import SnackLabVideo from "../assets/compressed/snacklab-desktop.mp4";
 import SnackLabMobile from "../assets/compressed/snacklab-mobile.mp4";
 
@@ -178,11 +179,9 @@ const SnackLab = () => {
           </ul>
         </motion.article>
         <motion.article className="project-description">
-          <motion.p style={{ whiteSpace: "pre-wrap" }}>
-            {
-              "SnackLab is a fictional company that sells snacks from around the world. The site is built using WordPress and WooCommerce. The theme is custom-built using HTML, CSS, PHP, and JavaScript. The design was created in Figma."
-            }
-          </motion.p>
+          <TextRevealByWord
+            text="SnackLab is a fictional company that sells snacks from around the world. The site is built using WordPress and WooCommerce. The theme is custom-built using HTML, CSS, PHP, and JavaScript. The design was created in Figma."
+          />
         </motion.article>
       </div>
 

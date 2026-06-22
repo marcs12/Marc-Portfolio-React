@@ -1,0 +1,38 @@
+.text-reveal {
+  position: relative;
+  z-index: 0;
+
+  // Layout only — typography inherits from the consumer's own class so the
+  // reveal never changes the text's size, weight, or line-height.
+  .text-reveal-text {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .reveal-word {
+    position: relative;
+    margin-right: 0.28em;
+    margin-bottom: 0.1em;
+  }
+
+  // Faint base layer always visible behind the revealed word.
+  .reveal-word-shadow {
+    color: var(--text-faint);
+    opacity: 0.55;
+  }
+
+  // Bright layer fades in on scroll, stacked on top of the shadow.
+  .reveal-word-fg {
+    position: absolute;
+    inset: 0;
+    color: var(--text);
+  }
+}
+
+// Users who prefer reduced motion get the fully-revealed text immediately
+// instead of a scroll-dependent fade (overrides the inline opacity).
+@media (prefers-reduced-motion: reduce) {
+  .text-reveal .reveal-word-fg {
+    opacity: 1 !important;
+  }
+}

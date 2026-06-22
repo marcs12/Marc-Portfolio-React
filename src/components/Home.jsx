@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Hero from "./Hero";
 import Reveal from "./Reveal";
 import SplitText from "./SplitText";
+import TextRevealByWord from "./TextRevealByWord";
 import projects from "../data/projects";
 
 const MARQUEE = [
@@ -65,11 +66,11 @@ const Home = () => {
           <Reveal as="p" className="eyebrow">
             The approach
           </Reveal>
-          <Reveal as="h2" className="statement-text" delay={0.05}>
+          <TextRevealByWord as="h2" className="statement-text">
             Most sites look fine and feel forgettable. I build the other kind,
             where the typography, the motion, and the load time all pull in the{" "}
             <em>same direction.</em>
-          </Reveal>
+          </TextRevealByWord>
         </div>
       </section>
 
