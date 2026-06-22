@@ -10,6 +10,8 @@
 // Centered, fixed, behind page content (#page-root is z-base:1).
 
 import { useRef, useMemo } from "react";
+import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer, useGLTF } from "@react-three/drei";
 import { MeshSurfaceSampler } from "three/examples/jsm/math/MeshSurfaceSampler.js";
@@ -85,8 +87,13 @@ function normalize(points, R) {
   return points;
 }
 
-function Particles() {
+function Particles({ isHome }) {
   const meshRef = useRef();
+  // Latest route state, read inside useFrame. Flips false the instant we leave
+  // the home route — before AnimatePresence finishes unmounting Home — so the
+  // explosion fires from the current shape instead of waiting for unmount.
+  const homeRef = useRef(isHome);
+  homeRef.current = isHome;
 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 760;
   const COUNT = isMobile ? 1000 : 2400;
@@ -159,15 +166,21 @@ function Particles() {
     // Progress = how far #main-wrapper has scrolled past the top of the
     // viewport. Re-queried each frame so route changes are picked up: when the
     // element is gone (off the home page), the field fades out (`present`).
+    // Drive presence off the ROUTE, not #main-wrapper existence. On nav-away the
+    // path leaves "/" instantly, while AnimatePresence keeps Home mounted (and
+    // ScrollToTop fires scrollTo(0)) during the exit. If we tracked scroll then,
+    // p would ease to 0 and morph current→sphere→logo before exploding. Latch
+    // off the route so we FREEZE p the moment we leave home: explode from the
+    // current shape, then fade.
     const el = document.getElementById("main-wrapper");
-    const present = el ? 1 : 0;
-    let pTarget = 0;
-    if (el) {
+    const onHome = homeRef.current && el;
+    const present = onHome ? 1 : 0;
+    if (onHome) {
       const r = el.getBoundingClientRect();
       const range = r.height - window.innerHeight;
-      pTarget = range > 0 ? THREE.MathUtils.clamp(-r.top / range, 0, 1) : 0;
+      const pTarget = range > 0 ? THREE.MathUtils.clamp(-r.top / range, 0, 1) : 0;
+      pSmooth.current += (pTarget - pSmooth.current) * Math.min(1, dt * 8);
     }
-    pSmooth.current += (pTarget - pSmooth.current) * Math.min(1, dt * 8);
     const p = pSmooth.current;
 
     // Legibility: dim the field across the dense content band (project text +
@@ -326,7 +339,13 @@ function Particles() {
   );
 }
 
+Particles.propTypes = {
+  isHome: PropTypes.bool.isRequired,
+};
+
 const ParticleField = () => {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
   return (
     <div
       className="particle-field"
@@ -343,7 +362,7 @@ const ParticleField = () => {
       >
         <ambientLight intensity={0.35} />
         <directionalLight position={[5, 8, 6]} intensity={0.7} />
-        <Particles />
+        <Particles isHome={isHome} />
         {/* Same procedural studio as the hero glass — chips read as the same
             white-glass material, not a separate effect. */}
         <Environment resolution={256}>
