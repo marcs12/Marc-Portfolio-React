@@ -35,6 +35,70 @@
   line-height: 1.6;
 }
 
+// Editorial fact row under the lead — labelled mono data.
+.about-facts {
+  list-style: none;
+  margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0 clamp(1.1rem, 2.5vw, 1.75rem);
+    border-left: 1px solid var(--line);
+
+    &:first-child {
+      padding-left: 0;
+      border-left: 0;
+    }
+  }
+
+  .about-fact-key {
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  .about-fact-val {
+    font-size: 0.82rem;
+    letter-spacing: 0.02em;
+    color: var(--text);
+  }
+}
+
+// Editorial section header: index number + label + a rule that runs out.
+.section-index {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.75rem);
+
+  .section-index-no {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+  }
+
+  .eyebrow {
+    margin: 0;
+  }
+
+  .section-index-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      var(--line) 0%,
+      transparent 100%
+    );
+  }
+}
+
 .about-portrait {
   position: relative;
   border-radius: var(--r-lg);
@@ -117,22 +181,64 @@
 
 .stack-icons {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(4.5rem, 1fr));
-  gap: 0.75rem;
-  max-width: 640px;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: 0.6rem;
+  max-width: 720px;
+}
 
-  > div {
+.stack-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 1.1rem 0.5rem 0.85rem;
+  border-radius: var(--r-md);
+  background: var(--ink-800);
+  border: 1px solid var(--line);
+  cursor: default;
+  transition:
+    border-color 0.3s var(--ease-out),
+    background 0.3s var(--ease-out);
+
+  .stack-tile-icon {
     display: grid;
     place-items: center;
-    aspect-ratio: 1;
-    border-radius: var(--r-md);
-    background: var(--ink-800);
-    border: 1px solid var(--line);
+    height: 2rem;
+  }
+
+  img {
+    width: 1.9rem;
+    height: 1.9rem;
+    object-fit: contain;
+    // Monochrome by default on a B&W site; brand colour rewards hover.
+    filter: grayscale(1) brightness(1.6) contrast(0.9);
+    opacity: 0.78;
+    transition:
+      filter 0.35s var(--ease-out),
+      opacity 0.35s var(--ease-out);
+  }
+
+  .stack-tile-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    text-align: center;
+    transition: color 0.3s var(--ease-out);
+  }
+
+  @include m.hover {
+    border-color: var(--line-strong);
+    background: var(--ink-850);
 
     img {
-      width: 1.9rem;
-      height: 1.9rem;
-      object-fit: contain;
+      filter: none;
+      opacity: 1;
+    }
+
+    .stack-tile-label {
+      color: var(--text-dim);
     }
   }
 }
@@ -163,12 +269,33 @@
 }
 
 .model-item {
+  position: relative;
   background: var(--ink-850);
   padding: clamp(1.5rem, 3vw, 2.25rem);
   display: flex;
   flex-direction: column;
   gap: 0.85rem;
   transition: background 0.4s var(--ease-out);
+
+  // Accent line that wipes across the top edge on hover.
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background: var(--text);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--ease-out);
+  }
+
+  .model-no {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--text-faint);
+  }
 
   .canvas-container {
     height: 220px;
@@ -192,6 +319,14 @@
 
   @include m.hover {
     background: var(--ink-800);
+
+    &::before {
+      transform: scaleX(1);
+    }
+
+    .model-no {
+      color: var(--text-dim);
+    }
   }
 }
 
