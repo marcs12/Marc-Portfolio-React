@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 import LogoMarc from "../assets/adjust-logo.svg";
 import SpiralAnimation from "./SpiralAnimation";
@@ -10,6 +11,16 @@ import { gsap } from "gsap";
 // and progress bar fill on top, then the whole screen fades out to the site —
 // one smooth stage instead of loader → intro.
 const LOAD_DURATION = 4; // seconds — long enough for the spiral to form
+
+// Editor-bay timecode for the load: 24fps across the loader's runtime, so the
+// splash reads like a take rolling up, matching the red REC motif site-wide.
+const FPS = 24;
+const formatTC = (pct) => {
+  const t = (pct / 100) * LOAD_DURATION;
+  const s = Math.floor(t);
+  const f = Math.floor((t - s) * FPS);
+  return `00:00:${String(s).padStart(2, "0")}:${String(f).padStart(2, "0")}`;
+};
 
 const LoadingScreen = ({ onFinish }) => {
   const [progress, setProgress] = useState(0);
@@ -52,12 +63,23 @@ const LoadingScreen = ({ onFinish }) => {
           <img src={LogoMarc} alt="Logo" />
         </motion.div>
         <div className="loading-bar" style={{ width: `${progress}%` }} />
-        <p className="loading-text">{progress}%</p>
+        <p className="loading-meta mono">
+          <span className="loading-rec">
+            <i />
+            REC
+          </span>
+          <span className="loading-tc">{formatTC(progress)}</span>
+          <span className="loading-pct">{progress}%</span>
+        </p>
       </div>
 
       <GrainOverlay />
     </div>
   );
+};
+
+LoadingScreen.propTypes = {
+  onFinish: PropTypes.func,
 };
 
 export default LoadingScreen;

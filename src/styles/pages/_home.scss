@@ -188,6 +188,65 @@
   }
 }
 
+// Fixed scrubbing timecode — page-as-one-take garnish. Desktop only.
+.scroll-timecode {
+  position: fixed;
+  left: clamp(1rem, 2vw, 2rem);
+  bottom: clamp(1rem, 2vw, 1.6rem);
+  z-index: calc(var(--z-nav) - 10);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+
+  i {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--r-pill);
+    background: #ef4444;
+  }
+
+  @include m.until(v.$bp-lg) {
+    display: none;
+  }
+}
+
+// Identity line: fixed first half, masked flip on the second.
+.hero-roles {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+  font-size: clamp(0.72rem, 1.1vw, 0.85rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+
+  .hero-roles-x {
+    color: var(--text-faint);
+  }
+
+  .hero-roles-flip {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    min-width: 16ch;
+    height: 1.4em;
+    color: var(--text);
+
+    span {
+      position: absolute;
+      inset: 0;
+      display: inline-block;
+      white-space: nowrap;
+    }
+  }
+}
+
 .hero-sub {
   margin-top: 1.5rem;
   max-width: 42ch;
@@ -292,32 +351,6 @@
 @keyframes marquee {
   to {
     transform: translateX(-50%);
-  }
-}
-
-// ========================= STATEMENT =========================
-.statement {
-  padding-block: var(--section-y);
-
-  .statement-text {
-    max-width: 22ch;
-    margin-top: 1.75rem;
-    font-size: clamp(2rem, 5.5vw, 4.25rem);
-    font-weight: 400;
-    line-height: 1.08;
-    letter-spacing: -0.03em;
-    color: var(--text);
-
-    em {
-      font-style: normal;
-      color: var(--amber);
-    }
-  }
-
-  @include m.from(v.$bp-md) {
-    .statement-text {
-      max-width: 18ch;
-    }
   }
 }
 
@@ -501,8 +534,13 @@
   border-radius: var(--r-lg);
   overflow: hidden;
 
+  // 2×2 on tablet, one row of four on wide screens.
   @include m.from(v.$bp-md) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include m.from(v.$bp-xl) {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 

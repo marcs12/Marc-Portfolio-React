@@ -1,0 +1,186 @@
+@use "../base/variables" as v;
+@use "../utils/mixins" as m;
+
+// ========================== PIPELINE ==========================
+// Pinned horizontal scrub styled as an editor's timeline. The section is
+// tall (400vh); a sticky viewport holds the track while scroll drives its
+// x-position, plus a ruler with a red playhead and a running timecode.
+
+.pipeline {
+  position: relative;
+  height: 340vh;
+
+  // Mobile / reduced-motion: plain vertical list, no pin, no ruler.
+  &.is-flat {
+    height: auto;
+    padding-block: var(--section-y);
+
+    .pipeline-sticky {
+      position: static;
+      height: auto;
+    }
+
+    .pipeline-track {
+      flex-direction: column;
+      padding-inline: var(--gutter);
+      max-width: var(--maxw);
+      margin-inline: auto;
+    }
+
+    .pipeline-card {
+      width: 100%;
+      min-height: 0;
+    }
+  }
+}
+
+.pipeline-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.pipeline-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem 2rem;
+  padding-bottom: clamp(1.6rem, 4vh, 3rem);
+}
+
+.pipeline-tc {
+  margin-left: auto;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+
+  // Match the REC accent from the reels rail.
+  &::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 0.55rem;
+    border-radius: var(--r-pill);
+    background: #ef4444;
+    vertical-align: 1px;
+  }
+}
+
+.pipeline-track {
+  display: flex;
+  gap: clamp(0.9rem, 2vw, 1.5rem);
+  padding-inline: var(--gutter);
+  width: max-content;
+  will-change: transform;
+}
+
+.pipeline-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: min(72vw, 26rem);
+  min-height: clamp(16rem, 38vh, 22rem);
+  padding: clamp(1.4rem, 2.5vw, 2.2rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--ink-800);
+  transition: border-color 0.4s var(--ease-out);
+
+  @include m.hover {
+    border-color: var(--line-strong);
+  }
+
+  h3 {
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    color: var(--text-dim);
+    line-height: 1.6;
+    max-width: 38ch;
+  }
+}
+
+.pipeline-card-no {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  color: var(--text-faint);
+}
+
+.pipeline-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+
+  li {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 0.28rem 0.6rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-pill);
+  }
+}
+
+// Frame counter in the card corner — quiet editor-bay garnish.
+.pipeline-card-frame {
+  position: absolute;
+  top: clamp(1.4rem, 2.5vw, 2.2rem);
+  right: clamp(1.4rem, 2.5vw, 2.2rem);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  color: var(--text-faint);
+}
+
+// ---- Ruler + playhead ----
+.pipeline-ruler {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 22px;
+  margin-top: clamp(1.6rem, 4vh, 3rem);
+  margin-inline: var(--gutter);
+  border-bottom: 1px solid var(--line);
+}
+
+.pipeline-tick {
+  width: 1px;
+  height: 8px;
+  background: var(--line-strong);
+
+  &.is-major {
+    height: 16px;
+  }
+}
+
+.pipeline-playhead {
+  position: absolute;
+  bottom: -4px;
+  width: 2px;
+  height: 30px;
+  background: #ef4444;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5);
+
+  // Playhead cap, like an NLE marker.
+  &::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #ef4444;
+  }
+}

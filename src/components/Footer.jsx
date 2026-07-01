@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import RevealLinks from "./TextEffect";
+
 const EMAIL = "marcgsapa@gmail.com";
 const YEAR = new Date().getFullYear();
 
@@ -49,23 +51,10 @@ const Footer = () => {
 
         <p className="footer-eyebrow">Available for select projects in 2026</p>
 
-        <a className="footer-cta" href={`mailto:${EMAIL}`}>
-          <span className="footer-cta-line">Let&rsquo;s build</span>
-          <span className="footer-cta-line footer-cta-line--accent">
-            your next website
-            <span className="footer-cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none">
-                <path
-                  d="M7 17 17 7M9 7h8v8"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </span>
-        </a>
+        {/* Kinetic flip-link CTA (each word links out: GitHub / LinkedIn / email) */}
+        <div className="footer-flip">
+          <RevealLinks />
+        </div>
 
         <div className="footer-grid">
           <div className="footer-col">
