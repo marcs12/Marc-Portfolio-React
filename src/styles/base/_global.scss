@@ -275,16 +275,72 @@ button {
 }
 
 .loading-bar {
+  position: relative;
   height: 2px;
   width: 0;
   max-width: 100%;
   align-self: flex-start;
   background: var(--amber);
+
+  // Red playhead riding the bar's leading edge, like an NLE timeline.
+  &::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    width: 2px;
+    height: 10px;
+    background: #ef4444;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.6);
+  }
 }
 
-.loading-text {
-  @include m.eyebrow;
-  letter-spacing: 0.3em;
+// REC row under the bar: pulsing dot + rolling timecode + percent.
+.loading-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+
+  .loading-rec {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-dim);
+
+    i {
+      width: 7px;
+      height: 7px;
+      border-radius: var(--r-pill);
+      background: #ef4444;
+      animation: loading-rec-pulse 1.6s ease-out infinite;
+    }
+  }
+
+  .loading-pct {
+    margin-left: auto;
+    color: var(--text-dim);
+  }
+}
+
+@keyframes loading-rec-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(239, 68, 68, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loading-rec i {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

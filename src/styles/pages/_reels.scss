@@ -1,0 +1,424 @@
+@use "../base/variables" as v;
+@use "../utils/mixins" as m;
+
+// ============================ REELS ============================
+// Instagram Reels rail. Idle panels sit as a graded-down (B&W) filmstrip;
+// the active one expands and "grades in" to full colour — the one place on
+// the site where colour is allowed, and only inside the footage.
+
+.reels {
+  padding-block: var(--section-y);
+
+  // Embedded in another page's flow (Works index): host controls the
+  // section rhythm and labels, the rail sits flush.
+  &.is-embedded {
+    padding-block: 0;
+
+    .reels-stage {
+      margin-top: 0;
+    }
+  }
+}
+
+.reels-head-note {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.reels-heading {
+  margin-top: clamp(1.6rem, 4vw, 2.8rem);
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 18ch;
+}
+
+.reels-sub {
+  margin-top: 1.2rem;
+  max-width: 46ch;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+// ---- Expanding rail ----
+.reels-stage {
+  margin-top: clamp(2.4rem, 5vw, 4rem);
+}
+
+.reels-track {
+  display: flex;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  height: clamp(24rem, 58vh, 38rem);
+
+  @include m.until(v.$bp-md) {
+    height: auto;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+.reel {
+  flex: 1;
+  min-width: 0;
+  transition: flex 0.85s var(--ease-in-out);
+
+  &.is-active {
+    flex: 3;
+  }
+
+  @include m.until(v.$bp-md) {
+    flex: 0 0 min(72vw, 20rem);
+    aspect-ratio: 9 / 16;
+    scroll-snap-align: center;
+
+    &.is-active {
+      flex: 0 0 min(72vw, 20rem);
+    }
+  }
+}
+
+.reel-hit {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--ink-800);
+  cursor: pointer;
+  transition: border-color 0.5s var(--ease-out);
+
+  &:focus-visible {
+    outline: 2px solid var(--text);
+    outline-offset: 3px;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    // Idle = graded down to match the site's B&W world.
+    filter: grayscale(1) brightness(0.55) contrast(1.05);
+    transform: scale(1.02);
+    transition:
+      filter 0.8s var(--ease-out),
+      transform 1.2s var(--ease-out);
+  }
+}
+
+.reel.is-active .reel-hit {
+  border-color: var(--line-strong);
+
+  video {
+    filter: none;
+    transform: scale(1);
+  }
+}
+
+// Bottom scrim for text legibility over footage.
+.reel-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(6, 6, 8, 0.85) 0%,
+    rgba(6, 6, 8, 0.25) 32%,
+    transparent 55%
+  );
+  opacity: 0.7;
+  transition: opacity 0.6s var(--ease-out);
+  pointer-events: none;
+}
+
+.reel.is-active .reel-scrim {
+  opacity: 1;
+}
+
+// ---- HUD chrome ----
+.reel-top {
+  position: absolute;
+  top: 0.9rem;
+  left: 1rem;
+  right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  color: var(--text-dim);
+}
+
+.reel-rec {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease-out);
+
+  i {
+    width: 7px;
+    height: 7px;
+    border-radius: var(--r-pill);
+    background: #ef4444;
+    animation: reel-rec-pulse 1.6s ease-out infinite;
+  }
+}
+
+.reel.is-active .reel-rec {
+  opacity: 1;
+}
+
+@keyframes reel-rec-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.55);
+  }
+  100% {
+    box-shadow: 0 0 0 9px rgba(239, 68, 68, 0);
+  }
+}
+
+.reel-meta {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 2.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.55s var(--ease-out) 0.12s,
+    transform 0.55s var(--ease-out) 0.12s;
+  pointer-events: none;
+}
+
+.reel.is-active .reel-meta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reel-title {
+  font-size: clamp(1.05rem, 1.8vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.reel-place {
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+
+.reel-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  span {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 0.28rem 0.6rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-pill);
+    white-space: nowrap;
+  }
+}
+
+.reel-tc {
+  position: absolute;
+  right: 1rem;
+  bottom: 0.85rem;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.reel-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: #ef4444;
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+// ---- Lightbox ----
+.reel-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background: rgba(6, 6, 8, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.reel-lightbox-card {
+  position: relative;
+  display: flex;
+  gap: clamp(1.2rem, 3vw, 2.4rem);
+  align-items: stretch;
+  max-width: min(60rem, 100%);
+  padding: clamp(0.8rem, 2vw, 1.4rem);
+  border-radius: var(--r-lg);
+  @include m.glass(rgba(14, 14, 18, 0.72), 22px);
+
+  @include m.until(v.$bp-md) {
+    flex-direction: column;
+    max-height: 92dvh;
+    overflow-y: auto;
+  }
+}
+
+.reel-lightbox-media {
+  position: relative;
+  flex: 0 0 auto;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--ink-900);
+
+  video {
+    display: block;
+    height: min(74vh, 44rem);
+    aspect-ratio: 9 / 16;
+    width: auto;
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  @include m.until(v.$bp-md) {
+    video {
+      width: 100%;
+      height: auto;
+      max-height: 62dvh;
+    }
+  }
+}
+
+.reel-lightbox-paused {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text);
+  background: rgba(6, 6, 8, 0.45);
+  pointer-events: none;
+}
+
+.reel-lightbox-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.9rem;
+  max-width: 22rem;
+  padding-block: 0.4rem 0.6rem;
+
+  h3 {
+    font-size: clamp(1.4rem, 2.4vw, 2rem);
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  p {
+    color: var(--text-dim);
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+}
+
+.reel-lightbox-index {
+  font-size: 0.68rem;
+  letter-spacing: 0.24em;
+  color: var(--text-faint);
+}
+
+.reel-lightbox-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+
+  span {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 0.28rem 0.6rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-pill);
+  }
+}
+
+.reel-lightbox-actions {
+  position: absolute;
+  top: clamp(0.8rem, 2vw, 1.4rem);
+  right: clamp(0.8rem, 2vw, 1.4rem);
+  display: flex;
+  gap: 0.5rem;
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--line-strong);
+    background: rgba(6, 6, 8, 0.55);
+    color: var(--text);
+    cursor: pointer;
+    transition:
+      border-color 0.3s var(--ease-out),
+      background 0.3s var(--ease-out);
+
+    @include m.hover {
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--text);
+      outline-offset: 2px;
+    }
+  }
+}
+
+// ---- Reduced motion ----
+@media (prefers-reduced-motion: reduce) {
+  .reel,
+  .reel-hit video,
+  .reel-scrim,
+  .reel-meta,
+  .reel-rec {
+    transition-duration: 0.01ms;
+  }
+
+  .reel-rec i {
+    animation: none;
+  }
+}

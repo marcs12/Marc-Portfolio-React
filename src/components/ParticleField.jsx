@@ -22,17 +22,22 @@ const SHAPE_RADIUS = 1.5;
 
 // Morph keyframes: a target shape at each scroll stop. Logo bookends the journey.
 //   stops are fractions of total page scroll; shapes morph between them.
-const STOPS = [0, 0.33, 0.56, 0.8, 1];
-// shape keys map 1:1 to STOPS: logo (hero) → sphere → knot → cube → logo (end)
-const SHAPE_KEYS = ["logo", "sphere", "knot", "cube", "logo"];
+// The sphere is duplicated so it HOLDS through the pinned Pipeline section
+// (which owns a long scroll span) instead of morphing away mid-pin.
+// Calibrated to measured section spans: pipeline pins ~0.15–0.48 of the
+// scroll range, featured ~0.61–0.70, reels ~0.84–0.89.
+const STOPS = [0, 0.15, 0.48, 0.66, 0.86, 1];
+// logo (hero) → sphere (pipeline in) → sphere (pipeline out) → knot → cube → logo
+const SHAPE_KEYS = ["logo", "sphere", "sphere", "knot", "cube", "logo"];
 // Per-stop screen offset [fx, fy] as fractions of the visible viewport
 // (fx: -0.5 left … +0.5 right). Shapes drift left/right for dynamic movement;
 // logo stays centered at the hero and at the bottom.
 const OFFSETS = [
   [0, 0], // logo — hero, centered
-  [0.27, 0], // sphere — right (The Approach)
+  [0.28, 0], // sphere — right as the Pipeline pins
+  [0.2, 0], // sphere — slow drift inward while the timeline scrubs
   [-0.34, 0], // knot — left, pushed to outer margin (Selected work)
-  [0.32, 0], // cube — right, pushed out (Capabilities)
+  [0.32, 0], // cube — right, pushed out (Reels / Capabilities)
   [0, 0], // logo — bottom, centered
 ];
 

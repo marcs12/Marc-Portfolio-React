@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { CanvasRevealEffect } from "./ui/canvas-reveal-effect";
 
 // Local Vancouver clock via Intl. No network call, reliable on static hosting.
@@ -36,11 +36,20 @@ const GhostWord = ({ text }) => (
   </span>
 );
 
+// Second half of the identity line — cycles to say "all of it, one person".
+const ROLES = ["Video Editor", "Motion Designer", "Web Designer", "Colorist"];
+
 const Hero = () => {
   const [clock, setClock] = useState(formatVancouver());
+  const [role, setRole] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => setClock(formatVancouver()), 1000 * 30);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const id = setInterval(() => setRole((r) => (r + 1) % ROLES.length), 2400);
     return () => clearInterval(id);
   }, []);
 
@@ -78,7 +87,33 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 0.9 }}
         >
-          Creative developer &amp; web designer
+          Creative technologist
+        </motion.p>
+
+        <motion.p
+          className="hero-roles mono"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease, delay: 1.05 }}
+          aria-label={`Front-end developer and ${ROLES.join(", ")}`}
+        >
+          <span>Front-End Developer</span>
+          <span className="hero-roles-x" aria-hidden="true">
+            &times;
+          </span>
+          <span className="hero-roles-flip" aria-hidden="true">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={ROLES[role]}
+                initial={{ y: "110%" }}
+                animate={{ y: 0 }}
+                exit={{ y: "-110%" }}
+                transition={{ duration: 0.45, ease }}
+              >
+                {ROLES[role]}
+              </motion.span>
+            </AnimatePresence>
+          </span>
         </motion.p>
 
         <motion.p
@@ -87,8 +122,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 1.15 }}
         >
-          I design and build fast websites, doing both the design and the
-          front-end myself so the work stays consistent from layout to code.
+          One person from first frame to final build. I design the interface,
+          write the front-end, and cut the film. Everything ships speaking the
+          same language.
         </motion.p>
       </div>
 

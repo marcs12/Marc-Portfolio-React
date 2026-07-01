@@ -6,7 +6,6 @@ import { Canvas } from "@react-three/fiber";
 import MarcPhoto from "../assets/IMG_1968.JPG";
 import Reveal from "./Reveal";
 import SplitText from "./SplitText";
-import TextEffect from "./TextEffect";
 import TextRevealByWord from "./TextRevealByWord";
 import { DevelopmentModel } from "./DevelopmentModel";
 import { DesignModel } from "./DesignModel";
@@ -35,7 +34,7 @@ import XdIcon from "../assets/icons/xd-Bj4jYHe2.png";
 
 const FACTS = [
   { k: "Based", v: "Vancouver, BC" },
-  { k: "Focus", v: "Front-end & Design" },
+  { k: "Focus", v: "Front-End & Film" },
   { k: "Status", v: "Available 2026" },
 ];
 
@@ -57,8 +56,8 @@ const SERVICES = [
     light: [0, 5, 5],
   },
   {
-    label: "Motion & interactivity",
-    copy: "Scroll-driven reveals, 3D, and micro-interactions that feel intentional.",
+    label: "Motion & video",
+    copy: "Scroll-driven motion and 3D on the web; shooting, cutting, and grading off it.",
     Model: PerformanceModel,
     camera: { position: [0, 0, 400] },
     cameraMobile: { position: [0, 0, 800] },
@@ -108,13 +107,14 @@ const About = () => {
           <SplitText
             as="h1"
             className="about-heading"
-            text="A front-end developer and designer who builds the whole thing, design through code."
+            text="A creative technologist who takes ideas from Figma to final cut."
           />
           <TextRevealByWord as="p" className="about-lead">
-            I&rsquo;m Marc, based in Vancouver. I came up through web design and
-            video editing, so I pay as much attention to how a site moves as how
-            it looks. I handle the design and the development myself, which keeps
-            everything consistent.
+            I&rsquo;m Marc, based in Vancouver. Half of me is a front-end
+            developer, the other half is a video editor, and each keeps
+            sharpening the other. Sites that move like film, films paced like
+            good interfaces. One pair of hands, so nothing gets lost in the
+            handoff.
           </TextRevealByWord>
           <ul className="about-facts mono">
             {FACTS.map(({ k, v }) => (
@@ -215,15 +215,6 @@ const About = () => {
         </div>
       </div>
 
-      {/* CTA */}
-      <div className="about-cta section-shell">
-        <Reveal className="section-index">
-          <span className="section-index-no mono">03</span>
-          <span className="eyebrow">Let&rsquo;s work together</span>
-          <span className="section-index-rule" aria-hidden="true" />
-        </Reveal>
-        <TextEffect />
-      </div>
     </section>
   );
 };

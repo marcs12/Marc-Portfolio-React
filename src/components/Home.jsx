@@ -4,16 +4,19 @@ import { Link } from "react-router-dom";
 import Hero from "./Hero";
 import Reveal from "./Reveal";
 import SplitText from "./SplitText";
-import TextRevealByWord from "./TextRevealByWord";
+import ReelsGallery from "./ReelsGallery";
+import PipelineTimeline from "./PipelineTimeline";
+import ScrollTimecode from "./ScrollTimecode";
 import projects from "../data/projects";
 
 const MARQUEE = [
-  "Web Design",
   "Front-End Development",
-  "Motion & Interaction",
+  "Video Editing",
+  "Motion Design",
   "3D / WebGL",
+  "Color Grading",
   "Design Systems",
-  "Brand Sites",
+  "Sound-Synced Cuts",
 ];
 
 const CAPABILITIES = [
@@ -35,6 +38,12 @@ const CAPABILITIES = [
     body: "Scroll-driven reveals, 3D, and micro-interactions with GSAP and Three.js. Motion that feels intentional, never noisy.",
     tags: ["GSAP", "Three.js", "WebGL"],
   },
+  {
+    no: "04",
+    title: "Film",
+    body: "Shooting, editing, and grading short-form video. Cuts that land on the beat, color that matches the brand.",
+    tags: ["Premiere", "After Effects", "Color"],
+  },
 ];
 
 const Home = () => {
@@ -42,6 +51,7 @@ const Home = () => {
 
   return (
     <div id="main-wrapper">
+      <ScrollTimecode />
       <Hero />
 
       {/* Manifesto marquee */}
@@ -60,19 +70,8 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Positioning statement */}
-      <section className="statement" id="approach">
-        <div className="section-shell">
-          <Reveal as="p" className="eyebrow">
-            The approach
-          </Reveal>
-          <TextRevealByWord as="h2" className="statement-text">
-            Most sites look fine and feel forgettable. I build the other kind,
-            where the typography, the motion, and the load time all pull in the{" "}
-            <em>same direction.</em>
-          </TextRevealByWord>
-        </div>
-      </section>
+      {/* The pipeline — pinned horizontal scrub (replaces the old statement) */}
+      <PipelineTimeline />
 
       {/* Selected work */}
       <section className="featured" id="selected-work">
@@ -114,6 +113,9 @@ const Home = () => {
           </ul>
         </div>
       </section>
+
+      {/* Instagram Reels — the video-editing side of the practice */}
+      <ReelsGallery />
 
       {/* Capabilities */}
       <section className="capabilities" id="capabilities">
