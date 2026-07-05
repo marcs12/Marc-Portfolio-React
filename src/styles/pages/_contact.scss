@@ -111,6 +111,12 @@
   @include m.hover {
     color: var(--amber);
   }
+
+  @include m.until(v.$bp-md) {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
 }
 
 .footer-email {

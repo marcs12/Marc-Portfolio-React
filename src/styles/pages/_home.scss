@@ -188,6 +188,24 @@
   }
 }
 
+// Mobile: the tall desktop viewport gives the centred ghost wordmark room to
+// sit above the bottom-anchored copy. On short screens it collides with the
+// eyebrow, role line, and lead — so dim + shrink it to read as faint texture
+// and let the foreground copy dominate.
+@include m.until(v.$bp-md) {
+  .hero-wordmark {
+    opacity: 0.42;
+  }
+
+  .hero-letter {
+    font-size: clamp(3rem, 17vw, 7rem);
+  }
+
+  .hero-sub {
+    margin-top: 1rem;
+  }
+}
+
 // Fixed scrubbing timecode — page-as-one-take garnish. Desktop only.
 .scroll-timecode {
   position: fixed;
@@ -219,6 +237,7 @@
 .hero-roles {
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
   gap: 0.7rem;
   margin-top: 0.4rem;
   font-size: clamp(0.72rem, 1.1vw, 0.85rem);

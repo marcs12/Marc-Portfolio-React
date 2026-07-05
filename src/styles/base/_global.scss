@@ -104,6 +104,11 @@ a {
   transition: color 0.25s var(--ease-out);
 }
 
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 // ---- Buttons ----
 button {
   background: none;

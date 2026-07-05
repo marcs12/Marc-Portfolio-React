@@ -75,6 +75,15 @@
     white-space: nowrap;
   }
 
+  @include m.until(v.$bp-md) {
+    a {
+      display: flex;
+      align-items: center;
+      min-height: 44px;
+      padding-block: 0.7rem;
+    }
+  }
+
   &.is-active a {
     color: var(--text);
   }
