@@ -22,6 +22,10 @@
 
     .pipeline-track {
       flex-direction: column;
+      // Reset the desktop scrub width (`max-content`), which would otherwise
+      // size the column to the widest sentence's intrinsic width and spill the
+      // cards past the viewport on mobile.
+      width: auto;
       padding-inline: var(--gutter);
       max-width: var(--maxw);
       margin-inline: auto;

@@ -1,6 +1,17 @@
 @use "variables" as v;
 @use "../utils/mixins" as m;
 
+// Mobile: the faint micro-label ink (--text-faint #706d67) sits at ~3.6:1 on
+// the near-black page — fine at desktop sizes/brightness, but below readable
+// contrast at ~10px on a phone (the hero eyebrow + HUD labels read as "too
+// dark"). Nudge the token to ~4.6:1 on small screens only; desktop keeps the
+// designed value, and every faint label brightens consistently.
+@include m.until(v.$bp-md) {
+  :root {
+    --text-faint: #928f88;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   background: var(--ink-850);
