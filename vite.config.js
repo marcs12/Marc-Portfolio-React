@@ -13,7 +13,19 @@ export default defineConfig({
     include: ["three"],
   },
   build: {
-    sourcemap: true,
+    sourcemap: false,
     chunkSizeWarningLimit: 1200,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (!id.includes("node_modules")) return;
+          if (/three|@react-three/.test(id)) return "three";
+          if (/framer-motion/.test(id)) return "framer";
+          if (/gsap/.test(id)) return "gsap";
+          if (/react-dom|react-router|scheduler|\/react\//.test(id))
+            return "react-vendor";
+        },
+      },
+    },
   },
 });
