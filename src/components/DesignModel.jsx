@@ -9,7 +9,7 @@ import { MeshPhysicalMaterial } from "three";
 
 export function DesignModel(props) {
   const group = useRef();
-  const { nodes } = useGLTF("/assets/abstract-sphere.glb");
+  const { nodes } = useGLTF("/assets/abstract-sphere.glb", "/draco/");
 
   const material = new MeshPhysicalMaterial({
     color: "#C0C0C0", // Silver color
@@ -55,4 +55,4 @@ export function DesignModel(props) {
   );
 }
 
-useGLTF.preload("/assets/abstract-sphere.glb");
+useGLTF.preload("/assets/abstract-sphere.glb", "/draco/");

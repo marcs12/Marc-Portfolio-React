@@ -4,7 +4,7 @@ import { useGLTF } from "@react-three/drei";
 
 export function DevelopmentModel(props) {
   const groupRef = useRef();
-  const { nodes } = useGLTF("/assets/globe_puzzle_A_OBJ_high.glb");
+  const { nodes } = useGLTF("/assets/globe_puzzle_A_OBJ_high.glb", "/draco/");
 
   // Rotate the model over time
   useFrame(() => {
@@ -44,4 +44,4 @@ export function DevelopmentModel(props) {
   );
 }
 
-useGLTF.preload("/assets/globe_puzzle_A_OBJ_high.glb");
+useGLTF.preload("/assets/globe_puzzle_A_OBJ_high.glb", "/draco/");

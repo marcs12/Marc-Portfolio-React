@@ -8,7 +8,7 @@ import { useGLTF } from "@react-three/drei";
 
 export function PerformanceModel(props) {
   const groupRef = useRef();
-  const { nodes, materials } = useGLTF("/assets/abstract_ball.glb");
+  const { nodes, materials } = useGLTF("/assets/abstract_ball.glb", "/draco/");
 
   // Rotate the model slowly
   useFrame(() => {
@@ -39,4 +39,4 @@ export function PerformanceModel(props) {
   );
 }
 
-useGLTF.preload("/assets/abstract_ball.glb");
+useGLTF.preload("/assets/abstract_ball.glb", "/draco/");
