@@ -27,19 +27,59 @@ const LoadingScreen = ({ onFinish }) => {
   const [fading, setFading] = useState(false);
 
   useEffect(() => {
-    const animation = gsap.to(".loading-bar", {
-      width: "100%",
+    // Spiral needs a beat to read as motion before we ever cut away.
+    const MIN_DURATION = 1.2;
+    const start = performance.now();
+    let done = false;
+
+    // Drive a plain counter (not the bar's width) so React owns the bar via
+    // `progress` and gsap owns the timing. LOAD_DURATION is the hard cap:
+    // if nothing signals ready, the loader still completes on its own.
+    const counter = { v: 0 };
+    const tween = gsap.to(counter, {
+      v: 100,
       duration: LOAD_DURATION,
-      ease: "power1.inOut",
-      onUpdate: () => setProgress(Math.round(animation.progress() * 100)),
+      ease: "power1.out",
+      onUpdate: () => setProgress(Math.round(counter.v)),
       onComplete: () => {
+        if (done) return;
+        done = true;
+        setProgress(100);
         setFading(true);
         // Match the CSS fade before handing off to the site.
         window.setTimeout(() => onFinish && onFinish(), 900);
       },
     });
 
-    return () => animation.kill();
+    // Finish as soon as the assets that gate first paint are ready — the
+    // wordmark font (the hero's LCP element) plus a full-load backstop — but
+    // never before MIN_DURATION so the spiral still forms. Once ready, rush
+    // the bar to 100 by speeding the tween up rather than snapping it.
+    let sped = false;
+    const rushToEnd = () => {
+      if (sped || done) return;
+      sped = true;
+      const elapsed = (performance.now() - start) / 1000;
+      gsap.delayedCall(Math.max(0, MIN_DURATION - elapsed), () => {
+        if (!done) gsap.to(tween, { timeScale: 6, duration: 0.3, ease: "power2.in" });
+      });
+    };
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(rushToEnd);
+    } else {
+      rushToEnd();
+    }
+    if (document.readyState === "complete") {
+      rushToEnd();
+    } else {
+      window.addEventListener("load", rushToEnd, { once: true });
+    }
+
+    return () => {
+      tween.kill();
+      window.removeEventListener("load", rushToEnd);
+    };
   }, [onFinish]);
 
   return (

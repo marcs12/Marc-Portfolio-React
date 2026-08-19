@@ -122,9 +122,9 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease, delay: 1.15 }}
         >
-          One person from first frame to final build. I design the interface,
-          write the front-end, and cut the film. Everything ships speaking the
-          same language.
+          From the first frame to a final build. I can design every interface,
+          write the front-end, shoot and edit the video, and grade the final
+          footage.
         </motion.p>
       </div>
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -10,24 +10,29 @@ import { AnimatePresence, MotionConfig } from "framer-motion";
 import NavBar from "./components/NavBar";
 import Home from "./components/Home";
 import ParticleField from "./components/ParticleField";
-import About from "./components/About";
-import Projects from "./components/Projects";
-import SnackLab from "./components/SnackLab";
-import ThirtyFive from "./components/ThirtyFive";
-import RunYuji from "./components/RunYuji";
-import Portfolio from "./components/Portfolio";
 import CursorTrail from "./components/CursorTrail";
 import PageTransition from "./components/PageTransition";
-import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import LoadingScreen from "./components/LoadingScreen";
 import Footer from "./components/Footer";
 import GrainOverlay from "./components/GrainOverlay";
 
+// Route pages are code-split: each becomes its own chunk fetched on
+// navigation. Keeps the heavy three.js/model bundles (About) and per-project
+// media off the initial homepage load.
+const About = lazy(() => import("./components/About"));
+const Projects = lazy(() => import("./components/Projects"));
+const SnackLab = lazy(() => import("./components/SnackLab"));
+const ThirtyFive = lazy(() => import("./components/ThirtyFive"));
+const RunYuji = lazy(() => import("./components/RunYuji"));
+const Portfolio = lazy(() => import("./components/Portfolio"));
+const NotFound = lazy(() => import("./components/NotFound"));
+
 function AnimatedRoutes() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
+      <Suspense fallback={null}>
       <Routes location={location} key={location.pathname}>
         <Route
           path="/"
@@ -94,6 +99,7 @@ function AnimatedRoutes() {
           }
         />
       </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 }

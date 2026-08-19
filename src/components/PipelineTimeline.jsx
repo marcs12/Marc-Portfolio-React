@@ -14,7 +14,7 @@ const STAGES = [
   {
     no: "01",
     title: "Concept",
-    body: "Every build starts as a storyboard, whether it ships as a website or a film. What's the story, and what should it feel like at second three?",
+    body: "Every build starts as a storyboard, whether the product is a website or a film. What's the story, and what should it feel like at second three?",
     tags: ["Storyboards", "References", "Scope"],
   },
   {
@@ -32,7 +32,7 @@ const STAGES = [
   {
     no: "04",
     title: "Shoot & Cut",
-    body: "Camera out, then into Premiere. Cuts that land on the beat, a grade that matches the brand. The same timing instincts at 24 frames a second.",
+    body: "Camera out, then into Premiere. Story beats that feel real, a grade that matches the brand. The same timing instincts at 24 frames a second.",
     tags: ["Premiere", "After Effects", "Color"],
   },
   {

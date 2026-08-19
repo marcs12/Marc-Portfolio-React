@@ -20,7 +20,7 @@ const reels = [
     year: "2023",
     tags: ["Montage", "Pacing"],
     caption:
-      "A year of major cities compressed into one montage. Rhythm does the storytelling.",
+      "A year of major Canadian cities in a montage. Rhythm does the storytelling.",
     src: "/videos/reel-canada-tour.mp4",
   },
   {
@@ -38,8 +38,8 @@ const reels = [
     id: "laundry",
     index: "04",
     title: "Laundry Can Wait",
-    location: "Out somewhere",
-    year: "2023",
+    location: "The Rockies, AB",
+    year: "2026",
     tags: ["Handheld", "Cut to Beat"],
     caption:
       "Skipped laundry and taxes for this one. Handheld energy, cuts on the beat.",

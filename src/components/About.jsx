@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { Canvas } from "@react-three/fiber";
@@ -66,8 +66,7 @@ const SERVICES = [
 ];
 
 const About = () => {
-  const isMobile =
-    typeof window !== "undefined" && window.innerWidth <= 768;
+  const isMobile = typeof window !== "undefined" && window.innerWidth <= 768;
 
   const techStackIcons = useMemo(
     () => [
@@ -110,11 +109,9 @@ const About = () => {
             text="A creative technologist who takes ideas from Figma to final cut."
           />
           <TextRevealByWord as="p" className="about-lead">
-            I&rsquo;m Marc, based in Vancouver. Half of me is a front-end
-            developer, the other half is a video editor, and each keeps
-            sharpening the other. Sites that move like film, films paced like
-            good interfaces. One pair of hands, so nothing gets lost in the
-            handoff.
+            I&rsquo;m Marc, based in British Columbia. I am passionate about
+            creating experiences, whether that is an immersive website or a film
+            enough to suspend disbelief.
           </TextRevealByWord>
           <ul className="about-facts mono">
             {FACTS.map(({ k, v }) => (
@@ -198,23 +195,36 @@ const About = () => {
         />
 
         <div className="models-container">
-          {SERVICES.map(({ label, copy, Model, camera, cameraMobile, light }, i) => (
-            <Reveal as="div" className="model-item" key={label} delay={i * 0.06}>
-              <span className="model-no mono">{`0${i + 1}`}</span>
-              <div className="canvas-container">
-                <Canvas camera={isMobile ? cameraMobile : camera}>
-                  <ambientLight intensity={0.5} />
-                  <directionalLight position={light} intensity={1} />
-                  <Model />
-                </Canvas>
-              </div>
-              <h3>{label}</h3>
-              <p>{copy}</p>
-            </Reveal>
-          ))}
+          {SERVICES.map(
+            ({ label, copy, Model, camera, cameraMobile, light }, i) => (
+              <Reveal
+                as="div"
+                className="model-item"
+                key={label}
+                delay={i * 0.06}
+              >
+                <span className="model-no mono">{`0${i + 1}`}</span>
+                <div className="canvas-container">
+                  <Canvas camera={isMobile ? cameraMobile : camera}>
+                    {/* Suspense MUST live inside the Canvas. Without it, the
+                        model's GLTF load escapes to the nearest DOM boundary
+                        (App's route Suspense) via R3F's Block promise, which
+                        never resolves, so the whole About page renders blank
+                        until a second navigation warms the GLTF cache. */}
+                    <Suspense fallback={null}>
+                      <ambientLight intensity={0.5} />
+                      <directionalLight position={light} intensity={1} />
+                      <Model />
+                    </Suspense>
+                  </Canvas>
+                </div>
+                <h3>{label}</h3>
+                <p>{copy}</p>
+              </Reveal>
+            ),
+          )}
         </div>
       </div>
-
     </section>
   );
 };

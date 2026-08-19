@@ -23,7 +23,7 @@ const CAPABILITIES = [
   {
     no: "01",
     title: "Design",
-    body: "Interface and brand design in Figma: type, layout, and a system that holds together across every screen.",
+    body: "I design UI that gives users an authentic experience. Whatever device, whatever layout.",
     tags: ["UX/UI", "Prototyping", "Design Systems"],
   },
   {
@@ -88,7 +88,12 @@ const Home = () => {
 
           <ul className="featured-list">
             {featured.map((p, i) => (
-              <Reveal as="li" className="featured-item" key={p.slug} delay={i * 0.05}>
+              <Reveal
+                as="li"
+                className="featured-item"
+                key={p.slug}
+                delay={i * 0.05}
+              >
                 <Link to={`/works/${p.slug}`} className="featured-link">
                   <div className="featured-media">
                     <video
@@ -132,7 +137,12 @@ const Home = () => {
 
           <ul className="capability-list">
             {CAPABILITIES.map((c, i) => (
-              <Reveal as="li" className="capability" key={c.no} delay={i * 0.06}>
+              <Reveal
+                as="li"
+                className="capability"
+                key={c.no}
+                delay={i * 0.06}
+              >
                 <span className="capability-no mono">{c.no}</span>
                 <h3>{c.title}</h3>
                 <p>{c.body}</p>
