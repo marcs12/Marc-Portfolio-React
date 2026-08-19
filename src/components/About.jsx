@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { Canvas } from "@react-three/fiber";
@@ -206,9 +206,16 @@ const About = () => {
                 <span className="model-no mono">{`0${i + 1}`}</span>
                 <div className="canvas-container">
                   <Canvas camera={isMobile ? cameraMobile : camera}>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={light} intensity={1} />
-                    <Model />
+                    {/* Suspense MUST live inside the Canvas. Without it, the
+                        model's GLTF load escapes to the nearest DOM boundary
+                        (App's route Suspense) via R3F's Block promise, which
+                        never resolves, so the whole About page renders blank
+                        until a second navigation warms the GLTF cache. */}
+                    <Suspense fallback={null}>
+                      <ambientLight intensity={0.5} />
+                      <directionalLight position={light} intensity={1} />
+                      <Model />
+                    </Suspense>
                   </Canvas>
                 </div>
                 <h3>{label}</h3>

@@ -9,7 +9,7 @@
 // Driven purely by page scroll progress (0..1), eased for a buttery morph.
 // Centered, fixed, behind page content (#page-root is z-base:1).
 
-import { useRef, useMemo } from "react";
+import { Suspense, useRef, useMemo } from "react";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -379,33 +379,39 @@ const ParticleField = () => {
         // R3F's own canvas styles.
         style={{ width: "100%", height: "100%", pointerEvents: "none" }}
       >
-        <ambientLight intensity={0.35} />
-        <directionalLight position={[5, 8, 6]} intensity={0.7} />
-        <Particles isHome={isHome} />
-        {/* Same procedural studio as the hero glass — chips read as the same
-            white-glass material, not a separate effect. */}
-        <Environment resolution={256}>
-          <Lightformer
-            intensity={3}
-            color="#ffffff"
-            position={[0, 3, 4]}
-            scale={[12, 4, 1]}
-          />
-          <Lightformer
-            intensity={1.6}
-            color="#ffffff"
-            position={[-6, 1, 2]}
-            rotation={[0, Math.PI / 2, 0]}
-            scale={[8, 8, 1]}
-          />
-          <Lightformer
-            intensity={1.6}
-            color="#ffffff"
-            position={[6, -1, 2]}
-            rotation={[0, -Math.PI / 2, 0]}
-            scale={[8, 8, 1]}
-          />
-        </Environment>
+        {/* Suspense MUST be inside the Canvas: the glass model and the
+            Environment both suspend, and R3F blocks the outer DOM tree with a
+            promise that never resolves, which would blank the whole page
+            behind this field on a cold load. */}
+        <Suspense fallback={null}>
+          <ambientLight intensity={0.35} />
+          <directionalLight position={[5, 8, 6]} intensity={0.7} />
+          <Particles isHome={isHome} />
+          {/* Same procedural studio as the hero glass — chips read as the same
+              white-glass material, not a separate effect. */}
+          <Environment resolution={256}>
+            <Lightformer
+              intensity={3}
+              color="#ffffff"
+              position={[0, 3, 4]}
+              scale={[12, 4, 1]}
+            />
+            <Lightformer
+              intensity={1.6}
+              color="#ffffff"
+              position={[-6, 1, 2]}
+              rotation={[0, Math.PI / 2, 0]}
+              scale={[8, 8, 1]}
+            />
+            <Lightformer
+              intensity={1.6}
+              color="#ffffff"
+              position={[6, -1, 2]}
+              rotation={[0, -Math.PI / 2, 0]}
+              scale={[8, 8, 1]}
+            />
+          </Environment>
+        </Suspense>
       </Canvas>
     </div>
   );
